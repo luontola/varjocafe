@@ -17,7 +17,13 @@ A:hover {
 TH.cafe {
 	background-color: #E4E4E4;
 	border: 1px solid #AAAAAA;
-	padding: 2px 2em 2px 2em;
+	padding: 5px 2em 5px 2em;
+	white-space: nowrap;
+}
+
+SPAN.timetable {
+	font-weight: normal;
+	font-size: 11px;
 }
 
 TD.menu {
@@ -34,4 +40,16 @@ TD.menu_highlight {
 
 P.copyright {
 	color: #999999;
+}
+
+INPUT.button {
+	background-color: #E4E4E4;
+	border: 1px solid #AAAAAA;
+	margin-top: 1.5ex;
+	margin-bottom: 0.5ex;
+}
+
+SPAN.note {
+	font-size: 11px;
+	color: #666666;
 }
