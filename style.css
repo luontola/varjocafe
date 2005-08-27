@@ -1,5 +1,5 @@
 
-BODY {
+BODY, TABLE {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color : #000000;
@@ -12,6 +12,11 @@ A {
 
 A:hover {
 	text-decoration: underline;
+}
+
+H1 A, A:hover {
+	color: #000000;
+	text-decoration: none;
 }
 
 TH.cafe {
@@ -36,6 +41,11 @@ TD.menu_highlight {
 	background-color: #D7E8F6;
 	border: 1px solid #AAAAAA;
 	padding: 1ex;
+}
+
+TD.menu_empty {
+	background-color: #F9F9F9;
+	height: 6ex;
 }
 
 P.copyright {
