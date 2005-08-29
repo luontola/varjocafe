@@ -63,3 +63,20 @@ SPAN.note {
 	font-size: 11px;
 	color: #666666;
 }
+
+DIV.banner {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	padding: 0.5ex;
+	background-color: #FFFFFF;
+	border: 2px dashed #D7E8F6;
+}
+
+DIV.info {
+	margin: 1em;
+	padding: 1em;
+	width: 500px;
+	background-color: #F9F9F9;
+	border: 1px solid #AAAAAA;
+}

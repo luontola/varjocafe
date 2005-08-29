@@ -1,0 +1,6 @@
+
+<p>VarjoCafe on <a href="http://www.unicafe.fi/">UniCafe</a>-ravintoloiden ruokalistojen parempi käyttöliittymä. Järjestelmä luotiin 25.8.2005 vastareaktiona UniCafen uudistuneille nettisivuille.</p>
+
+<p>Valitse vasemmalta ravintolat, joissa käyt säännöllisesti, ja tallenna valintasi evästeenä (<cite>Muista valinnat</cite> -valintaruutu) tai säilö sivun osoite kirjanmerkkeihisi. Ravintoloiden ja kampuksien nimet toimivat linkkeinä ruokalistoihinsa. VarjoCafe näyttää seuraavien 7 vuorokauden ruokalistat sikäli kun ne ovat saatavissa UniCafen sivuilta (pienellä viiveellä).</p>
+
+<p>Ohjelmaa kehittää <a href="http://www.cs.helsinki.fi/u/luontola/">Esko Luontola</a> Helsingin yliopiston tietojenkäsittelytieteen laitokselta. Palautetta voi antaa irkissä kanavalla #tko-äly (IRCnet), missä oleskelen nimimerkillä ORFJackal. VarjoCafe on julkaistu <a href="LICENCE">GPL</a>-lisenssin alaisuudessa ja viimeisin virallinen versio pyörii osoitteessa <a href="http://www.orfjackal.net/varjocafe/">http://www.orfjackal.net/varjocafe/</a></p>

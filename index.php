@@ -21,6 +21,12 @@
 /*
  * CHANGE LOG:
  *
+ * Version 1.03 (2005-08-29)
+ *	+ Distributed page downloading more evenly (soft & hard limit)
+ *	+ Refresh cache more often if the menu is not available in
+ *	  the beginning of the week
+ *	+ Info page and banner support
+ *
  * Version 1.02 (2005-08-27)
  *	+ Configurable: first visible day and number of days to show
  *	+ Fixed timetables for cafes with special characters in the name
@@ -38,47 +44,6 @@
  * Version 1.0 (2005-08-25)
  *	+ Initial release
  */
-
-// TODO: lempiruoan korostus
-// TODO: Change the order of cafes
-/*
-[12:35] <tsj> järjestystä pitäis voida vaihtaa :)
-[12:36] <Koffa> tsj :)
-[12:36] <tsj> ja sit se vois yrittää suorilta skrollata ko päivän näkyviin.
-[12:36] <tsj> ja säätimet vois olla absultella asetettu näkymään aina :)
-
-[01:24] <ORFJackal> sanokaa myös että mitä mieltä olette näiden ehdotuksien tarpeellisuudesta: (1) mahdollisuus muuttaa ruokaloiden järjestystä, (2) lempiruokien korostus listassa
-[01:25] <ORFJackal> kumpikin olisi cookie-pohjainen ratkaisu
-[01:26] <_^_> <@mjr> 3) tiettyjen kirjainlyhennemääreiden korostus listassa
-[01:31] <ORFJackal> mjr, nuo lyhenteet taitavat olla kaikille ravintoloille samat? niihin voisi tosiaan kehittää jotain erikoistuneempaa korostusta
-[01:32] <af> joku vois varmaan haluta valinnat että älä näytä sapuskoja joissa on aineita mitä ei voi kuitenkaan syödä
-[01:32] <_^_> <@mjr> joo, ovat, tosin osa esittää "(a,b)"-muodossa ja osa "(a) (b)"-muodossa
-[01:32] <_^_> <@mjr> että olis ihan kiva tosiaan joku erikoistuneempi kalu ettei tarvis kovin rasittavia regexejä väsätä
-
-[01:29] <af> se mitä mä yleensä haluan nähdä on "nää syöttölät, tänään"
-[01:29] <af> poislukien ne jotka on jo kiinni
-[01:30] <af> tai siis ne joista ei enää saa ravintoa
-[01:30] <_^_> <@mjr> tjoo, ehkä kuluvan päivän korostuksesta voisi poimia kiinnimenneet epäkorostetuiksi
-[01:32] <ORFJackal> kiinnimenneiden epäkorostus voi olla vaikeaa, kun pitäisi ensin saada parsittua aukioloajat
-[02:28] <ruffneck> ja heti näkis jos joku on menos just kiinni
-
-[01:37] <af> vois olla pop jos toi söis noi säädöt (myös) urlista
-[01:37] <ORFJackal> noi korostussäädötkö?
-[01:38] <af> noi valinnat
-[01:38] <ORFJackal> tarkoitatko cookieiden asetusta?
-[01:39] <af> sori että en ole seurannut kun tuota on säädetty että mitä se on syönyt, mutta kerronpa miten mä tuollaista käyttäisin jos se olisi mahdollista
-[01:39] <ORFJackal> kerro pois
-[01:40] <af> optimaalista olis jos saisin yhdellä ratkaisulla lähialueen apelaarien valikoimat, mutta koska sen tietäminen olenko keskustassa vai kumpulassa ei ole ihan helppoa, niin sekin riittäisi hyvin että saisin bookmarkkeihin suoraan tyypillisimmät paikat eli joko kumpulan tai keskustan, joissa on sit ne mitkä olen valinnut
-[01:41] <af> ton jälkeen mun kannalta kaikki muu on turhaa kuorrutusta
-[01:41] <_^_> <@mjr> joh, se olis ihan kätevää että esmes ainakin ne lyhennekorostuskliksutukset olis urlissa, mutta emmä kovasti paheksu keksiäkään
-[01:42] <ORFJackal> af, valinnat menee jo urlissa. bookmarkkausta varten tarkoitin tuon alunperinkin.
-[01:42] <_^_> <@mjr> "tags=ve,g,v"
-
-[01:58] <ORFJackal> osaisiko joku neuvoa, että miten noiden ruokavalioiden korostus pitäisi hoitaa?
-[02:00] <ORFJackal> riittääkö semmoinen, että taustavärillä korostetaan valitut tagit?
-[02:02] <ORFJackal> pitäisikö ruoka korostaa, jos siinä on yksi valituista tageista, vai korostetaanko silloin kun siinä on ne kaikki?
-
-*/
 
 /*******************************************************************\
   CONFIGURATION
@@ -154,6 +119,12 @@ define('SOURCE_TIMETABLE_REGEX', '/(?:<strong>{CAFE}.*?<\/strong>)(.*?)(?:<\/p>|
 // Internationalization
 define('TEXT_DISPLAY_BUTTON', 'Näytä');
 define('TEXT_SAVE_SELECTION', 'Muista valinnat');
+define('TEXT_INFO', 'Tiedot');
+define('TEXT_DESCRIPTION', 'UniCafe -ravintoloiden ruokalistojen parempi käyttöliittymä.');
+
+// Locations of files containing the info page and banner code, or FALSE do disable
+define('INFO_FILE', 'info.txt');
+define('BANNER_FILE', 'banner.txt');
 
 // Time zone
 putenv("TZ=EET");
@@ -162,11 +133,21 @@ putenv("TZ=EET");
 // WARNING: Any files in this folder will be deleted!
 define('CACHE_DIR', './cache');
 
-// How many seconds to keep the pages cached
-define('CACHE_AGE', 3600 * 6);
+// How many seconds to keep the pages cached. Max one pages exceeding soft limit 
+// will be reloaded in a lifetime. Pages exceeding hard limit are always reloaded
+define('CACHE_SOFT_LIMIT', 3600 * 3);
+define('CACHE_HARD_LIMIT', 3600 * 12);
 
-// Randomly shorten CACHE_AGE by up to CACHE_AGE_SPREAD * CACHE_AGE, value range: [0.0, 1.0)
-define('CACHE_AGE_SPREAD', 0.5);
+// The source site might be updated more frequently in the beginning of the week,
+// so it is best to keep the cache times short when the menu for today is not yet
+// available.
+//	LIMIT = cache time in seconds
+//	WDAY = 0 for Monday, 6 for Sunday, -1 to disable
+//	HOUR_START/END = this rule will apply when the hour is between [START, END)
+define('CACHE_RECHECK_LIMIT', 1800);
+define('CACHE_RECHECK_WDAY', 0);
+define('CACHE_RECHECK_HOUR_START', 6);
+define('CACHE_RECHECK_HOUR_END', 16);
 
 // Cookie configuration
 define('COOKIE_IDS_FIELD', 'varjocafe_ids');
@@ -193,7 +174,7 @@ $_visible = array();
 
 // application properties
 define('APP_NAME', 'VarjoCafe');
-define('APP_VERSION', '1.02 (2005-08-27)');
+define('APP_VERSION', '1.03');
 define('COPYRIGHT_HTML', 'Copyright &copy; 2005 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
 
 // get an URL like PHP_SELF but without "index.php"
@@ -232,25 +213,38 @@ function process_input_parameters(&$array) {
 
 
 /*******************************************************************\
-  Returns the current UNIX timestamp with greater accuracy.
+  Returns the current UNIX timestamp with greater accuracy
 \*******************************************************************/
 function getmicrotime() {
 	list($usec, $sec) = explode(" ", microtime());
 	return ((float)$usec + (float)$sec);
 }
 
+
 /*******************************************************************\
-  Returns the source code of this program
+  Reads the given file or URL and returns its contents.
+  Returns FALSE if opening the file fails.
 \*******************************************************************/
-function get_source_code() {
+function read_file($file) {
 	$contents = "";
-	$handle = fopen($_SERVER['SCRIPT_FILENAME'], "r");
+	$handle = @fopen($file, 'r');
+	if ($handle === false) {
+		return false;
+	}
 	do {
 		$data = fread($handle, 8192);
 		$contents .= $data;
 	} while (strlen($data) > 0);
 	fclose($handle);
 	return $contents;
+}
+
+
+/*******************************************************************\
+  Returns the source code of this program
+\*******************************************************************/
+function get_source_code() {
+	return read_file($_SERVER['SCRIPT_FILENAME']);
 }
 
 
@@ -294,7 +288,6 @@ function trim_br($string) {
 		$arr[$key] = trim($value);
 	}
 	while (reset($arr) == "" && count($arr) > 0) {
-		
 		unset($arr[key($arr)]);
 	}
 	while (end($arr) == "" && count($arr) > 0) {
@@ -334,9 +327,13 @@ function get_cafe_selection() {
 
 /*******************************************************************\
   Returns HTML elements displaying the menus for the selected cafes
+  or an empty string if there are no visible cafes
 \*******************************************************************/
 function get_menus() {
 	$cafes = get_visible_cafes();
+	if (count($cafes) == 0) {
+		return "";
+	}
 	
 	// weekdays are shown in rows
 	$html = "<table border=\"0\">\n";
@@ -356,7 +353,7 @@ function get_menus() {
 			}
 			
 			// row 1 will have today's menu when DISPLAY_OFFSET=0, yesterday when DISPLAY_OFFSET=-1 etc.
-			$time = mktime(0, 0, 0, date("n"), date("j") + ($row - 1) + DISPLAY_OFFSET, date("Y"));
+			$time = mktime(0, 0, 0, date('n'), date('j') + ($row - 1) + DISPLAY_OFFSET, date('Y'));
 			$menu = get_menu($id, $time);
 			if (strlen($menu) > 0) {
 				if ($row == 1 - DISPLAY_OFFSET) {			// today is highlighted
@@ -380,9 +377,10 @@ function get_menus() {
   Returns the menu for the given cafe (id) and day (unix timestamp)
 \*******************************************************************/
 function get_menu($id, $time) {
-	$year = date("Y", $time);
-	$week = date("W", $time);
-	$wday = (date("w", $time) + 6) % 7;	// convert to: day of week, 0 is monday
+	$year = date('Y', $time);
+	$week = date('W', $time);
+	$wday = (date('w', $time) + 6) % 7;	// convert to: day of week, 0 is monday
+	$wday_now = (date('w') + 6) % 7;
 	
 	// locate the TABLE element containing the menu
 	$contents = get_menu_page($id, $week, $year);
@@ -391,25 +389,35 @@ function get_menu($id, $time) {
 	$menu = substr($contents, $start, $end - $start);
 	
 	// go through the menu day by day
+	$i = $wday;
 	$start = 0;
 	while (true) {
 		
 		// identify TD elements and select their contents
 		$start = strpos($menu, '<td', $start);
-		if ($start === false) {
-			return "";		// end of menu
+		if ($start === false) {			// end of menu reached
+			
+			// If now is the beginning of the week, the source
+			// site's menu might be updated soon, so it would
+			// be better to keep the cache time short:
+			if ($wday == $wday_now
+					&& $wday == CACHE_RECHECK_WDAY
+					&& date('G') >= CACHE_RECHECK_HOUR_START
+					&& date('G') < CACHE_RECHECK_HOUR_END) {
+				recheck_menu_page($id, $week, $year);
+			}
+			return "";		
 		}
 		$start = strpos($menu, '>', $start) + strlen('>');
 		$end = strpos($menu, '</td>', $start);
 		
 		// keep on parsing until the requested day is reached
-		$wday--;
-		if ($wday < 0) {
+		$i--;
+		if ($i < 0) {
 			$result = trim(substr($menu, $start, $end - $start));
 			return trim_br($result);
-		} else {
-			$start = $end;
 		}
+		$start = $end;
 	}
 }
 
@@ -456,8 +464,8 @@ function get_timetable($id) {
 function get_cafe_url($id) {
 	$url = SOURCE_MENU_URL;
 	$url = str_replace('{ID}', $id, $url);
-	$url = str_replace('{WEEK}', date("W"), $url);
-	$url = str_replace('{YEAR}', date("Y"), $url);
+	$url = str_replace('{WEEK}', date('W'), $url);
+	$url = str_replace('{YEAR}', date('Y'), $url);
 	return $url;
 }
 
@@ -473,6 +481,16 @@ function get_menu_page($id, $week, $year) {
 	$url = str_replace('{WEEK}', $week, $url);
 	$url = str_replace('{YEAR}', $year, $url);
 	return get_page($cache_id, $url);
+}
+
+
+/*******************************************************************\
+  Deletes from file cache the menu page for the given cafe (id),
+  week number and year if it is older than CACHE_RECHECK_LIMIT
+\*******************************************************************/
+function recheck_menu_page($id, $week, $year) {
+	$cache_id = $id.'-'.$week.'-'.$year;
+	purge_cache_file($cache_id, CACHE_RECHECK_LIMIT);
 }
 
 
@@ -494,6 +512,7 @@ function get_page($cache_id, $url) {
 	global $_page_downloads;
 	static $cache = array();
 	
+	// security check
 	if (!preg_match('/^[0-9a-z-_]+$/', $cache_id)) {
 		die("get_page: '$cache_id' contains illegal characters");
 	}
@@ -508,46 +527,70 @@ function get_page($cache_id, $url) {
 	}
 	
 	// look for a recent copy of the page from file cache
-	$limit = rand(CACHE_AGE - (CACHE_AGE * CACHE_AGE_SPREAD), CACHE_AGE);	// distribute the page reload frequency
-	if (file_exists($cache_file) 
-			&& filemtime($cache_file) > time() - $limit
-			&& filesize($cache_file) > 0) {
-		// get the page from file cache
-		$handle = fopen($cache_file, "r");
-		$cached = true;
+	if (!file_exists($cache_file) || filesize($cache_file) == 0) {
+		$is_cached = false;
+	} else if ($_page_downloads == 0 && filemtime($cache_file) < time() - CACHE_SOFT_LIMIT) {
+		$is_cached = false;
+//	} else if (filemtime($cache_file) < time() - CACHE_HARD_LIMIT) {
+//		// NOTE: This line is actually never reached, because a soft update
+//		//       will initiate cache purge, which will remove all the files
+//		//       that are breaking the hard limit.
+//		$is_cached = false;
 	} else {
-		// get the page from the web
-		$_page_downloads++;
-		$handle = fopen($url, "r");
-		$cached = false;
+		$is_cached = true;
 	}
 	
-	// read the contents of the page
-	$contents = "";
-	do {
-		$data = fread($handle, 8192);
-		$contents .= $data;
-	} while (strlen($data) > 0);
-	fclose($handle);
+	// read the contents of the page from file cache or web
+	if ($is_cached) {
+		$contents = read_file($cache_file);
+	} else {
+		$_page_downloads++;
+		$contents = read_file($url);
+	}
+	if ($contents === false) {
+		return "";
+	}
 	
 	// update runtime cache
 	$cache[$cache_id] = $contents;
 	
 	// update file cache
-	if (!$cached && (is_writable($cache_file) || (!file_exists($cache_file) && is_writable(CACHE_DIR)))) {
-		$handle = fopen($cache_file, "w");
-		fwrite($handle, $contents);
-		fclose($handle);
-//		echo "Cache updated: $cache_file<br>"; // DEBUG
-		purge_cache_dir();	// TODO: testaa toimivuus
+	if (!$is_cached && (is_writable($cache_file) || (!file_exists($cache_file) && is_writable(CACHE_DIR)))) {
+		$handle = fopen($cache_file, 'w');
+		if ($handle) {
+			fwrite($handle, $contents);
+			fclose($handle);
+//			echo "Cache updated: $cache_file<br>"; // DEBUG
+		}
+		purge_cache_dir();
 	}
 	return $contents;
 }
 
 
 /*******************************************************************\
-  Deletes from CACHE_DIR any files older than CACHE_AGE. Will do
-  nothing if called more than once.
+  Deletes from CACHE_DIR the file used by $cache_id if it is older
+  than $age_limit seconds. Returns TRUE if the file was deleted,
+  otherwise FALSE.
+\*******************************************************************/
+function purge_cache_file($cache_id, $age_limit) {
+	
+	// security check
+	if (!preg_match('/^[0-9a-z-_]+$/', $cache_id)) {
+		die("purge_cache_file: '$cache_id' contains illegal characters");
+	}
+	$cache_file = CACHE_DIR.'/'.$cache_id.'.html';
+	
+	if (file_exists($cache_file) && filemtime($cache_file) < time() - $age_limit) {
+		return unlink($cache_file);
+	}
+	return false;
+}
+
+
+/*******************************************************************\
+  Deletes from CACHE_DIR any files older than CACHE_HARD_LIMIT.
+  Will do nothing if called more than once.
 \*******************************************************************/
 function purge_cache_dir() {
 	static $is_purged = false;
@@ -558,7 +601,7 @@ function purge_cache_dir() {
 	}
 	$is_purged = true;
 	
-	// go through ALL files in CACHE_DIR and delete those older than CACHE_AGE
+	// go through ALL files in CACHE_DIR and delete those older than CACHE_HARD_LIMIT
 	$files = array();
 	$dh = opendir(CACHE_DIR);
 	while (false !== ($filename = readdir($dh))) {
@@ -568,8 +611,7 @@ function purge_cache_dir() {
 	}
 	closedir($dh);
 	foreach ($files as $file) {
-		if (filemtime($file) <= (time() - CACHE_AGE)
-				|| filesize($file) == 0) {
+		if (filemtime($file) < time() - CACHE_HARD_LIMIT) {
 //			echo "Deleted: $file<br>"; // DEBUG
 			unlink($file);
 		}
@@ -589,7 +631,7 @@ if (isset($_GET['sources'])) {
 		echo get_source_code();
 		die();
 	} else {
-		echo '<p align="center"><a href="'.BASE_URL.'?sources&amp;plain"><b>Download in Plain Text</b></a></p>';
+		echo '<p align="center"><a href="'.BASE_URL.'?sources&amp;plain">View plain text version</a></p>';
 		highlight_string(get_source_code());
 		die();
 	}
@@ -645,12 +687,30 @@ foreach ($ids as $id) {
 /*******************************************************************\
   Print the page
 \*******************************************************************/
-$cafe_selection = get_cafe_selection();
-$menus = get_menus();
 
+// links and menus
+$cafe_selection = get_cafe_selection();
+$content = get_menus();
+
+// advertisement banner
+$banner = "";
+if (BANNER_FILE !== false && $content != "" && ($banner = read_file(BANNER_FILE)) != "") {
+	$banner = "\n<div class=\"banner\">$banner</div>\n";
+}
+
+// information page
+if (INFO_FILE !== false && $content == "") {
+	$content = read_file(INFO_FILE);
+	$content = "<div class=\"info\">$content</div>";
+}
+$info_link = INFO_FILE ? '<a href="'.BASE_URL.'?ids="><img src="img/info.png" alt="'.TEXT_INFO.'" border="0" style="float: right;" /></a>' : '';
+
+// localized strings
 $base_url = htmlspecialchars(BASE_URL);
 $text_display_button = htmlspecialchars(TEXT_DISPLAY_BUTTON);
 $text_save_selection = htmlspecialchars(TEXT_SAVE_SELECTION);
+$text_info = htmlspecialchars(TEXT_INFO);
+$text_description = htmlspecialchars(TEXT_DESCRIPTION);
 $app_name = htmlspecialchars(APP_NAME);
 $app_version = htmlspecialchars(APP_VERSION);
 $copyright = COPYRIGHT_HTML;
@@ -672,21 +732,25 @@ echo <<<END
 
 <link rel="stylesheet" href="style.css" type="text/css" media="all" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="$text_description" />
 
 </head>
 <body>
 
 <h1><a href="$base_url">$app_name</a></h1>
-
+$banner
 <table border="0">
 <tr>
-	<td valign="top" style="white-space: nowrap;"><form action="$base_url" method="get">
-	$cafe_selection
-	<input type="submit" class="button" value="$text_display_button" /><br />
-	<span class="note"><input type="checkbox" name="save" value="" />$text_save_selection</span>
-	<input type="hidden" name="submit" value="1" />
-	</form></td>
-	<td valign="top">$menus</td>
+	<td valign="top" style="white-space: nowrap;">
+	$info_link
+	<form action="$base_url" method="get">
+		$cafe_selection
+		<input type="submit" class="button" value="$text_display_button" /><br />
+		<span class="note"><input type="checkbox" name="save" value="" />$text_save_selection</span>
+		<input type="hidden" name="submit" value="1" />
+	</form>
+	</td>
+	<td valign="top">$content</td>
 </tr>
 </table>
 
