@@ -48,7 +48,11 @@ TD.menu_empty {
 	height: 6ex;
 }
 
-P.copyright {
+P.copyright { /* deprecicated in 1.04 */
+	color: #999999;
+}
+
+P.footer {
 	color: #999999;
 }
 

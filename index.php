@@ -21,6 +21,9 @@
 /*
  * CHANGE LOG:
  *
+ * Version 1.04 (2005-09-04)
+ *	+ Delayed page reloading
+ *
  * Version 1.03 (2005-08-29)
  *	+ Distributed page downloading more evenly (soft & hard limit)
  *	+ Refresh cache more often if the menu is not available in
@@ -116,35 +119,29 @@ define('SOURCE_TIMETABLE_START', '<div id="sisalto"');
 //     "{CAFE}" will be replaced with the cafe's name
 define('SOURCE_TIMETABLE_REGEX', '/(?:<strong>{CAFE}.*?<\/strong>)(.*?)(?:<\/p>|<strong>)/');
 
-// Internationalization
-define('TEXT_DISPLAY_BUTTON', 'Näytä');
-define('TEXT_SAVE_SELECTION', 'Muista valinnat');
-define('TEXT_INFO', 'Tiedot');
-define('TEXT_DESCRIPTION', 'UniCafe -ravintoloiden ruokalistojen parempi käyttöliittymä.');
-
-// Locations of files containing the info page and banner code, or FALSE do disable
-define('INFO_FILE', 'info.txt');
-define('BANNER_FILE', 'banner.txt');
-
-// Time zone
-putenv("TZ=EET");
-
 // Writable directory to contain the cached pages, no trailing slash
 // WARNING: Any files in this folder will be deleted!
 define('CACHE_DIR', './cache');
 
-// How many seconds to keep the pages cached. Max one pages exceeding soft limit 
-// will be reloaded in a lifetime. Pages exceeding hard limit are always reloaded
+// How many seconds to keep the pages cached. Pages exceeding soft limit use delayed
+// reloading. Pages exceeding hard limit are always reloaded before showing the page
 define('CACHE_SOFT_LIMIT', 3600 * 3);
-define('CACHE_HARD_LIMIT', 3600 * 12);
+define('CACHE_HARD_LIMIT', 3600 * 24);
+
+// Maximum number of delayed page reloads in a lifetime
+define('CACHE_MAX_DELAYED_COUNT', 3);
+
+// Name of the session ID parameter used in the links of the source site. Needed for
+// finding out whether the content of the page has changed
+define('CACHE_STRIP_SESSION_NAME', 'dev_sessionname_SiteUpdate2_v01100_a');
 
 // The source site might be updated more frequently in the beginning of the week,
 // so it is best to keep the cache times short when the menu for today is not yet
-// available.
+// available. These will invoke delayed reloading
 //	LIMIT = cache time in seconds
 //	WDAY = 0 for Monday, 6 for Sunday, -1 to disable
 //	HOUR_START/END = this rule will apply when the hour is between [START, END)
-define('CACHE_RECHECK_LIMIT', 1800);
+define('CACHE_RECHECK_LIMIT', 900);
 define('CACHE_RECHECK_WDAY', 0);
 define('CACHE_RECHECK_HOUR_START', 6);
 define('CACHE_RECHECK_HOUR_END', 16);
@@ -154,6 +151,23 @@ define('COOKIE_IDS_FIELD', 'varjocafe_ids');
 define('COOKIE_AGE', 3600 * 24 * 365);
 define('COOKIE_PATH', '');
 define('COOKIE_DOMAIN', '');
+
+// Time zone
+putenv("TZ=EET");
+
+// Locations of files containing the info page and banner code, or FALSE do disable
+define('INFO_FILE', 'info.txt');
+define('BANNER_FILE', 'banner.txt');
+
+// Internationalization
+define('TEXT_DISPLAY_BUTTON', 'Näytä');
+define('TEXT_SAVE_SELECTION', 'Muista valinnat');
+define('TEXT_INFO', 'Tiedot');
+define('TEXT_DESCRIPTION', 'UniCafe -ravintoloiden ruokalistojen parempi käyttöliittymä.');
+
+define('HTML_DELAYED_RELOAD_START', '<p class="footer">Loading .');
+define('HTML_DELAYED_RELOAD_STEP', ' .');
+define('HTML_DELAYED_RELOAD_STOP', ' Done</p>');
 
 
 /*******************************************************************\
@@ -172,9 +186,12 @@ $_page_downloads = 0;
 // database: visible cafes
 $_visible = array();
 
+// scheduled cache updates in a "cache_id => url" array
+$_delayed_reloads = array();
+
 // application properties
 define('APP_NAME', 'VarjoCafe');
-define('APP_VERSION', '1.03');
+define('APP_VERSION', '1.04');
 define('COPYRIGHT_HTML', 'Copyright &copy; 2005 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
 
 // get an URL like PHP_SELF but without "index.php"
@@ -485,12 +502,23 @@ function get_menu_page($id, $week, $year) {
 
 
 /*******************************************************************\
-  Deletes from file cache the menu page for the given cafe (id),
-  week number and year if it is older than CACHE_RECHECK_LIMIT
+  Schedules a delayed reload for the menu page of the given 
+  cafe (id), week number and year if older than CACHE_RECHECK_LIMIT
 \*******************************************************************/
 function recheck_menu_page($id, $week, $year) {
 	$cache_id = $id.'-'.$week.'-'.$year;
-	purge_cache_file($cache_id, CACHE_RECHECK_LIMIT);
+	$cache_file = get_cache_file($cache_id);
+	if ($cache_file === false) {
+		die("recheck_menu_page: '$cache_id' contains illegal characters");
+	}
+	if (file_exists($cache_file) && filemtime($cache_file) < time() - CACHE_RECHECK_LIMIT) {
+		$url = SOURCE_MENU_URL;
+		$url = str_replace('{ID}', $id, $url);
+		$url = str_replace('{WEEK}', $week, $url);
+		$url = str_replace('{YEAR}', $year, $url);
+		set_delayed_reload($cache_id, $url);
+	}
+	//purge_cache_file($cache_id, CACHE_RECHECK_LIMIT);
 }
 
 
@@ -506,36 +534,35 @@ function get_timetable_page() {
   Returns the content of an URL. Will read the page from cache
   if it is up to date, otherwise will download it from the web.
   $cache_id should be unique for each $url and it may contain only
-  "-", "_" and alphanumeric lowercase characters.
+  "-", "_" and alphanumeric lowercase characters. If $nocache is
+  TRUE, the URL will always be downloaded and cache updated.
 \*******************************************************************/
-function get_page($cache_id, $url) {
+function get_page($cache_id, $url, $nocache=false) {
 	global $_page_downloads;
 	static $cache = array();
 	
 	// security check
-	if (!preg_match('/^[0-9a-z-_]+$/', $cache_id)) {
+	$cache_file = get_cache_file($cache_id);
+	if ($cache_file === false) {
 		die("get_page: '$cache_id' contains illegal characters");
 	}
 	if (!preg_match('/^https?:\/\//', $url)) {
 		die("get_page: '$url' does not use HTTP(S) protocol");
 	}
-	$cache_file = CACHE_DIR.'/'.$cache_id.'.html';
 	
 	// read the page from runtime cache, if present
-	if (isset($cache[$cache_id])) {
+	if (isset($cache[$cache_id]) && !$nocache) {
 		return $cache[$cache_id];
 	}
 	
 	// look for a recent copy of the page from file cache
-	if (!file_exists($cache_file) || filesize($cache_file) == 0) {
+	if (!file_exists($cache_file) || filesize($cache_file) == 0 || $nocache) {
 		$is_cached = false;
-	} else if ($_page_downloads == 0 && filemtime($cache_file) < time() - CACHE_SOFT_LIMIT) {
+	} else if (filemtime($cache_file) < time() - CACHE_HARD_LIMIT) {
 		$is_cached = false;
-//	} else if (filemtime($cache_file) < time() - CACHE_HARD_LIMIT) {
-//		// NOTE: This line is actually never reached, because a soft update
-//		//       will initiate cache purge, which will remove all the files
-//		//       that are breaking the hard limit.
-//		$is_cached = false;
+	} else if (filemtime($cache_file) < time() - CACHE_SOFT_LIMIT) {
+		$is_cached = true;
+		set_delayed_reload($cache_id, $url);
 	} else {
 		$is_cached = true;
 	}
@@ -569,23 +596,89 @@ function get_page($cache_id, $url) {
 
 
 /*******************************************************************\
+  Returns the location of the cache file used by $cache_id, or 
+  FALSE if the $cache_id contains illegal characters
+\*******************************************************************/
+function get_cache_file($cache_id) {
+	if (!preg_match('/^[0-9a-z-_]+$/', $cache_id)) {
+		return false;
+	}
+	$cache_file = CACHE_DIR.'/'.$cache_id.'.html';
+	return $cache_file;
+}
+
+
+/*******************************************************************\
+  Schedule a cache update to be done after the script finishes. 
+  Will do nothing if CACHE_MAX_DELAYED_COUNT updates are already 
+  scheduled.
+\*******************************************************************/
+function set_delayed_reload($cache_id, $url) {
+	global $_delayed_reloads;
+	
+	if (count($_delayed_reloads) < CACHE_MAX_DELAYED_COUNT) {
+		$_delayed_reloads[$cache_id] = $url;
+	}
+}
+
+
+/*******************************************************************\
+  Do all the schedule cache updates. Will print the progress if
+  there are scheduled updates to be done. Returns TRUE if one or
+  more pages have changed, otherwise FALSE.
+\*******************************************************************/
+function do_delayed_reloads() {
+	global $_delayed_reloads;
+	
+	if (count($_delayed_reloads) == 0) {
+		return false;
+	}
+	echo HTML_DELAYED_RELOAD_START;
+	flush();
+	
+	// download all requested pages and check if their content has changed
+	$is_changed = false;
+	foreach ($_delayed_reloads as $cache_id => $url) {
+		$old_page = get_page($cache_id, $url, false);
+		$new_page = get_page($cache_id, $url, true);
+		
+		// remove session IDs from the source because they change all the time
+		$old_page = preg_replace('/'.CACHE_STRIP_SESSION_NAME.'=[0-9a-fA-F]+/', '', $old_page);
+		$new_page = preg_replace('/'.CACHE_STRIP_SESSION_NAME.'=[0-9a-fA-F]+/', '', $new_page);
+		
+		if ($old_page != $new_page) {
+			$is_changed = true;
+		}
+		echo HTML_DELAYED_RELOAD_STEP;
+		flush();
+	}
+	echo HTML_DELAYED_RELOAD_STOP;
+	return $is_changed;
+}
+
+
+/*******************************************************************\
   Deletes from CACHE_DIR the file used by $cache_id if it is older
   than $age_limit seconds. Returns TRUE if the file was deleted,
   otherwise FALSE.
 \*******************************************************************/
+/* NOTE: as of 1.04 this method is never used
+
 function purge_cache_file($cache_id, $age_limit) {
 	
 	// security check
-	if (!preg_match('/^[0-9a-z-_]+$/', $cache_id)) {
+	$cache_file = get_cache_file($cache_id);
+	if ($cache_file === false) {
 		die("purge_cache_file: '$cache_id' contains illegal characters");
 	}
-	$cache_file = CACHE_DIR.'/'.$cache_id.'.html';
 	
+	// delete the cache file if older than $age_limit
 	if (file_exists($cache_file) && filemtime($cache_file) < time() - $age_limit) {
 		return unlink($cache_file);
 	}
 	return false;
 }
+*/
 
 
 /*******************************************************************\
@@ -616,7 +709,6 @@ function purge_cache_dir() {
 			unlink($file);
 		}
 	}
-	return;
 }
 
 
@@ -754,8 +846,22 @@ $banner
 </tr>
 </table>
 
-<p class="copyright">$app_name $app_version (<a href="$base_url?sources">Source Code</a>), executed in $exec_note
+<p class="footer">$app_name $app_version (<a href="$base_url?sources">Source Code</a>), executed in $exec_note
 <br />$copyright</p>
+
+END;
+
+// delayed cache updates, reload page if content has changed
+if (do_delayed_reloads()) {
+	echo <<<END
+<script text="text/javascript">
+location.reload();
+</script>
+
+END;
+}
+
+echo <<<END
 
 </body>
 </html>
