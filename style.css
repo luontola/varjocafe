@@ -48,6 +48,14 @@ TD.menu_empty {
 	height: 6ex;
 }
 
+DIV.menu_date {
+	font-weight: bold;
+}
+
+DIV.food {
+	margin-top: 0.4em;
+}
+
 P.copyright { /* deprecicated in 1.04 */
 	color: #999999;
 }
@@ -69,12 +77,14 @@ SPAN.note {
 }
 
 DIV.banner {
-	position: absolute;
+/*	position: absolute; */
+	float: right;
 	top: 1em;
 	right: 1em;
 	padding: 0.5ex;
 	background-color: #FFFFFF;
 	border: 2px dashed #D7E8F6;
+	width: 70%;
 }
 
 DIV.info {
@@ -83,4 +93,9 @@ DIV.info {
 	width: 500px;
 	background-color: #F9F9F9;
 	border: 1px solid #AAAAAA;
+}
+
+#bottom_banner {
+	border: 0;
+	margin-top: 10px;
 }

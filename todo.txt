@@ -1,0 +1,79 @@
+
+>> 21.3.2006
+- tehosta cachea niin, ettei sivuja tallenneta sellaisenaan, vaan sisältö tallennetaan valmiiksi parsitussa muodossa (debuggausta varten pidetään myös originaaliversio)
+- muutosten tarkistamiseksi laske tekstisisällön md5sum ja talleta se cacheen, niin ei tarvitse laskea sitä kahteen kertaan
+
+>> 24.2.2006
+- erillinen konfigurointitiedosto
+- lähdekoodin katselu --> automaattinen zip-paketin generointi
+- validin xhtml:n generointi kunnon työkaluilla (unicafen sivuilta tuleva materiaali parsittava)
+
+>> 19.10.2005
+- template-systeemi ulkoasun täydelliseksi kustomoinniksi
+- sivun muuttumisen tarkistamiseksi poista kaikki html-tagit ennen vertailua
+- lempiruoan korostus
+- ruokaloiden järjestyksen muuttaminen
+- hälytys, kun ruokala on pian menossa kiinni tai lounasaika loppumassa
+
+[12:35] <tsj> järjestystä pitäis voida vaihtaa :)
+[12:36] <Koffa> tsj :)
+[12:36] <tsj> ja sit se vois yrittää suorilta skrollata ko päivän näkyviin.
+[12:36] <tsj> ja säätimet vois olla absultella asetettu näkymään aina :)
+
+[01:24] <ORFJackal> sanokaa myös että mitä mieltä olette näiden ehdotuksien tarpeellisuudesta: (1) mahdollisuus muuttaa ruokaloiden järjestystä, (2) lempiruokien korostus listassa
+[01:25] <ORFJackal> kumpikin olisi cookie-pohjainen ratkaisu
+[01:26] <_^_> <@mjr> 3) tiettyjen kirjainlyhennemääreiden korostus listassa
+[01:31] <ORFJackal> mjr, nuo lyhenteet taitavat olla kaikille ravintoloille samat? niihin voisi tosiaan kehittää jotain erikoistuneempaa korostusta
+[01:32] <af> joku vois varmaan haluta valinnat että älä näytä sapuskoja joissa on aineita mitä ei voi kuitenkaan syödä
+[01:32] <_^_> <@mjr> joo, ovat, tosin osa esittää "(a,b)"-muodossa ja osa "(a) (b)"-muodossa
+[01:32] <_^_> <@mjr> että olis ihan kiva tosiaan joku erikoistuneempi kalu ettei tarvis kovin rasittavia regexejä väsätä
+
+[01:29] <af> se mitä mä yleensä haluan nähdä on "nää syöttölät, tänään"
+[01:29] <af> poislukien ne jotka on jo kiinni
+[01:30] <af> tai siis ne joista ei enää saa ravintoa
+[01:30] <_^_> <@mjr> tjoo, ehkä kuluvan päivän korostuksesta voisi poimia kiinnimenneet epäkorostetuiksi
+[01:32] <ORFJackal> kiinnimenneiden epäkorostus voi olla vaikeaa, kun pitäisi ensin saada parsittua aukioloajat
+[02:28] <ruffneck> ja heti näkis jos joku on menos just kiinni
+
+[01:37] <af> vois olla pop jos toi söis noi säädöt (myös) urlista
+[01:37] <ORFJackal> noi korostussäädötkö?
+[01:38] <af> noi valinnat
+[01:38] <ORFJackal> tarkoitatko cookieiden asetusta?
+[01:39] <af> sori että en ole seurannut kun tuota on säädetty että mitä se on syönyt, mutta kerronpa miten mä tuollaista käyttäisin jos se olisi mahdollista
+[01:39] <ORFJackal> kerro pois
+[01:40] <af> optimaalista olis jos saisin yhdellä ratkaisulla lähialueen apelaarien valikoimat, mutta koska sen tietäminen olenko keskustassa vai kumpulassa ei ole ihan helppoa, niin sekin riittäisi hyvin että saisin bookmarkkeihin suoraan tyypillisimmät paikat eli joko kumpulan tai keskustan, joissa on sit ne mitkä olen valinnut
+[01:41] <af> ton jälkeen mun kannalta kaikki muu on turhaa kuorrutusta
+[01:41] <_^_> <@mjr> joh, se olis ihan kätevää että esmes ainakin ne lyhennekorostuskliksutukset olis urlissa, mutta emmä kovasti paheksu keksiäkään
+[01:42] <ORFJackal> af, valinnat menee jo urlissa. bookmarkkausta varten tarkoitin tuon alunperinkin.
+[01:42] <_^_> <@mjr> "tags=ve,g,v"
+
+[01:58] <ORFJackal> osaisiko joku neuvoa, että miten noiden ruokavalioiden korostus pitäisi hoitaa?
+[02:00] <ORFJackal> riittääkö semmoinen, että taustavärillä korostetaan valitut tagit?
+[02:02] <ORFJackal> pitäisikö ruoka korostaa, jos siinä on yksi valituista tageista, vai korostetaanko silloin kun siinä on ne kaikki?
+
+[12:32] <_^_> <@Zds> palautetta varjocafesta: sinne pitäisi lisätä sana unicafe että google löytäisi silläkin :-]
+[12:33] <_^_> <@Zds> sitten kun varjocafe alkaa olla googlessa ennen unicafen omia sivuja, voivat miettiä onko kaikki ok ;-)
+[12:33] <Arkku> Voitaisiin nostaa se tollaiseen asemaan.
+[12:33] <_^_> <@mjr> sit voivat haastaa sen oikeuteen
+[12:33] <Arkku> Kaikki linkittäisi sen omilta sivuiltaan jollain "Unicafe-ruokalistat" -tekstillä.
+
+[18:29] <suo> Tuo Varjocafe on aika täydellinen. Vielä kun se osaisi kertoa, mitkä noista juttusista ovat ihmisten ruokaa.
+[18:30] <zeska> =)
+[18:30] <zeska> jos sinne tehtäis jokin reittausjärjestelmä?
+[18:30] <suo> Joo, se sitten klusteroisi ihmisiä mieltymysten mukaan ja tarjoaisi suosituksia oman klusterisi mukaan.
+[18:31] <_^_> <@Zds> suo, jesh!
+[18:31] <suo> Jos tuohon vielä saisi kontekstitietoisuuden mukaan, meidän ryhmä voisi ottaa tuon tutkimusprojektiksi. Pitäisi varmaan oppia tuntemaan krapulasafka ja ennen tenttiä soveltuva ruokavalio.
+[18:32] <zeska> suo: ja tietty se painoittais suosituksia katselijan ip:n maantieteellisen sijainnin perusteella =)?
+[18:33] <zeska> tottakai jos katson exactumista unicafea tahdon mielummin syödä siellä kuin esim. ylioppilasaukiolla jne :)
+[18:34] <ruffneck> nii, se tosiaa vois ensinäkemältä näyttää muutaki ku tyhjää sivua ja valintacheckboxeja
+[18:34] <suo> Lähdedata olisi jopa annotoitua; siellä on noita ruokavammamerkkejä ja lisähintatägejä.
+[18:38] <_^_> <@Zds> se voisi hyvin näyttää vaikka suosituimpien paikkojen listat jos muuta tietoa ei ole
+[18:39] <Koffa> noi pikalinkit piisaa hyvin
+
+[18:49] <otso> varjo vois kertoo mnkä viikon lista mikäkin on
+[18:49] <otso> meinaan unicafen sivut ystävällisesti tarjoo osa maanantaisin edellistä viikkoa vielä
+[18:49] <suo> Varjo kai automaagisesti osaa hakea seuraavan 7 vrk:n listan.
+[18:50] <otso> paitsi kun sitä ei oo tarjolla
+[18:50] <suo> No silloin se näyttää tyhjää? Niin se ainakin teki viikonloppuna, kun seuraavan viikon listaa ei vielä ollut.
+[18:51] <otso> hmm nyt taitaa suunnilleen kaikki listat jo löytyä eli pitäis jaksaa lukea koodia nähdäkseen mitä se tekee
+[18:52] <suo> Näh, käyttää sitä tyytyväisenä ja lähettää sitten ne jauhelihacrepet varjocafen tekijälle, jos se ei toimikaan oikein. :)
