@@ -1,17 +1,5 @@
-<p>VarjoCafe on <a href="http://www.unicafe.fi/">UniCafe</a>-ravintoloiden ruokalistojen parempi käyttöliittymä.
-Järjestelmä luotiin 25.8.2005 vastareaktiona UniCafen uudistuneille nettisivuille. UniCafe uudisti sivujaan
-toistamiseen 21.11.2006, tällä kertaa ottaen vaikutteita VarjoCafesta, mutta sivuston ruokalistojen käytettävyyteen
-jäi silloinkin parantamisen varaa, joten VarjoCafe jatkaa vieläkin toimintaansa.</p>
+<p>VarjoCafe on <a href="http://www.unicafe.fi/">UniCafe</a>-ravintoloiden ruokalistojen parempi käyttöliittymä. Järjestelmä luotiin 25.8.2005 vastareaktiona UniCafen uudistuneille nettisivuille. UniCafe uudisti sivujaan toistamiseen 21.11.2006, tällä kertaa ottaen vaikutteita VarjoCafesta, mutta sivuston ruokalistojen käytettävyyteen jäi silloinkin parantamisen varaa, joten VarjoCafe jatkaa toimintaansa.</p>
 
-<p>Valitse vasemmalta ravintolat, joissa käyt säännöllisesti, ja tallenna valintasi evästeenä (<cite>Muista
-valinnat</cite> -valintaruutu) tai säilö sivun osoite kirjanmerkkeihisi. Ravintoloiden ja kampuksien nimet toimivat
-linkkeinä ruokalistoihinsa. VarjoCafe näyttää ajankohtaiset ruokalistat sikäli kun ne ovat saatavissa UniCafen
-sivuilta.</p>
+<p>Valitse vasemmalta ravintolat, joissa käyt säännöllisesti, ja tallenna valintasi evästeenä (<cite>Muista valinnat</cite> -valintaruutu) tai säilö sivun osoite kirjanmerkkeihisi. Ravintoloiden ja kampuksien nimet toimivat linkkeinä ruokalistoihinsa. VarjoCafe näyttää ajankohtaiset ruokalistat sikäli kun ne ovat saatavissa UniCafen sivuilta.</p>
 
-<p>Ohjelmaa kehittää <a href="http://www.cs.helsinki.fi/u/luontola/">Esko Luontola</a>, opiskelija Helsingin yliopiston
-tietojenkäsittelytieteen laitokselta. Palautetta voi antaa sähköpostitse (<i>esko piste luontola ät cs piste helsinki
-piste fi</i>) tai irkissä kanavalla #tko-äly (IRCnet), missä oleskelen nimimerkillä ORFJackal. VarjoCafe on julkaistu <a
-href="LICENCE">GPL</a>-lisenssin alaisuudessa ja viimeisin virallinen versio pyörii osoitteessa <a
-href="http://www.varjocafe.net/">http://www.varjocafe.net/</a></p>
-
-
+<p>Ohjelmaa kehittää <a href="http://www.cs.helsinki.fi/u/luontola/">Esko Luontola</a>, opiskelija Helsingin yliopiston tietojenkäsittelytieteen laitokselta. Palautetta voi antaa sähköpostitse (<i>esko piste luontola ät cs piste helsinki piste fi</i>) tai irkissä kanavalla #tko-äly (IRCnet), missä oleskelen nimimerkillä ORFJackal. VarjoCafe on julkaistu <a href="LICENCE">GPL</a>-lisenssin alaisuudessa ja viimeisin virallinen versio pyörii osoitteessa <a href="http://www.varjocafe.net/">http://www.varjocafe.net/</a></p>

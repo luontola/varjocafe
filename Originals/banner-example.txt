@@ -1,0 +1,4 @@
+<span style="color: #FF9900; font-style: italic; font-weight: bold;"><blink>HUOM!</blink> VarjoCafe on tilapäisesti poissa käytöstä</span>
+<br/>UniCafe uudisti sivujaan 21.11.2006, eikä VarjoCafe <em>vielä</em> osaa noutaa ruokalistoja uudelta sivustolta.
+<a href="http://www.unicafe.fi/" style="font-weight: bold;">Katso ruokalistat UniCafen sivuilta</a> kunnes VarjoCafea saadaan päivitettyä (viimeistään joululomalla).
+Ideoita VarjoCafen parantamiseksi voi lähettää osoitteeseen <i>esko piste luontola ät cs piste helsinki piste fi</i>.

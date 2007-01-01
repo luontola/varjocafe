@@ -1,2 +1,2 @@
-<b>23.12.2006</b>
-<br />VarjoCafe on nyt p‰ivitetty tunnistamaan UniCafen uudistuneet sivut. N‰in ensih‰t‰‰n ei lis‰tty mit‰‰n muita uusia ominaisuuksia kuin pieni rako jokaisen ruokalajin v‰lill‰ helpottamaan lukemista. Ehk‰ sitten joskus, kun on paremmin aikaa...
+<b>1.1.2007</b>
+<br />UniCafen uudet sivut bugittavat vuoden vaihtumisen takia, eik‰ <a href="http://www.unicafe.fi/index.php?option=com_paivanlounas&amp;Itemid=44&amp;kampusid=1">ravintolakohtaisilta sivuilta</a> en‰‰ n‰e ruokalistoja, vaan ainoastaan <a href="http://www.unicafe.fi/index.php?option=com_ruokalista&amp;Itemid=29">viikon lounaslista</a> -haku toimii. Koska VarjoCafe noutaa ruokalistat edellisilt‰, niin VarjoCafe ei toimi kunnes UniCafe korjaa sivunsa. UniCafea on tiedotettu ongelmasta.

@@ -1,6 +1,6 @@
 <?php
 /*
-* Copyright (C) 2005-2006 Esko Luontola, www.orfjackal.net
+* Copyright (C) 2005-2007 Esko Luontola, www.orfjackal.net
 *
 * This file is part of VarjoCafe.
 *
@@ -20,6 +20,10 @@
 */
 /*
 * CHANGE LOG:
+*
+* Version 1.06 (2007-01-01)
+*    + Removed some debug code which caused the delayed page 
+*      reloading not to work
 *
 * Version 1.05 (2006-12-23)
 *    + Supports UniCafe's renewed web site
@@ -189,8 +193,8 @@ $_delayed_reloads = array();
 
 // application properties
 define('APP_NAME', 'VarjoCafe');
-define('APP_VERSION', '1.05');
-define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2006 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
+define('APP_VERSION', '1.06');
+define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
 
 // get an URL like PHP_SELF but without "index.php"
 $pos = strpos($_SERVER['REQUEST_URI'], '?');
@@ -839,7 +843,6 @@ END;
 
 // delayed cache updates, reload page if content has changed
 if (do_delayed_reloads()) {
-die('RELOAD');
     echo <<<END
 <script text="text/javascript">
 location.reload();
