@@ -21,6 +21,9 @@
 /*
 * CHANGE LOG:
 *
+* Version 1.07 (2007-01-02)
+*    + Removed leading 0's from the menu URL's week parameter
+*
 * Version 1.06 (2007-01-01)
 *    + Removed some debug code which caused the delayed page 
 *      reloading not to work
@@ -193,7 +196,7 @@ $_delayed_reloads = array();
 
 // application properties
 define('APP_NAME', 'VarjoCafe');
-define('APP_VERSION', '1.06');
+define('APP_VERSION', '1.07');
 define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
 
 // get an URL like PHP_SELF but without "index.php"
@@ -495,9 +498,9 @@ function get_timetable($id) {
 \*******************************************************************/
 function get_cafe_url($id) {
     $url = SOURCE_MENU_URL;
-    $url = str_replace('{ID}', $id, $url);
-    $url = str_replace('{WEEK}', date('W'), $url);
-    $url = str_replace('{YEAR}', date('Y'), $url);
+    $url = str_replace('{ID}', (int) $id, $url);
+    $url = str_replace('{WEEK}', (int) date('W'), $url);
+    $url = str_replace('{YEAR}', (int) date('Y'), $url);
     return $url;
 }
 
@@ -509,9 +512,9 @@ function get_cafe_url($id) {
 function get_menu_page($id, $week, $year) {
     $cache_id = $id.'-'.$week.'-'.$year;
     $url = SOURCE_MENU_URL;
-    $url = str_replace('{ID}', $id, $url);
-    $url = str_replace('{WEEK}', $week, $url);
-    $url = str_replace('{YEAR}', $year, $url);
+    $url = str_replace('{ID}', (int) $id, $url);
+    $url = str_replace('{WEEK}', (int) $week, $url);
+    $url = str_replace('{YEAR}', (int) $year, $url);
     return get_page($cache_id, $url);
 }
 
@@ -528,9 +531,9 @@ function recheck_menu_page($id, $week, $year) {
     }
     if (file_exists($cache_file) && filemtime($cache_file) < time() - CACHE_RECHECK_LIMIT) {
         $url = SOURCE_MENU_URL;
-        $url = str_replace('{ID}', $id, $url);
-        $url = str_replace('{WEEK}', $week, $url);
-        $url = str_replace('{YEAR}', $year, $url);
+        $url = str_replace('{ID}', (int) $id, $url);
+        $url = str_replace('{WEEK}', (int) $week, $url);
+        $url = str_replace('{YEAR}', (int) $year, $url);
         set_delayed_reload($cache_id, $url);
     }
 }
