@@ -1,63 +1,67 @@
 <?php
 /*
-* Copyright (C) 2005-2007 Esko Luontola, www.orfjackal.net
-*
-* This file is part of VarjoCafe.
-*
-* VarjoCafe is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* VarjoCafe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with VarjoCafe; if not, write to the Free Software
-* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+ * Copyright (C) 2005-2007 Esko Luontola, www.orfjackal.net
+ *
+ * This file is part of VarjoCafe.
+ *
+ * VarjoCafe is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * VarjoCafe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with VarjoCafe; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 /*
-* CHANGE LOG:
-*
-* Version 1.07 (2007-01-02)
-*    + Removed leading 0's from the menu URL's week parameter
-*
-* Version 1.06 (2007-01-01)
-*    + Removed some debug code which caused the delayed page 
-*      reloading not to work
-*
-* Version 1.05 (2006-12-23)
-*    + Supports UniCafe's renewed web site
-*    + Small padding between menu items to improve readability
-*
-* Version 1.04 (2005-09-04)
-*    + Delayed page reloading
-*
-* Version 1.03 (2005-08-29)
-*    + Distributed page downloading more evenly (soft & hard limit)
-*    + Refresh cache more often if the menu is not available in
-*      the beginning of the week
-*    + Info page and banner support
-*
-* Version 1.02 (2005-08-27)
-*    + Configurable: first visible day and number of days to show
-*    + Fixed timetables for cafes with special characters in the name
-*    + Page title is a link to the front page
-*    + Shortened URLs by excluding "index.php" when possible
-*    + Display execution time statistics
-*    + Source code syntax highlighting
-*
-* Version 1.01 (2005-08-26)
-*    + Cafes grouped by location
-*    + Cafe timetables
-*    + Save selection as a cookie
-*    + Time zone fixed
-*
-* Version 1.0 (2005-08-25)
-*    + Initial release
-*/
+ * CHANGE LOG:
+ *
+ * Version 1.08 (2007-01-11)
+ *    + Use a different URL for the menu of the current week, because UniCafe's 
+ *      site does not handle the 'week' and 'year' parameters correctly
+ *
+ * Version 1.07 (2007-01-02)
+ *    + Removed leading 0's from the menu URL's week parameter
+ *
+ * Version 1.06 (2007-01-01)
+ *    + Removed some debug code which caused the delayed page reloading not to 
+ *      work
+ *
+ * Version 1.05 (2006-12-23)
+ *    + Supports UniCafe's renewed web site
+ *    + Small padding between menu items to improve readability
+ *
+ * Version 1.04 (2005-09-04)
+ *    + Delayed page reloading
+ *
+ * Version 1.03 (2005-08-29)
+ *    + Distributed page downloading more evenly (soft & hard limit)
+ *    + Refresh cache more often if the menu is not available in the beginning 
+ *      of the week
+ *    + Info page and banner support
+ *
+ * Version 1.02 (2005-08-27)
+ *    + Configurable: first visible day and number of days to show
+ *    + Fixed timetables for cafes with special characters in the name
+ *    + Page title is a link to the front page
+ *    + Shortened URLs by excluding "index.php" when possible
+ *    + Display execution time statistics
+ *    + Source code syntax highlighting
+ *
+ * Version 1.01 (2005-08-26)
+ *    + Cafes grouped by location
+ *    + Cafe timetables
+ *    + Save selection as a cookie
+ *    + Time zone fixed
+ *
+ * Version 1.0 (2005-08-25)
+ *    + Initial release
+ */
 
 /*******************************************************************\
   CONFIGURATION
@@ -118,6 +122,7 @@ define('DISPLAY_OFFSET', -1);
 //     "{WEEK}" with the week number
 //     "{YEAR}" with the year
 define('SOURCE_MENU_URL', 'http://www.unicafe.fi/index.php?option=com_content&task=view&id={ID}&Itemid=46&week={WEEK}&year={YEAR}');
+define('SOURCE_MENU_URL_CURRENT_WEEK', 'http://www.unicafe.fi/index.php?option=com_content&task=view&id={ID}&Itemid=46');
 
 // The beginning of the menu. The first TD element after this must contain the first day's menu
 define('SOURCE_MENU_START', '<div class="column-plus-right"><div class="smalltableshadow"><table class="noborders">');
@@ -196,7 +201,7 @@ $_delayed_reloads = array();
 
 // application properties
 define('APP_NAME', 'VarjoCafe');
-define('APP_VERSION', '1.07');
+define('APP_VERSION', '1.08');
 define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
 
 // get an URL like PHP_SELF but without "index.php"
@@ -494,14 +499,29 @@ function get_timetable($id) {
 
 
 /*******************************************************************\
+  Fills the id/week/year parameters to the SOURCE_MENU_URL and returns it
+\*******************************************************************/
+function get_source_menu_url($id, $week, $year) {
+    $id = (int) $id;
+    $week = (int) $week;
+    $year = (int) $year;
+    if ($week == (int) date('W') && $year == (int) date('Y')) {
+    	$url = SOURCE_MENU_URL_CURRENT_WEEK;
+    } else {
+    	$url = SOURCE_MENU_URL;
+    }
+    $url = str_replace('{ID}', $id, $url);
+    $url = str_replace('{WEEK}', $week, $url);
+    $url = str_replace('{YEAR}', $year, $url);
+    return $url;
+}
+
+
+/*******************************************************************\
   Returns the url for this week's menu for the given cafe (id)
 \*******************************************************************/
 function get_cafe_url($id) {
-    $url = SOURCE_MENU_URL;
-    $url = str_replace('{ID}', (int) $id, $url);
-    $url = str_replace('{WEEK}', (int) date('W'), $url);
-    $url = str_replace('{YEAR}', (int) date('Y'), $url);
-    return $url;
+	return get_source_menu_url($id, date('W'), date('Y'));
 }
 
 
@@ -511,10 +531,7 @@ function get_cafe_url($id) {
 \*******************************************************************/
 function get_menu_page($id, $week, $year) {
     $cache_id = $id.'-'.$week.'-'.$year;
-    $url = SOURCE_MENU_URL;
-    $url = str_replace('{ID}', (int) $id, $url);
-    $url = str_replace('{WEEK}', (int) $week, $url);
-    $url = str_replace('{YEAR}', (int) $year, $url);
+    $url = get_source_menu_url($id, $week, $year);
     return get_page($cache_id, $url);
 }
 
@@ -530,10 +547,7 @@ function recheck_menu_page($id, $week, $year) {
         die("recheck_menu_page: '$cache_id' contains illegal characters");
     }
     if (file_exists($cache_file) && filemtime($cache_file) < time() - CACHE_RECHECK_LIMIT) {
-        $url = SOURCE_MENU_URL;
-        $url = str_replace('{ID}', (int) $id, $url);
-        $url = str_replace('{WEEK}', (int) $week, $url);
-        $url = str_replace('{YEAR}', (int) $year, $url);
+    	$url = get_source_menu_url($id, $week, $year);
         set_delayed_reload($cache_id, $url);
     }
 }
