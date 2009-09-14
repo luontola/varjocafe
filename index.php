@@ -80,33 +80,31 @@ $_cafes = array(
         37 => "Porthania",
         38 => "Päärakennus",
         39 => "Rotunda",
+        42 => "Soc & kom",
         43 => "Topelias",
         45 => "Valtiotiede",
         47 => "Ylioppilasaukio"
     ),
+    "Kallio" => array(
+        35 => "Kookos"
+    ),
     "Kumpula" => array(
         28 => "Chemicum",
-        54 => "Exactum",
-        36 => "Physicum"
+        54 => "Exactum"
     ),
     "Meilahti" => array(
-        32 => "Meilahti",
-        42 => "Soc & kom"
-    ),
-    "Otaniemi" => array(
-        41 => "Servin mökki"
+        32 => "Meilahti"
     ),
     "Ruskeasuo" => array(
         40 => "Ruskeasuo"
     ),
     "Vallila" => array(
-        35 => "Palmenia",
         44 => "Valdemar"
     ),
     "Viikki" => array(
         27 => "Biokeskus",
         30 => "Korona",
-        31 => "Ladonlukko",
+//      31 => "Ladonlukko",
         46 => "Viikuna"
     )
 );
@@ -137,7 +135,7 @@ define('CACHE_DIR', './cache');
 
 // How many seconds to keep the pages cached. Pages exceeding soft limit use delayed
 // reloading. Pages exceeding hard limit are always reloaded before showing the page
-define('CACHE_SOFT_LIMIT', 3600 * 3);
+define('CACHE_SOFT_LIMIT', 3600 * 1);
 define('CACHE_HARD_LIMIT', 3600 * 24);
 
 // Maximum number of delayed page reloads in a lifetime

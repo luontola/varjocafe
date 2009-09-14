@@ -1,2 +1,0 @@
-<b>11.1.2007</b>
-<br />VarjoCafea on nyt p‰ivitetty siet‰m‰‰n UniCafen sivujen virheellista toimintaa niin hyvin kuin mahdollista. UniCafen sivut eiv‰t viel‰k‰‰n k‰sittele <code>week</code> ja <code>year</code> -parametrej‰ oikein, joten VarjoCafe pystyy n‰ytt‰m‰‰n ainoastaan kuluvan viikon ruokalistat. Tulevan viikon listojen n‰ytt‰minen vaatii UniCafen sivujen korjaamista.
