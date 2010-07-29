@@ -1,9 +1,9 @@
 <?php
+require_once(dirname(__FILE__) . '/common.php');
 require_once(dirname(__FILE__) . '/simpletest/autorun.php');
 require_once(dirname(__FILE__) . '/simpletest/web_tester.php');
-require_once(dirname(__FILE__) . '/common.php');
 
-class BaseEndToEndTest extends WebTestCase {
+abstract class BaseEndToEndTest extends WebTestCase {
 
     function before($method) {
         parent::before($method);
@@ -18,6 +18,10 @@ class BaseEndToEndTest extends WebTestCase {
     function baseUrl() {
         return DEPLOY_URL;
     }
+
+    function openFrontPage() {
+        $this->get($this->baseUrl() . '/index.php');
+    }
 }
 
 class TestOfLiveFetching extends BaseEndToEndTest {
@@ -27,8 +31,14 @@ class TestOfLiveFetching extends BaseEndToEndTest {
     }
 
     function test_Front_page_shows_up() {
-        $this->get($this->baseUrl() . '/index.php');
+        $this->openFrontPage();
         $this->assertText('VarjoCafe');
+    }
+
+    function test_Menus_from_UniCafe_are_shown() {
+        $this->openFrontPage();
+        $this->click('Keskusta');
+        $this->assertText('jauheliha');
     }
 }
 
