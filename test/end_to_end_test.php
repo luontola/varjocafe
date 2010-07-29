@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '/common.php');
-require_once(dirname(__FILE__) . '/simpletest/autorun.php');
-require_once(dirname(__FILE__) . '/simpletest/web_tester.php');
+require_once(TEST_DIR . '/simpletest/autorun.php');
+require_once(TEST_DIR . '/simpletest/web_tester.php');
 
 abstract class BaseEndToEndTest extends WebTestCase {
 
@@ -24,7 +24,7 @@ abstract class BaseEndToEndTest extends WebTestCase {
     }
 }
 
-class TestOfLiveFetching extends BaseEndToEndTest {
+class TestShowingMenus extends BaseEndToEndTest {
 
     function setUp() {
         $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
@@ -41,5 +41,3 @@ class TestOfLiveFetching extends BaseEndToEndTest {
         $this->assertText('jauheliha');
     }
 }
-
-?>

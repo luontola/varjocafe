@@ -6,8 +6,12 @@ error_reporting(E_ALL & ~E_DEPRECATED);
 define('PROJECT_DIR', dirname(__FILE__) . '/..');
 define('PROJECT_URL', 'http://localhost/varjocafe');
 define('SOURCE_DIR', PROJECT_DIR . '/src');
+define('TEST_DIR', PROJECT_DIR . '/test');
+define('TESTDATA_DIR', TEST_DIR . '/testdata');
 define('DEPLOY_DIR', PROJECT_DIR . '/test-deploy.tmp');
 define('DEPLOY_URL', PROJECT_URL . '/test-deploy.tmp');
+
+header('Content-Type: text/html; charset=utf-8');
 
 function recursiveCopy($src, $dst) {
     $dir = opendir($src);
@@ -39,5 +43,3 @@ function recursiveDelete($dir) {
     closedir($dh);
     @rmdir($dir);
 }
-
-?>
