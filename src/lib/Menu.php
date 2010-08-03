@@ -3,5 +3,7 @@
 class Menu {
 
     public $restaurants = array();
-    public $days = array();
+    public $weekdays = array();
+    public $dates = array();
+    public $foods = array();
 }
