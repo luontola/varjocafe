@@ -67,7 +67,7 @@
   CONFIGURATION
 \*******************************************************************/
 
-if ($_SERVER['HTTP_HOST'] != 'www.varjocafe.net' && $_SERVER['HTTP_HOST'] != 'tux') {
+if ($_SERVER['HTTP_HOST'] != 'www.varjocafe.net' && $_SERVER['HTTP_HOST'] != 'localhost') {
 	header('Location: http://www.varjocafe.net/');
 	die();
 }
@@ -75,37 +75,37 @@ if ($_SERVER['HTTP_HOST'] != 'www.varjocafe.net' && $_SERVER['HTTP_HOST'] != 'tu
 // List of Unicafes and their IDs as in www.uniface.fi, in order of appearance
 $_cafes = array(
     "Keskusta" => array(
-        33 => "Mets‰talo",
-        34 => "Olivia",
-        37 => "Porthania",
-        38 => "P‰‰rakennus",
-        39 => "Rotunda",
-        42 => "Soc & kom",
-        43 => "Topelias",
-        45 => "Valtiotiede",
-        47 => "Ylioppilasaukio"
+         1 => "Mets√§talo",
+         2 => "Olivia",
+         3 => "Porthania",
+         4 => "P√§√§rakennus",
+         5 => "Rotunda",
+        15 => "Soc & kom",
+         6 => "Topelias",
+         7 => "Valtiotiede",
+         8 => "Ylioppilasaukio"
     ),
     "Kallio" => array(
-        35 => "Kookos"
+        16 => "Kookos"
     ),
     "Kumpula" => array(
-        28 => "Chemicum",
-        54 => "Exactum"
+        10 => "Chemicum",
+        11 => "Exactum",
+        12 => "Physicum"
     ),
     "Meilahti" => array(
-        32 => "Meilahti"
+        13 => "Meilahti"
     ),
     "Ruskeasuo" => array(
-        40 => "Ruskeasuo"
+        14 => "Ruskeasuo"
     ),
     "Vallila" => array(
-        44 => "Valdemar"
+        17 => "Valdemar"
     ),
     "Viikki" => array(
-        27 => "Biokeskus",
-        30 => "Korona",
-//      31 => "Ladonlukko",
-        46 => "Viikuna"
+        18 => "Biokeskus",
+        19 => "Korona",
+        21 => "Viikuna"
     )
 );
 
@@ -149,6 +149,7 @@ define('CACHE_MAX_DELAYED_COUNT', 3);
 //    HOUR_START/END = this rule will apply when the hour is between [START, END)
 define('CACHE_RECHECK_LIMIT', 900);
 define('CACHE_RECHECK_WDAY', 0);
+define('CACHE_RECHECK_WDAY2', 1);
 define('CACHE_RECHECK_HOUR_START', 6);
 define('CACHE_RECHECK_HOUR_END', 16);
 
@@ -168,10 +169,10 @@ define('BANNER_FILE', 'banner.txt');
 define('BOTTOM_BANNER_HTML', '<a href="http://www.nodeta.fi"><img id="bottom_banner" src="img/hostedby.png" width="98" height="15" alt="Hosted by Nodeta" /></a>');
 
 // Internationalization
-define('TEXT_DISPLAY_BUTTON', 'N‰yt‰');
+define('TEXT_DISPLAY_BUTTON', 'N√§yt√§');
 define('TEXT_SAVE_SELECTION', 'Muista valinnat');
 define('TEXT_INFO', 'Tiedot');
-define('TEXT_DESCRIPTION', 'UniCafe -ravintoloiden ruokalistojen parempi k‰yttˆliittym‰.');
+define('TEXT_DESCRIPTION', 'UniCafe -ravintoloiden ruokalistojen parempi k√§ytt√∂liittym√§.');
 
 define('HTML_DELAYED_RELOAD_START', '<p class="footer">Loading .');
 define('HTML_DELAYED_RELOAD_STEP', ' .');
@@ -199,7 +200,7 @@ $_delayed_reloads = array();
 
 // application properties
 define('APP_NAME', 'VarjoCafe');
-define('APP_VERSION', '1.08');
+define('APP_VERSION', '1.09-SNAPSHOT');
 define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
 
 // get an URL like PHP_SELF but without "index.php"
@@ -308,7 +309,8 @@ function is_visible($id) {
 
 // Removes leading and trailing whitespace and BR elements from a string
 function trim_br($string) {
-    $arr = split('<br[ /]*>', $string);
+    // TODO: split() is deprecated
+    $arr = @split('<br[ /]*>', $string);
     foreach ($arr as $key => $value) {
         $arr[$key] = trim($value);
     }
@@ -329,11 +331,11 @@ function get_cafe_selection() {
     global $_cafes;
     $html = "";
     foreach ($_cafes as $category => $cafes) {
-        
+
         // quicklink for each group of cafes
         $ids = implode(',', array_keys($cafes));
         $html .= '<a href="'.BASE_URL.'?ids='.$ids.'"><b>'.$category.'</b></a><br />';
-        
+
         // checkboxes for each cafe
         foreach ($cafes as $id => $name) {
             if (is_visible($id)) {
@@ -359,27 +361,32 @@ function get_menus() {
     if (count($cafes) == 0) {
         return "";
     }
-    
+
     // weekdays are shown in rows
     $html = "<table border=\"0\">\n";
     for ($row = 0; $row < DISPLAY_DAYS + 1; $row++) {
-        
+
         // cafes are shown in columns
         $html .= "<tr>\n";
         foreach ($cafes as $id => $cafe) {
-            
+
             // row 0 is the header: name of the cafe (link to official site) and timetables
             if ($row == 0) {
+                $html .= "\t".'<th class="cafe" valign="top" style="font-weight: normal">';
+                $html .= get_timetable2($id);
+                $html .= '</th>'."\n";
+                /*
                 $html .= "\t<th class=\"cafe\" valign=\"top\"><a href=\""
                     .htmlspecialchars(get_cafe_url($id))."\">"
                     .htmlspecialchars($cafe)."</a><br /><span class=\"timetable\">"
                     .get_timetable($id)."</span></th>\n";
+                */
                 continue;
             }
-            
+
             // row 1 will have today's menu when DISPLAY_OFFSET=0, yesterday when DISPLAY_OFFSET=-1 etc.
             $time = mktime(0, 0, 0, date('n'), date('j') + ($row - 1) + DISPLAY_OFFSET, date('Y'));
-            $menu = get_menu($id, $time);
+            $menu = get_menu2($id, $time);
             if (strlen($menu) > 0) {
                 if ($row == 1 - DISPLAY_OFFSET) {            // today is highlighted
                     $style = 'menu_highlight';
@@ -397,6 +404,60 @@ function get_menus() {
     return $html;
 }
 
+function get_timetable2($id) {
+    $year = date('Y');
+    $week = date('W');
+    $wday = (date('w') + 6) % 7 + 1;    // convert to: day of week, 1 is monday
+
+    $url = "http://www.unicafe.fi/lounastyokalu/index.php?option=com_ruokalista&Itemid=29&task=lounaslista_haku&week={$week}&day={$wday}&year={$year}&rid={$id}&lang=1";
+//    $content = file_get_contents($url);
+    $content = get_page(null, $url);
+
+    $TIMETABLE_END = '<br class="clear" />';
+
+    $timetableEnd = strpos($content, $TIMETABLE_END);
+    $timetable = substr($content, 0, $timetableEnd);
+
+    $timetable = str_replace('href="/', 'href="http://www.unicafe.fi/', $timetable);
+
+    return $timetable;
+}
+
+function get_menu2($id, $time) {
+    $year = date('Y', $time);
+    $week = date('W', $time);
+    $wday = (date('w', $time) + 6) % 7 + 1; // convert to: day of week, 1 is monday
+    $wday_now = (date('w') + 6) % 7 + 1;
+
+    $url = "http://www.unicafe.fi/lounastyokalu/index.php?option=com_ruokalista&Itemid=29&task=lounaslista_haku&week={$week}&day={$wday}&year={$year}&rid={$id}&lang=1";
+//    $content = file_get_contents($url);
+    $content = get_page(null, $url);
+
+    // If now is the beginning of the week, the source
+    // site's menu might be updated soon, so it would
+    // be better to keep the cache time short:
+    if ($wday == $wday_now
+            && $wday == CACHE_RECHECK_WDAY2
+            && date('G') >= CACHE_RECHECK_HOUR_START
+            && date('G') < CACHE_RECHECK_HOUR_END) {
+        recheck_url($url);
+    }
+
+    $LUNCH_START = '<ul>';
+    $LUNCH_END = '</ul>';
+
+    $lunchStart = strpos($content, $LUNCH_START);
+    $lunchEnd = strpos($content, $LUNCH_END, $lunchStart) + strlen($LUNCH_END);
+    $lunch = substr($content, $lunchStart, $lunchEnd - $lunchStart);
+
+    if (strlen($lunch) <= strlen($LUNCH_START) + strlen($LUNCH_END)) {
+        return '';
+    } else {
+        setlocale(LC_TIME, 'fi_FI');
+        return '<b>' . strftime('%A %d.%m.%Y', $time) . '</b><br>' . $lunch;
+    }
+}
+
 
 /*******************************************************************\
   Returns the menu for the given cafe (id) and day (unix timestamp)
@@ -406,22 +467,22 @@ function get_menu($id, $time) {
     $week = date('W', $time);
     $wday = (date('w', $time) + 6) % 7;    // convert to: day of week, 0 is monday
     $wday_now = (date('w') + 6) % 7;
-    
+
     // locate the TABLE element containing the menu
     $contents = get_menu_page($id, $week, $year);
     $start = strpos($contents, SOURCE_MENU_START);
     $end = strpos($contents, '</table>', $start) + strlen('</table>');
     $menu = substr($contents, $start, $end - $start);
-    
+
     // go through the menu day by day
     $i = $wday;
     $start = 0;
     while (true) {
-        
+
         // identify TD elements and to get the menu from their contents
         $start = strpos($menu, '<td', $start);
         if ($start === false) {            // end of menu reached
-            
+
             // If now is the beginning of the week, the source
             // site's menu might be updated soon, so it would
             // be better to keep the cache time short:
@@ -431,16 +492,16 @@ function get_menu($id, $time) {
                     && date('G') < CACHE_RECHECK_HOUR_END) {
                 recheck_menu_page($id, $week, $year);
             }
-            return "";        
+            return "";
         }
         $start = strpos($menu, '>', $start) + strlen('>');
         $end = strpos($menu, '</td>', $start);
-        
+
         // keep on parsing until the requested day is reached
         $i--;
         if ($i < 0) {
             $result = trim(substr($menu, $start, $end - $start));
-            
+
             // clean up the HTML for the menu
             $foods = explode('<div class="dpMealSpacer"></div>', $result);
             foreach ($foods as $key => $value) {
@@ -455,7 +516,7 @@ function get_menu($id, $time) {
             if ($result == '') {
                 return '';
             }
-            
+
             // show the date above the menu
             $date = ucfirst(strftime('%A %x', $time));
             return '<div class="menu_date">'.htmlspecialchars($date).'</div>'.$result;
@@ -469,9 +530,9 @@ function get_menu($id, $time) {
   Returns the timetable for the given cafe (id)
 \*******************************************************************/
 function get_timetable($id) {
-    
+
     $contents = get_menu_page($id, date('W'), date('Y'));
-    
+
     $start = strpos($contents, SOURCE_TIMETABLE_OPEN_START) + strlen(SOURCE_TIMETABLE_OPEN_START);
     $end = strpos($contents, '</div>', $start);
     if ($start === false || $end === false) {
@@ -479,7 +540,7 @@ function get_timetable($id) {
     } else {
         $timetable_open = trim_br(substr($contents, $start, $end - $start));
     }
-    
+
     $start = strpos($contents, SOURCE_TIMETABLE_LUNCH_START) + strlen(SOURCE_TIMETABLE_LUNCH_START);
     $end = strpos($contents, '</div>', $start);
     if ($start === false || $end === false) {
@@ -487,7 +548,7 @@ function get_timetable($id) {
     } else {
         $timetable_lunch = trim_br(substr($contents, $start, $end - $start));
     }
-    
+
     if ($timetable_open == '' && $timetable_lunch == '') {
         return '';
     } else {
@@ -539,13 +600,17 @@ function get_menu_page($id, $week, $year) {
   cafe (id), week number and year if older than CACHE_RECHECK_LIMIT
 \*******************************************************************/
 function recheck_menu_page($id, $week, $year) {
-    $cache_id = $id.'-'.$week.'-'.$year;
+    $url = get_source_menu_url($id, $week, $year);
+    recheck_url($url);
+}
+
+function recheck_url($url) {
+    $cache_id = md5($url);
     $cache_file = get_cache_file($cache_id);
     if ($cache_file === false) {
         die("recheck_menu_page: '$cache_id' contains illegal characters");
     }
     if (file_exists($cache_file) && filemtime($cache_file) < time() - CACHE_RECHECK_LIMIT) {
-    	$url = get_source_menu_url($id, $week, $year);
         set_delayed_reload($cache_id, $url);
     }
 }
@@ -561,7 +626,8 @@ function recheck_menu_page($id, $week, $year) {
 function get_page($cache_id, $url, $nocache=false) {
     global $_page_downloads;
     static $cache = array();
-    
+    $cache_id = md5($url); // TODO: get rid of the explicit cache_id, rely on this md5 instead
+
     // security check
     $cache_file = get_cache_file($cache_id);
     if ($cache_file === false) {
@@ -570,12 +636,12 @@ function get_page($cache_id, $url, $nocache=false) {
     if (!preg_match('/^https?:\/\//', $url)) {
         die("get_page: '$url' does not use HTTP(S) protocol");
     }
-    
+
     // read the page from runtime cache, if present
     if (isset($cache[$cache_id]) && !$nocache) {
         return $cache[$cache_id];
     }
-    
+
     // look for a recent copy of the page from file cache
     if (!file_exists($cache_file) || filesize($cache_file) == 0 || $nocache) {
         $is_cached = false;
@@ -587,7 +653,7 @@ function get_page($cache_id, $url, $nocache=false) {
     } else {
         $is_cached = true;
     }
-    
+
     // read the contents of the page from file cache or web
     if ($is_cached) {
         $contents = read_file($cache_file);
@@ -596,20 +662,20 @@ function get_page($cache_id, $url, $nocache=false) {
         $contents = read_file($url);
     }
     if ($contents === false) {
-	$contents = ' '; // DISABLE UPDATES ON 404
-#        return "";
+        $contents = ' '; // DISABLE UPDATES ON 404
+        //return "";
     }
-    
+
     // update runtime cache
     $cache[$cache_id] = $contents;
-    
+
     // update file cache
     if (!$is_cached && (is_writable($cache_file) || (!file_exists($cache_file) && is_writable(CACHE_DIR)))) {
         $handle = fopen($cache_file, 'w');
         if ($handle) {
             fwrite($handle, $contents);
             fclose($handle);
-//            echo "Cache updated: $cache_file<br>"; // DEBUG
+            //echo "Cache updated: $cache_file<br>"; // DEBUG
         }
         purge_cache_dir();
     }
@@ -637,7 +703,7 @@ function get_cache_file($cache_id) {
 \*******************************************************************/
 function set_delayed_reload($cache_id, $url) {
     global $_delayed_reloads;
-    
+
     if (count($_delayed_reloads) < CACHE_MAX_DELAYED_COUNT) {
         $_delayed_reloads[$cache_id] = $url;
     }
@@ -651,23 +717,23 @@ function set_delayed_reload($cache_id, $url) {
 \*******************************************************************/
 function do_delayed_reloads() {
     global $_delayed_reloads;
-    
+
     if (count($_delayed_reloads) == 0) {
         return false;
     }
     echo HTML_DELAYED_RELOAD_START;
     flush();
-    
+
     // download all requested pages and check if their content has changed
     $is_changed = false;
     foreach ($_delayed_reloads as $cache_id => $url) {
         $old_page = get_page($cache_id, $url, false);
         $new_page = get_page($cache_id, $url, true);
-        
+
         // remove all tags from the source because they contain ever changing data
         $old_page = md5(strip_tags($old_page));
         $new_page = md5(strip_tags($new_page));
-        
+
         if ($old_page != $new_page) {
             $is_changed = true;
         }
@@ -685,13 +751,13 @@ function do_delayed_reloads() {
 \*******************************************************************/
 function purge_cache_dir() {
     static $is_purged = false;
-    
+
     // execute only once in a lifetime
     if ($is_purged) {
         return;
     }
     $is_purged = true;
-    
+
     // go through ALL files in CACHE_DIR and delete those older than CACHE_HARD_LIMIT
     $files = array();
     $dh = opendir(CACHE_DIR);
@@ -727,12 +793,14 @@ if (isset($_GET['sources'])) {
 	echo '</body></html>';
         die();
     }
+} else {
+    header("Content-type: text/html; charset=UTF-8");
 }
 
 // select which cafes are visible, priority: form submit, query string, cookies
 $ids = "";
 if (isset($_GET['submit'])) {
-    
+
     // verify input, allow empty selection
     if (isset($_GET['set_id']) && is_array($_GET['set_id'])) {
         $set_id = $_GET['set_id'];
@@ -743,11 +811,11 @@ if (isset($_GET['submit'])) {
         $set_id[$key] = (int) $value;
     }
     $ids = implode(',', $set_id);
-    
+
     // saving cookies will redict to front page; no saving will show request uri parameters
     if (isset($_GET['save'])) {
         setcookie(COOKIE_IDS_FIELD, $ids, time() + COOKIE_AGE, COOKIE_PATH, COOKIE_DOMAIN);
-        
+
         // Q: Would it be more intuitive to show the GET parameters?
         // A: Maybe not, because now the user will right away see
         //    how the cookie works. He will also see if the cookies
@@ -758,10 +826,10 @@ if (isset($_GET['submit'])) {
         header('Location: '.BASE_URL.'?ids='.$ids);
         die();
     }
-    
+
 } else if (isset($_GET['ids'])) {
     $ids = $_GET['ids'];
-    
+
 } else if (isset($_COOKIE[COOKIE_IDS_FIELD])) {
     $ids = $_COOKIE[COOKIE_IDS_FIELD];
 }

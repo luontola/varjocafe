@@ -17,6 +17,10 @@ Version History
 - Complete rewrite
 - ...
 
+**1.xx (2010-xx-xx)**
+
+- Supports UniCafe's renewed web site
+
 **1.08 (2007-01-11)**
 
 - Use a different URL for the menu of the current week, because UniCafe's site does not handle the 'week' and 'year' parameters correctly
