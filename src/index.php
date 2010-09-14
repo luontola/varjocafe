@@ -39,29 +39,29 @@ $_cafes = array(
         15 => "Soc & kom",
          6 => "Topelias",
          7 => "Valtiotiede",
-         8 => "Ylioppilasaukio"
+         8 => "Ylioppilasaukio",
     ),
     "Kallio" => array(
-        16 => "Kookos"
+        16 => "Kookos",
     ),
     "Kumpula" => array(
         10 => "Chemicum",
         11 => "Exactum",
-        12 => "Physicum"
+//      12 => "Physicum", // there is no lunch in Physicum
     ),
     "Meilahti" => array(
-        13 => "Meilahti"
+        13 => "Meilahti",
     ),
     "Ruskeasuo" => array(
-        14 => "Ruskeasuo"
+        14 => "Ruskeasuo",
     ),
     "Vallila" => array(
-        17 => "Valdemar"
+        17 => "Valdemar",
     ),
     "Viikki" => array(
         18 => "Biokeskus",
         19 => "Korona",
-        21 => "Viikuna"
+        21 => "Viikuna",
     )
 );
 
