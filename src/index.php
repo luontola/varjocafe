@@ -875,7 +875,7 @@ $banner
 </tr>
 </table>
 
-<p class="footer">$app_name $app_version (<a href="$base_url?sources">Source Code</a>), executed in $exec_note
+<p class="footer">$app_name $app_version (<a href="http://github.com/orfjackal/varjocafe">Source Code</a>), executed in $exec_note
 <br />$copyright</p>
 
 END;
