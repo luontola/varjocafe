@@ -12,6 +12,11 @@ Mashup of [UniCafe](http://www.unicafe.fi/)'s daily lunch menus.
 Version History
 ---------------
 
+**2.0.0 (2010-xx-xx)**
+
+- Complete rewrite
+- ...
+
 **1.09 (2010-09-14)**
 
 - Supports UniCafe's renewed web site
