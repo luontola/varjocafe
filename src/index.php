@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2005-2007 Esko Luontola, www.orfjackal.net
+ * Copyright (C) 2005-2007, 2010 Esko Luontola, www.orfjackal.net
  *
  * This file is part of VarjoCafe.
  *
@@ -17,50 +17,6 @@
  * You should have received a copy of the GNU General Public License
  * along with VarjoCafe; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-/*
- * CHANGE LOG:
- *
- * Version 1.08 (2007-01-11)
- *    + Use a different URL for the menu of the current week, because UniCafe's 
- *      site does not handle the 'week' and 'year' parameters correctly
- *
- * Version 1.07 (2007-01-02)
- *    + Removed leading 0's from the menu URL's week parameter
- *
- * Version 1.06 (2007-01-01)
- *    + Removed some debug code which caused the delayed page reloading not to 
- *      work
- *
- * Version 1.05 (2006-12-23)
- *    + Supports UniCafe's renewed web site
- *    + Small padding between menu items to improve readability
- *
- * Version 1.04 (2005-09-04)
- *    + Delayed page reloading
- *
- * Version 1.03 (2005-08-29)
- *    + Distributed page downloading more evenly (soft & hard limit)
- *    + Refresh cache more often if the menu is not available in the beginning 
- *      of the week
- *    + Info page and banner support
- *
- * Version 1.02 (2005-08-27)
- *    + Configurable: first visible day and number of days to show
- *    + Fixed timetables for cafes with special characters in the name
- *    + Page title is a link to the front page
- *    + Shortened URLs by excluding "index.php" when possible
- *    + Display execution time statistics
- *    + Source code syntax highlighting
- *
- * Version 1.01 (2005-08-26)
- *    + Cafes grouped by location
- *    + Cafe timetables
- *    + Save selection as a cookie
- *    + Time zone fixed
- *
- * Version 1.0 (2005-08-25)
- *    + Initial release
  */
 
 /*******************************************************************\
@@ -200,8 +156,8 @@ $_delayed_reloads = array();
 
 // application properties
 define('APP_NAME', 'VarjoCafe');
-define('APP_VERSION', '1.09-SNAPSHOT');
-define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
+define('APP_VERSION', '1.09');
+define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007, 2010 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
 
 // get an URL like PHP_SELF but without "index.php"
 $pos = strpos($_SERVER['REQUEST_URI'], '?');
