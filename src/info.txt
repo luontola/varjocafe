@@ -1,5 +1,9 @@
-<p>VarjoCafe on <a href="http://www.unicafe.fi/">UniCafe</a>-ravintoloiden ruokalistojen parempi käyttöliittymä. Järjestelmä luotiin 25.8.2005 vastareaktiona UniCafen uudistuneille nettisivuille. UniCafe uudisti sivujaan toistamiseen 21.11.2006, tällä kertaa ottaen vaikutteita VarjoCafesta, mutta sivuston ruokalistojen käytettävyyteen jäi silloinkin parantamisen varaa, joten VarjoCafe jatkaa toimintaansa.</p>
+<p>VarjoCafe on <a href="http://www.unicafe.fi/">UniCafe</a>-ravintoloiden ruokalistojen parempi kÃ¤yttÃ¶liittymÃ¤. Ohjelmaa kehittÃ¤Ã¤ <a href="http://www.cs.helsinki.fi/u/luontola/">Esko Luontola</a>, opiskelija Helsingin yliopiston tietojenkÃ¤sittelytieteen laitokselta. Palautetta voi antaa sÃ¤hkÃ¶postitse: <i>etunimi.sukunimi@cs.helsinki.fi</i></p>
 
-<p>Valitse vasemmalta ravintolat, joissa käyt säännöllisesti, ja tallenna valintasi evästeenä (<cite>Muista valinnat</cite> -valintaruutu) tai säilö sivun osoite kirjanmerkkeihisi. Ravintoloiden ja kampuksien nimet toimivat linkkeinä ruokalistoihinsa. VarjoCafe näyttää ajankohtaiset ruokalistat sikäli kun ne ovat saatavissa UniCafen sivuilta.</p>
+<h3>Pikaohje</h3>
 
-<p>Ohjelmaa kehittää <a href="http://www.cs.helsinki.fi/u/luontola/">Esko Luontola</a>, opiskelija Helsingin yliopiston tietojenkäsittelytieteen laitokselta. Palautetta voi antaa sähköpostitse (<i>esko piste luontola ät cs piste helsinki piste fi</i>) tai irkissä kanavalla #tko-äly (IRCnet), missä oleskelen nimimerkillä ORFJackal. VarjoCafe on julkaistu <a href="LICENCE">GPL</a>-lisenssin alaisuudessa ja viimeisin virallinen versio pyörii osoitteessa <a href="http://www.varjocafe.net/">http://www.varjocafe.net/</a></p>
+<p>Valitse vasemmalta ravintolat, joissa kÃ¤yt sÃ¤Ã¤nnÃ¶llisesti, ja tallenna valintasi evÃ¤steenÃ¤ (<cite>Muista valinnat</cite> -valintaruutu) tai sÃ¤ilÃ¶ sivun osoite kirjanmerkkeihisi. Ravintoloiden ja kampuksien nimet toimivat linkkeinÃ¤ ruokalistoihinsa. VarjoCafe nÃ¤yttÃ¤Ã¤ ajankohtaiset ruokalistat sikÃ¤li kun ne ovat saatavissa UniCafen sivuilta.</p>
+
+<h3>Historiaa</h3>
+
+<p>JÃ¤rjestelmÃ¤ luotiin 25.8.2005 vastareaktiona UniCafen uudistuneille nettisivuille, joista pÃ¤ivittÃ¤isten ruokalistojen lukeminen oli hÃ¤mmÃ¤styttÃ¤vÃ¤n vaivalloista. UniCafe uudisti sivujaan toistamiseen 21.11.2006, tÃ¤llÃ¤ kertaa ottaen vaikutteita VarjoCafesta, mutta kÃ¤ytettÃ¤vyyteen jÃ¤i silloinkin parantamisen varaa. Seuraava uudistus oli kesÃ¤kuussa 2010, mutta sekÃ¤Ã¤n ei aivan yltÃ¤nyt VarjoCafen kÃ¤ytettÃ¤vyyteen, joten VarjoCafe jatkaa yhÃ¤ toimintaansa.</p>
