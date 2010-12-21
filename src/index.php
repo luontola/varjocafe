@@ -718,7 +718,7 @@ function purge_cache_dir() {
     $files = array();
     $dh = opendir(CACHE_DIR);
     while (false !== ($filename = readdir($dh))) {
-        if ($filename != '.' && $filename != '..') {
+        if ($filename != '.' && $filename != '..' && $filename{0} != '.') {
             $files[] = CACHE_DIR.'/'.$filename;
         }
     }
