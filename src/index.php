@@ -850,6 +850,7 @@ echo <<<END
 <link rel="stylesheet" href="style.css" type="text/css" media="all" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="description" content="$text_description" />
+<script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="scripts.js"></script>
 
 </head>
