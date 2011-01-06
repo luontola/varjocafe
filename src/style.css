@@ -112,6 +112,7 @@ DIV.info {
     display: none;
     background-color: #DDDDDD;
     border: 1px solid #999999;
+    white-space: nowrap;
 }
 
 /* formatting of html snippets from unicafe.fi */
