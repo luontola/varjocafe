@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2005-2007, 2010 Esko Luontola, www.orfjackal.net
+ * Copyright (C) 2005-2007, 2010-2011 Esko Luontola, www.orfjackal.net
  *
  * This file is part of VarjoCafe.
  *
@@ -157,7 +157,7 @@ $_delayed_reloads = array();
 // application properties
 define('APP_NAME', 'VarjoCafe');
 define('APP_VERSION', '1.10-SNAPSHOT');
-define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007, 2010 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
+define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007, 2010-2011 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
 
 // get an URL like PHP_SELF but without "index.php"
 $pos = strpos($_SERVER['REQUEST_URI'], '?');
