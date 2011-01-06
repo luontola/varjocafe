@@ -12,6 +12,11 @@ Mashup of [UniCafe](http://www.unicafe.fi/)'s daily lunch menus.
 Version History
 ---------------
 
+**2.0.0 (2011-xx-xx)**
+
+- Complete rewrite
+- ...
+
 **1.10 (2011-01-06)**
 
 - Hide past days by default, but make it possible to show them with one click
