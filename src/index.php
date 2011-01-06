@@ -20,26 +20,26 @@
  */
 
 /*******************************************************************\
-  CONFIGURATION
+CONFIGURATION
 \*******************************************************************/
 
 if ($_SERVER['HTTP_HOST'] != 'www.varjocafe.net' && $_SERVER['HTTP_HOST'] != 'localhost') {
-	header('Location: http://www.varjocafe.net/');
-	die();
+    header('Location: http://www.varjocafe.net/');
+    die();
 }
 
 // List of Unicafes and their IDs as in www.uniface.fi, in order of appearance
 $_cafes = array(
     "Keskusta" => array(
-         1 => "Metsätalo",
-         2 => "Olivia",
-         3 => "Porthania",
-         4 => "Päärakennus",
-         5 => "Rotunda",
+        1 => "Metsätalo",
+        2 => "Olivia",
+        3 => "Porthania",
+        4 => "Päärakennus",
+        5 => "Rotunda",
         15 => "Soc & kom",
-         6 => "Topelias",
-         7 => "Valtiotiede",
-         8 => "Ylioppilasaukio",
+        6 => "Topelias",
+        7 => "Valtiotiede",
+        8 => "Ylioppilasaukio",
     ),
     "Kallio" => array(
         16 => "Kookos",
@@ -136,7 +136,7 @@ define('HTML_DELAYED_RELOAD_STOP', ' Done</p>');
 
 
 /*******************************************************************\
-  DATABASES & INITIALIZATION
+DATABASES & INITIALIZATION
 \*******************************************************************/
 
 error_reporting(E_ALL);
@@ -177,7 +177,7 @@ process_input_parameters($_COOKIE);
 
 
 /*******************************************************************\
-  Trims and strips slashes from an array, used for Get/Put/Cookie
+Trims and strips slashes from an array, used for Get/Put/Cookie
 \*******************************************************************/
 function process_input_parameters(&$array) {
     foreach ($array as $key => $value) {
@@ -195,17 +195,17 @@ function process_input_parameters(&$array) {
 
 
 /*******************************************************************\
-  Returns the current UNIX timestamp with greater accuracy
+Returns the current UNIX timestamp with greater accuracy
 \*******************************************************************/
 function getmicrotime() {
     list($usec, $sec) = explode(" ", microtime());
-    return ((float)$usec + (float)$sec);
+    return ((float) $usec + (float) $sec);
 }
 
 
 /*******************************************************************\
-  Reads the given file or URL and returns its contents.
-  Returns FALSE if opening the file fails.
+Reads the given file or URL and returns its contents.
+Returns FALSE if opening the file fails.
 \*******************************************************************/
 function read_file($file) {
     $contents = "";
@@ -223,7 +223,7 @@ function read_file($file) {
 
 
 /*******************************************************************\
-  Returns the source code of this program
+Returns the source code of this program
 \*******************************************************************/
 function get_source_code() {
     return read_file($_SERVER['SCRIPT_FILENAME']);
@@ -231,7 +231,7 @@ function get_source_code() {
 
 
 /*******************************************************************\
-  Functions for cafe database management and general usage
+Functions for cafe database management and general usage
 \*******************************************************************/
 
 // Returns the cafes in a "id => name" array
@@ -281,7 +281,7 @@ function trim_br($string) {
 
 
 /*******************************************************************\
-  Returns HTML elements for choosing the cafes to be shown
+Returns HTML elements for choosing the cafes to be shown
 \*******************************************************************/
 function get_cafe_selection() {
     global $_cafes;
@@ -290,7 +290,7 @@ function get_cafe_selection() {
 
         // quicklink for each group of cafes
         $ids = implode(',', array_keys($cafes));
-        $html .= '<a href="'.BASE_URL.'?ids='.$ids.'"><b>'.$category.'</b></a><br />';
+        $html .= '<a href="' . BASE_URL . '?ids=' . $ids . '"><b>' . $category . '</b></a><br />';
 
         // checkboxes for each cafe
         foreach ($cafes as $id => $name) {
@@ -299,9 +299,9 @@ function get_cafe_selection() {
             } else {
                 $checked = '';
             }
-            $html .= '<input type="checkbox" name="set_id[]" value="'.$id.'"'.$checked.' />'
-                .' <a href="'.BASE_URL.'?ids='.$id.'">'
-                .htmlspecialchars($name).'</a><br />';
+            $html .= '<input type="checkbox" name="set_id[]" value="' . $id . '"' . $checked . ' />'
+                    . ' <a href="' . BASE_URL . '?ids=' . $id . '">'
+                    . htmlspecialchars($name) . '</a><br />';
         }
     }
     return $html;
@@ -309,8 +309,8 @@ function get_cafe_selection() {
 
 
 /*******************************************************************\
-  Returns HTML elements displaying the menus for the selected cafes
-  or an empty string if there are no visible cafes
+Returns HTML elements displaying the menus for the selected cafes
+or an empty string if there are no visible cafes
 \*******************************************************************/
 function get_menus() {
     $cafes = get_visible_cafes();
@@ -327,15 +327,15 @@ function get_menus() {
         } else {
             $html .= "<tr>\n";
         }
-        
+
         // cafes are shown in columns
         foreach ($cafes as $id => $cafe) {
 
             // row 0 is the header: name of the cafe (link to official site) and timetables
             if ($row == 0) {
-                $html .= "\t".'<th class="cafe" valign="top" style="font-weight: normal">';
+                $html .= "\t" . '<th class="cafe" valign="top" style="font-weight: normal">';
                 $html .= get_timetable2($id);
-                $html .= '</th>'."\n";
+                $html .= '</th>' . "\n";
                 /*
                 $html .= "\t<th class=\"cafe\" valign=\"top\"><a href=\""
                     .htmlspecialchars(get_cafe_url($id))."\">"
@@ -349,7 +349,7 @@ function get_menus() {
             $time = mktime(0, 0, 0, date('n'), date('j') + ($row - 1) + DISPLAY_OFFSET, date('Y'));
             $menu = get_menu2($id, $time);
             if (strlen($menu) > 0) {
-                if ($row == 1 - DISPLAY_OFFSET) {            // today is highlighted
+                if ($row == 1 - DISPLAY_OFFSET) { // today is highlighted
                     $style = 'menu_highlight';
                 } else {
                     $style = 'menu';
@@ -368,7 +368,7 @@ function get_menus() {
 function get_timetable2($id) {
     $year = date('Y');
     $week = date('W');
-    $wday = (date('w') + 6) % 7 + 1;    // convert to: day of week, 1 is monday
+    $wday = (date('w') + 6) % 7 + 1; // convert to: day of week, 1 is monday
 
     $url = "http://www.unicafe.fi/lounastyokalu/index.php?option=com_ruokalista&Itemid=29&task=lounaslista_haku&week={$week}&day={$wday}&year={$year}&rid={$id}&lang=1";
 //    $content = file_get_contents($url);
@@ -421,12 +421,12 @@ function get_menu2($id, $time) {
 
 
 /*******************************************************************\
-  Returns the menu for the given cafe (id) and day (unix timestamp)
+Returns the menu for the given cafe (id) and day (unix timestamp)
 \*******************************************************************/
 function get_menu($id, $time) {
     $year = date('Y', $time);
     $week = date('W', $time);
-    $wday = (date('w', $time) + 6) % 7;    // convert to: day of week, 0 is monday
+    $wday = (date('w', $time) + 6) % 7; // convert to: day of week, 0 is monday
     $wday_now = (date('w') + 6) % 7;
 
     // locate the TABLE element containing the menu
@@ -442,7 +442,7 @@ function get_menu($id, $time) {
 
         // identify TD elements and to get the menu from their contents
         $start = strpos($menu, '<td', $start);
-        if ($start === false) {            // end of menu reached
+        if ($start === false) { // end of menu reached
 
             // If now is the beginning of the week, the source
             // site's menu might be updated soon, so it would
@@ -466,12 +466,12 @@ function get_menu($id, $time) {
             // clean up the HTML for the menu
             $foods = explode('<div class="dpMealSpacer"></div>', $result);
             foreach ($foods as $key => $value) {
-            	$value = trim($value);
-            	if ($value == '' || $value == '&nbsp;') {
-            	    unset($foods[$key]);
-            	} else {
-            	    $foods[$key] = '<div class="food">'.htmlspecialchars(strip_tags($value)).'</div>';
-            	}
+                $value = trim($value);
+                if ($value == '' || $value == '&nbsp;') {
+                    unset($foods[$key]);
+                } else {
+                    $foods[$key] = '<div class="food">' . htmlspecialchars(strip_tags($value)) . '</div>';
+                }
             }
             $result = implode('', $foods);
             if ($result == '') {
@@ -480,7 +480,7 @@ function get_menu($id, $time) {
 
             // show the date above the menu
             $date = ucfirst(strftime('%A %x', $time));
-            return '<div class="menu_date">'.htmlspecialchars($date).'</div>'.$result;
+            return '<div class="menu_date">' . htmlspecialchars($date) . '</div>' . $result;
         }
         $start = $end;
     }
@@ -488,7 +488,7 @@ function get_menu($id, $time) {
 
 
 /*******************************************************************\
-  Returns the timetable for the given cafe (id)
+Returns the timetable for the given cafe (id)
 \*******************************************************************/
 function get_timetable($id) {
 
@@ -513,22 +513,22 @@ function get_timetable($id) {
     if ($timetable_open == '' && $timetable_lunch == '') {
         return '';
     } else {
-        return $timetable_open.'<br /><b>Lounas</b><br />'.$timetable_lunch;
+        return $timetable_open . '<br /><b>Lounas</b><br />' . $timetable_lunch;
     }
 }
 
 
 /*******************************************************************\
-  Fills the id/week/year parameters to the SOURCE_MENU_URL and returns it
+Fills the id/week/year parameters to the SOURCE_MENU_URL and returns it
 \*******************************************************************/
 function get_source_menu_url($id, $week, $year) {
     $id = (int) $id;
     $week = (int) $week;
     $year = (int) $year;
     if ($week == (int) date('W') && $year == (int) date('Y')) {
-    	$url = SOURCE_MENU_URL_CURRENT_WEEK;
+        $url = SOURCE_MENU_URL_CURRENT_WEEK;
     } else {
-    	$url = SOURCE_MENU_URL;
+        $url = SOURCE_MENU_URL;
     }
     $url = str_replace('{ID}', $id, $url);
     $url = str_replace('{WEEK}', $week, $url);
@@ -538,27 +538,27 @@ function get_source_menu_url($id, $week, $year) {
 
 
 /*******************************************************************\
-  Returns the url for this week's menu for the given cafe (id)
+Returns the url for this week's menu for the given cafe (id)
 \*******************************************************************/
 function get_cafe_url($id) {
-	return get_source_menu_url($id, date('W'), date('Y'));
+    return get_source_menu_url($id, date('W'), date('Y'));
 }
 
 
 /*******************************************************************\
-  Returns contents of the menu page for the given cafe (id),
-  week number and year. Uses cache.
+Returns contents of the menu page for the given cafe (id),
+week number and year. Uses cache.
 \*******************************************************************/
 function get_menu_page($id, $week, $year) {
-    $cache_id = $id.'-'.$week.'-'.$year;
+    $cache_id = $id . '-' . $week . '-' . $year;
     $url = get_source_menu_url($id, $week, $year);
     return get_page($cache_id, $url);
 }
 
 
 /*******************************************************************\
-  Schedules a delayed reload for the menu page of the given
-  cafe (id), week number and year if older than CACHE_RECHECK_LIMIT
+Schedules a delayed reload for the menu page of the given
+cafe (id), week number and year if older than CACHE_RECHECK_LIMIT
 \*******************************************************************/
 function recheck_menu_page($id, $week, $year) {
     $url = get_source_menu_url($id, $week, $year);
@@ -578,13 +578,13 @@ function recheck_url($url) {
 
 
 /*******************************************************************\
-  Returns the content of an URL. Will read the page from cache
-  if it is up to date, otherwise will download it from the web.
-  $cache_id should be unique for each $url and it may contain only
-  "-", "_" and alphanumeric lowercase characters. If $nocache is
-  TRUE, the URL will always be downloaded and cache updated.
+Returns the content of an URL. Will read the page from cache
+if it is up to date, otherwise will download it from the web.
+$cache_id should be unique for each $url and it may contain only
+"-", "_" and alphanumeric lowercase characters. If $nocache is
+TRUE, the URL will always be downloaded and cache updated.
 \*******************************************************************/
-function get_page($cache_id, $url, $nocache=false) {
+function get_page($cache_id, $url, $nocache = false) {
     global $_page_downloads;
     static $cache = array();
     $cache_id = md5($url); // TODO: get rid of the explicit cache_id, rely on this md5 instead
@@ -645,22 +645,22 @@ function get_page($cache_id, $url, $nocache=false) {
 
 
 /*******************************************************************\
-  Returns the location of the cache file used by $cache_id, or
-  FALSE if the $cache_id contains illegal characters
+Returns the location of the cache file used by $cache_id, or
+FALSE if the $cache_id contains illegal characters
 \*******************************************************************/
 function get_cache_file($cache_id) {
     if (!preg_match('/^[0-9a-z-_]+$/', $cache_id)) {
         return false;
     }
-    $cache_file = CACHE_DIR.'/'.$cache_id.'.html';
+    $cache_file = CACHE_DIR . '/' . $cache_id . '.html';
     return $cache_file;
 }
 
 
 /*******************************************************************\
-  Schedule a cache update to be done after the script finishes.
-  Will do nothing if CACHE_MAX_DELAYED_COUNT updates are already
-  scheduled.
+Schedule a cache update to be done after the script finishes.
+Will do nothing if CACHE_MAX_DELAYED_COUNT updates are already
+scheduled.
 \*******************************************************************/
 function set_delayed_reload($cache_id, $url) {
     global $_delayed_reloads;
@@ -672,9 +672,9 @@ function set_delayed_reload($cache_id, $url) {
 
 
 /*******************************************************************\
-  Do all the schedule cache updates. Will print the progress if
-  there are scheduled updates to be done. Returns TRUE if one or
-  more pages have changed, otherwise FALSE.
+Do all the schedule cache updates. Will print the progress if
+there are scheduled updates to be done. Returns TRUE if one or
+more pages have changed, otherwise FALSE.
 \*******************************************************************/
 function do_delayed_reloads() {
     global $_delayed_reloads;
@@ -707,8 +707,8 @@ function do_delayed_reloads() {
 
 
 /*******************************************************************\
-  Deletes from CACHE_DIR any files older than CACHE_HARD_LIMIT.
-  Will do nothing if called more than once.
+Deletes from CACHE_DIR any files older than CACHE_HARD_LIMIT.
+Will do nothing if called more than once.
 \*******************************************************************/
 function purge_cache_dir() {
     static $is_purged = false;
@@ -724,13 +724,13 @@ function purge_cache_dir() {
     $dh = opendir(CACHE_DIR);
     while (false !== ($filename = readdir($dh))) {
         if ($filename != '.' && $filename != '..' && $filename{0} != '.') {
-            $files[] = CACHE_DIR.'/'.$filename;
+            $files[] = CACHE_DIR . '/' . $filename;
         }
     }
     closedir($dh);
     foreach ($files as $file) {
         if (filemtime($file) < time() - CACHE_HARD_LIMIT) {
-//            echo "Deleted: $file<br>"; // DEBUG
+            //            echo "Deleted: $file<br>"; // DEBUG
             unlink($file);
         }
     }
@@ -738,7 +738,7 @@ function purge_cache_dir() {
 
 
 /*******************************************************************\
-  STARTUP
+STARTUP
 \*******************************************************************/
 
 // show the program's source code if requested
@@ -748,10 +748,10 @@ if (isset($_GET['sources'])) {
         echo get_source_code();
         die();
     } else {
-	echo '<html><head><title>Viewing Source Code</title><meta name="robots" content="noindex, nofollow" /></head><body>';
-        echo '<p align="center"><a href="'.BASE_URL.'?sources&amp;plain">View plain text version</a></p>';
+        echo '<html><head><title>Viewing Source Code</title><meta name="robots" content="noindex, nofollow" /></head><body>';
+        echo '<p align="center"><a href="' . BASE_URL . '?sources&amp;plain">View plain text version</a></p>';
         highlight_string(get_source_code());
-	echo '</body></html>';
+        echo '</body></html>';
         die();
     }
 } else {
@@ -781,10 +781,10 @@ if (isset($_GET['submit'])) {
         // A: Maybe not, because now the user will right away see
         //    how the cookie works. He will also see if the cookies
         //    are disabled and it could not be saved.
-        header('Location: '.BASE_URL);
+        header('Location: ' . BASE_URL);
         die();
     } else {
-        header('Location: '.BASE_URL.'?ids='.$ids);
+        header('Location: ' . BASE_URL . '?ids=' . $ids);
         die();
     }
 
@@ -806,7 +806,7 @@ foreach ($ids as $id) {
 
 
 /*******************************************************************\
-  Print the page
+Print the page
 \*******************************************************************/
 
 // links and menus
@@ -824,7 +824,7 @@ if (INFO_FILE !== false && $content == "") {
     $content = read_file(INFO_FILE);
     $content = "<div class=\"info\">$content</div>";
 }
-$info_link = INFO_FILE ? '<a href="'.BASE_URL.'?ids="><img src="img/info.png" alt="'.TEXT_INFO.'" border="0" style="float: right;" /></a>' : '';
+$info_link = INFO_FILE ? '<a href="' . BASE_URL . '?ids="><img src="img/info.png" alt="' . TEXT_INFO . '" border="0" style="float: right;" /></a>' : '';
 
 // localized strings
 $base_url = htmlspecialchars(BASE_URL);
@@ -839,9 +839,9 @@ $bottom_banner = BOTTOM_BANNER_HTML;
 
 // information about the script execution time
 $exec_ms = round((getmicrotime() - $_exec_start) * 1000, 2);
-$exec_note = $exec_ms.' ms';
+$exec_note = $exec_ms . ' ms';
 if ($_page_downloads > 0) {
-    $exec_note .= ' ('.$_page_downloads.' page'.($_page_downloads > 1 ? 's' : '').' reloaded)';
+    $exec_note .= ' (' . $_page_downloads . ' page' . ($_page_downloads > 1 ? 's' : '') . ' reloaded)';
 }
 
 echo <<<END

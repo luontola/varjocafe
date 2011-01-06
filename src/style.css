@@ -1,112 +1,111 @@
-
 BODY, TABLE {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	color : #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000000;
 }
 
 A {
-	color: #458AD7;
-	text-decoration: none;
+    color: #458AD7;
+    text-decoration: none;
 }
 
 A:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 H1 A, A:hover {
-	color: #000000;
-	text-decoration: none;
+    color: #000000;
+    text-decoration: none;
 }
 
 TH.cafe {
-	background-color: #E4E4E4;
-	border: 1px solid #AAAAAA;
-	padding: 5px 2em 5px 2em;
-	white-space: nowrap;
+    background-color: #E4E4E4;
+    border: 1px solid #AAAAAA;
+    padding: 5px 2em 5px 2em;
+    white-space: nowrap;
 }
 
 SPAN.timetable {
-	font-weight: normal;
-	font-size: 11px;
+    font-weight: normal;
+    font-size: 11px;
 }
 
 TD.menu {
-	background-color: #F4F4F4;
-	border: 1px solid #AAAAAA;
-	padding: 1ex;
+    background-color: #F4F4F4;
+    border: 1px solid #AAAAAA;
+    padding: 1ex;
 }
 
 TD.menu_highlight {
-	background-color: #D7E8F6;
-	border: 1px solid #AAAAAA;
-	padding: 1ex;
+    background-color: #D7E8F6;
+    border: 1px solid #AAAAAA;
+    padding: 1ex;
 }
 
 .past TD.menu {
-	background-color: #F4F4F4;
-        color: #999999;
-	border: 1px solid #AAAAAA;
-	padding: 1ex;
+    background-color: #F4F4F4;
+    color: #999999;
+    border: 1px solid #AAAAAA;
+    padding: 1ex;
 }
 
 TD.menu_empty {
-	background-color: #F9F9F9;
-	height: 6ex;
+    background-color: #F9F9F9;
+    height: 6ex;
 }
 
 DIV.menu_date {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 DIV.food {
-	margin-top: 0.4em;
+    margin-top: 0.4em;
 }
 
-P.copyright { /* deprecicated in 1.04 */
-	color: #999999;
+P.copyright {
+/* deprecicated in 1.04 */
+    color: #999999;
 }
 
 P.footer {
-	color: #999999;
+    color: #999999;
 }
 
 INPUT.button {
-	background-color: #E4E4E4;
-	border: 1px solid #AAAAAA;
-	margin-top: 1.5ex;
-	margin-bottom: 0.5ex;
+    background-color: #E4E4E4;
+    border: 1px solid #AAAAAA;
+    margin-top: 1.5ex;
+    margin-bottom: 0.5ex;
 }
 
 SPAN.note {
-	font-size: 11px;
-	color: #666666;
+    font-size: 11px;
+    color: #666666;
 }
 
 DIV.banner {
 /*	position: absolute; */
-	float: right;
-	top: 1em;
-	right: 1em;
-	padding: 0.5ex;
-	background-color: #FFFFFF;
-	border: 2px dashed #D7E8F6;
-	width: 70%;
+    float: right;
+    top: 1em;
+    right: 1em;
+    padding: 0.5ex;
+    background-color: #FFFFFF;
+    border: 2px dashed #D7E8F6;
+    width: 70%;
 }
 
 DIV.info {
-	margin: 1em;
-	padding: 1em;
-	width: 500px;
-	background-color: #F9F9F9;
-	border: 1px solid #AAAAAA;
+    margin: 1em;
+    padding: 1em;
+    width: 500px;
+    background-color: #F9F9F9;
+    border: 1px solid #AAAAAA;
 }
 
 #bottom_banner {
-	border: 0;
-	margin-top: 10px;
+    border: 0;
+    margin-top: 10px;
 }
-
 
 /* formatting of html snippets from unicafe.fi */
 
@@ -115,6 +114,7 @@ UL {
     margin: 0;
     list-style: none;
 }
+
 LI {
     margin: 3px;
 }
