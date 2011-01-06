@@ -107,6 +107,13 @@ DIV.info {
     margin-top: 10px;
 }
 
+.tooltip {
+    position: absolute;
+    display: none;
+    background-color: #DDDDDD;
+    border: 1px solid #999999;
+}
+
 /* formatting of html snippets from unicafe.fi */
 
 UL {
@@ -136,4 +143,11 @@ LI {
     font-size: 90%;
     font-style: italic;
     color: #999999;
+}
+
+.tooltip .dotline {
+    border-top: 1px dotted #FFFFFF;
+    height: 1px;
+    margin: 0;
+    padding: 0;
 }
