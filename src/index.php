@@ -344,7 +344,9 @@ function get_menus() {
             $time = mktime(0, 0, 0, date('n'), date('j') + ($row - 1) + DISPLAY_OFFSET, date('Y'));
             $menu = get_menu2($id, $time);
             if (strlen($menu) > 0) {
-                if ($row == 1 - DISPLAY_OFFSET) {            // today is highlighted
+                if ($row < 1 - DISPLAY_OFFSET) {
+                    $style = 'menu_past';
+                } else if ($row == 1 - DISPLAY_OFFSET) {            // today is highlighted
                     $style = 'menu_highlight';
                 } else {
                     $style = 'menu';

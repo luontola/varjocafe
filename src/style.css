@@ -43,6 +43,13 @@ TD.menu_highlight {
 	padding: 1ex;
 }
 
+TD.menu_past {
+	background-color: #F4F4F4;
+        color: #999999;    
+	border: 1px solid #AAAAAA;
+	padding: 1ex;
+}
+
 TD.menu_empty {
 	background-color: #F9F9F9;
 	height: 6ex;
