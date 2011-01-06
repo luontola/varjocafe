@@ -43,7 +43,7 @@ TD.menu_highlight {
 	padding: 1ex;
 }
 
-TD.menu_past {
+.past TD.menu {
 	background-color: #F4F4F4;
         color: #999999;    
 	border: 1px solid #AAAAAA;

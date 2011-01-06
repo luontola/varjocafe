@@ -319,11 +319,16 @@ function get_menus() {
     }
 
     // weekdays are shown in rows
-    $html = "<table border=\"0\">\n";
+    $html = "<table border=\"0\" id=\"menus\">\n";
     for ($row = 0; $row < DISPLAY_DAYS + 1; $row++) {
 
+        if ($row > 0 && $row < 1 - DISPLAY_OFFSET) {
+            $html .= "<tr class=\"past\">\n"; // make it possible to dynamically hide past days
+        } else {
+            $html .= "<tr>\n";
+        }
+        
         // cafes are shown in columns
-        $html .= "<tr>\n";
         foreach ($cafes as $id => $cafe) {
 
             // row 0 is the header: name of the cafe (link to official site) and timetables
@@ -344,9 +349,7 @@ function get_menus() {
             $time = mktime(0, 0, 0, date('n'), date('j') + ($row - 1) + DISPLAY_OFFSET, date('Y'));
             $menu = get_menu2($id, $time);
             if (strlen($menu) > 0) {
-                if ($row < 1 - DISPLAY_OFFSET) {
-                    $style = 'menu_past';
-                } else if ($row == 1 - DISPLAY_OFFSET) {            // today is highlighted
+                if ($row == 1 - DISPLAY_OFFSET) {            // today is highlighted
                     $style = 'menu_highlight';
                 } else {
                     $style = 'menu';
