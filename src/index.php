@@ -156,7 +156,7 @@ $_delayed_reloads = array();
 
 // application properties
 define('APP_NAME', 'VarjoCafe');
-define('APP_VERSION', '1.10-SNAPSHOT');
+define('APP_VERSION', '1.10');
 define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007, 2010-2011 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
 
 // get an URL like PHP_SELF but without "index.php"
