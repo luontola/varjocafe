@@ -45,7 +45,7 @@ TD.menu_highlight {
 
 .past TD.menu {
 	background-color: #F4F4F4;
-        color: #999999;    
+        color: #999999;
 	border: 1px solid #AAAAAA;
 	padding: 1ex;
 }
@@ -130,4 +130,10 @@ LI {
 
 .cafe h4 {
     margin: 2px;
+}
+
+.price {
+    font-size: 90%;
+    font-style: italic;
+    color: #999999;
 }
