@@ -95,7 +95,7 @@ define('CACHE_SOFT_LIMIT', 3600 * 1);
 define('CACHE_HARD_LIMIT', 3600 * 24);
 
 // Maximum number of delayed page reloads in a lifetime
-define('CACHE_MAX_DELAYED_COUNT', 3);
+define('CACHE_MAX_DELAYED_COUNT', 15);
 
 // The source site might be updated more frequently in the beginning of the week,
 // so it is best to keep the cache times short when the menu for today is not yet
