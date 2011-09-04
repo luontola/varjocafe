@@ -122,7 +122,7 @@ setlocale(LC_ALL, 'fi_FI');
 // Locations of files containing the info page and banner code, or FALSE do disable
 define('INFO_FILE', 'info.txt');
 define('BANNER_FILE', 'banner.txt');
-define('BOTTOM_BANNER_HTML', '<a href="http://www.nodeta.fi"><img id="bottom_banner" src="img/hostedby.png" width="98" height="15" alt="Hosted by Nodeta" /></a>');
+define('BOTTOM_BANNER_HTML', '<a href="http://www.neutech.fi/" style="font-size: 10px; color: #999;">Hosted by<br/>K&amp;T Neutech Oy</a>');
 
 // Internationalization
 define('TEXT_DISPLAY_BUTTON', 'Näytä');
