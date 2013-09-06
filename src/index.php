@@ -28,21 +28,18 @@ if ($_SERVER['HTTP_HOST'] != 'www.varjocafe.net' && $_SERVER['HTTP_HOST'] != 'lo
     die();
 }
 
-// List of Unicafes and their IDs as in www.uniface.fi, in order of appearance
+// List of Unicafes and their IDs as in www.unicafe.fi, in order of appearance
 $_cafes = array(
     "Keskusta" => array(
         1 => "Metsätalo",
         2 => "Olivia",
         3 => "Porthania",
         4 => "Päärakennus",
-        5 => "Rotunda",
-        15 => "Soc & kom",
+//      5 => "Rotunda", // closed due to renovation (estimated until Autumn 2015)
+        15 => "Soc&Kom",
         6 => "Topelias",
         7 => "Valtiotiede",
         8 => "Ylioppilasaukio",
-    ),
-    "Kallio" => array(
-        16 => "Kookos",
     ),
     "Kumpula" => array(
         10 => "Chemicum",
@@ -55,14 +52,23 @@ $_cafes = array(
     "Ruskeasuo" => array(
         14 => "Ruskeasuo",
     ),
-    "Vallila" => array(
-        17 => "Valdemar",
-    ),
     "Viikki" => array(
         18 => "Biokeskus",
         19 => "Korona",
         21 => "Viikuna",
-    )
+    ),
+    "Metropolia" => array(
+        29 => "Albertinkatu",
+        28 => "Bulevardi",
+        33 => "Hämeentie",
+        36 => "Leiritie",
+        30 => "Onnentie",
+        27 => "Ricola",
+        34 => "Sofianlehto",
+        31 => "Tukholmankatu",
+        35 => "Vanha Maantie",
+        32 => "Vanha Viertotie",
+    ),
 );
 
 // How many days to show at a time
