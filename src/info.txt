@@ -1,4 +1,4 @@
-<p>VarjoCafe on <a href="http://www.unicafe.fi/">UniCafe</a>-ravintoloiden ruokalistojen parempi käyttöliittymä. Ohjelmaa kehittää <a href="http://www.cs.helsinki.fi/u/luontola/">Esko Luontola</a>, opiskelija Helsingin yliopiston tietojenkäsittelytieteen laitokselta. Palautetta voi antaa sähköpostitse: <i>etunimi.sukunimi@cs.helsinki.fi</i></p>
+<p>VarjoCafe on <a href="http://www.unicafe.fi/">UniCafe</a>-ravintoloiden ruokalistojen parempi käyttöliittymä. Ohjelmaa kehittää <a href="http://www.cs.helsinki.fi/u/luontola/">Esko Luontola</a>, opiskelija Helsingin yliopiston tietojenkäsittelytieteen laitokselta. Palautetta voi antaa sähköpostitse: <i>etunimi.sukunimi@orfjackal.net</i></p>
 
 <h3>Pikaohje</h3>
 
