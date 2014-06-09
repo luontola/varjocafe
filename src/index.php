@@ -40,6 +40,7 @@ $_cafes = array(
         6 => "Topelias",
         7 => "Valtiotiede",
         8 => "Ylioppilasaukio",
+        43 => "Cafe Portaali",
     ),
     "Kumpula" => array(
         10 => "Chemicum",
@@ -58,16 +59,19 @@ $_cafes = array(
         21 => "Viikuna",
     ),
     "Metropolia" => array(
+        27 => "Agricolankatu Ricola",
         29 => "Albertinkatu",
         28 => "Bulevardi",
         33 => "Hämeentie",
         36 => "Leiritie",
         30 => "Onnentie",
-        27 => "Ricola",
         34 => "Sofianlehto",
         31 => "Tukholmankatu",
         35 => "Vanha Maantie",
         32 => "Vanha Viertotie",
+    ),
+    "YTHS" => array(
+        42 => "Ravintola Serpens",
     ),
 );
 
