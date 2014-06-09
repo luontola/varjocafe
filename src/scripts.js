@@ -22,7 +22,7 @@ $(function() {
         $(this).hover(showTooltip, hideTooltip);
     };
 
-    $('[title^="<"]').each(installRichTooltip);
+    $('[title*="<table"]').each(installRichTooltip);
 });
 
 // Hide menus for past days by default; require user action to show them
