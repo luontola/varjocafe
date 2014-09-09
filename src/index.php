@@ -23,10 +23,12 @@
 CONFIGURATION
 \*******************************************************************/
 
+/*
 if ($_SERVER['HTTP_HOST'] != 'www.varjocafe.net' && $_SERVER['HTTP_HOST'] != 'localhost') {
     header('Location: http://www.varjocafe.net/');
     die();
 }
+*/
 
 // List of Unicafes and their IDs as in www.unicafe.fi, in order of appearance
 $_cafes = array(
@@ -132,7 +134,7 @@ setlocale(LC_ALL, 'fi_FI');
 // Locations of files containing the info page and banner code, or FALSE do disable
 define('INFO_FILE', 'info.txt');
 define('BANNER_FILE', 'banner.txt');
-define('BOTTOM_BANNER_HTML', '<a href="http://www.neutech.fi/" style="font-size: 10px; color: #999;">Hosted by<br/>K&amp;T Neutech Oy</a>');
+define('BOTTOM_BANNER_HTML', '<a href="http://www.shellit.org/" style="font-size: 10px; color: #999;">Hosted by<br /><img src="img/shellit.png" alt="Shellit.org" /></a>');
 
 // Internationalization
 define('TEXT_DISPLAY_BUTTON', 'Näytä');
@@ -165,9 +167,9 @@ $_visible = array();
 $_delayed_reloads = array();
 
 // application properties
-define('APP_NAME', 'VarjoCafe');
+define('APP_NAME', 'respocafe');
 define('APP_VERSION', '1.11-SNAPSHOT');
-define('COPYRIGHT_HTML', 'Copyright &copy; 2005-2007, 2010-2011 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a>');
+define('COPYRIGHT_HTML', '<p>Original code &amp; Copyright &copy; 2005-2007, 2010-2011 Esko Luontola, <a href="http://www.orfjackal.net/">www.orfjackal.net</a></p><p>Responsive layout: 2014 Jiikax</p>');
 
 // get an URL like PHP_SELF but without "index.php"
 $pos = strpos($_SERVER['REQUEST_URI'], '?');
@@ -300,7 +302,7 @@ function get_cafe_selection() {
 
         // quicklink for each group of cafes
         $ids = implode(',', array_keys($cafes));
-        $html .= '<a href="' . BASE_URL . '?ids=' . $ids . '"><b>' . $category . '</b></a><br />';
+        $html .= '<p class="location"><a href="' . BASE_URL . '?ids=' . $ids . '"><b>' . $category . '</b></a></p>';
 
         // checkboxes for each cafe
         foreach ($cafes as $id => $name) {
@@ -309,9 +311,13 @@ function get_cafe_selection() {
             } else {
                 $checked = '';
             }
-            $html .= '<input type="checkbox" name="set_id[]" value="' . $id . '"' . $checked . ' />'
+            $html .= '<p class="restaurant">
+                        <span class="loota">
+                            <input type="checkbox" name="set_id[]" id="check-' . $id . '" value="' . $id . '"' . $checked . ' />
+                            <label for="check-' . $id . '"></label>
+                        </span>'
                     . ' <a href="' . BASE_URL . '?ids=' . $id . '">'
-                    . htmlspecialchars($name) . '</a><br />';
+                    . htmlspecialchars($name) . '</a></p>';
         }
     }
     return $html;
@@ -329,7 +335,7 @@ function get_menus() {
     }
 
     // weekdays are shown in rows
-    $html = "<table border=\"0\" id=\"menus\">\n";
+    $html = "<div class='tablewrap'><table border=\"0\" id=\"menus\">\n";
     for ($row = 0; $row < DISPLAY_DAYS + 1; $row++) {
 
         if ($row > 0 && $row < 1 - DISPLAY_OFFSET) {
@@ -371,7 +377,7 @@ function get_menus() {
         }
         $html .= "</tr>\n";
     }
-    $html .= "</table>";
+    $html .= "</table></div>";
     return $html;
 }
 
@@ -834,7 +840,7 @@ if (INFO_FILE !== false && $content == "") {
     $content = read_file(INFO_FILE);
     $content = "<div class=\"info\">$content</div>";
 }
-$info_link = INFO_FILE ? '<a href="' . BASE_URL . '?ids="><img src="img/info.png" alt="' . TEXT_INFO . '" border="0" style="float: right;" /></a>' : '';
+$info_link = INFO_FILE ? '<a id="infolink" href="' . BASE_URL . '?ids="><img src="img/info.png" alt="' . TEXT_INFO . '" border="0" style="float: right;" /></a>' : '';
 
 // localized strings
 $base_url = htmlspecialchars(BASE_URL);
@@ -855,46 +861,57 @@ if ($_page_downloads > 0) {
 }
 
 echo <<<END
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="$text_description" />
 
 <title>$app_name</title>
 
 <link rel="stylesheet" href="style.css" type="text/css" media="all" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta name="description" content="$text_description" />
-<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="jquery-ui-1.8.7.custom.min.js"></script>
-<script type="text/javascript" src="scripts.js"></script>
+<script type="text/javascript" src="combined.js"></script>
 
 </head>
 <body>
 
 $banner
-<h1><a href="$base_url">$app_name</a></h1>
 
-<table border="0" style="clear: both;">
-<tr>
-    <td valign="top" style="white-space: nowrap;">
-    $info_link
-    <form action="$base_url" method="get">
-        $cafe_selection
-        <input type="submit" class="button" value="$text_display_button" /><br />
-        <span class="note"><input type="checkbox" name="save" value="" />$text_save_selection</span>
-        <input type="hidden" name="submit" value="1" />
-    </form>
-    <p>
-        $bottom_banner
-    </p>
-    </td>
-    <td valign="top">$content</td>
-</tr>
-</table>
+<header>
+    <button id="toggle">Menu</button>
+    <h1><a href="$base_url">$app_name</a></h1>
+</header>
 
-<p class="footer">$app_name $app_version (<a href="http://github.com/orfjackal/varjocafe">Source Code</a>), executed in $exec_note
-<br />$copyright</p>
+<section>
+    <nav>
+            $info_link
+            <form action="$base_url" method="get">
+                $cafe_selection
+                <input type="submit" class="button" value="$text_display_button" /><br />
+                <span class="note">
+                    <span class="loota">
+                        <input type="checkbox" name="save" value="" id="save" />
+                        <label for="save"></label>
+                    </span>$text_save_selection
+                </span>
+                <input type="hidden" name="submit" value="1" />
+            </form>
+    </nav>
+
+    <article>
+        $content
+    </article>
+</section>
+
+<footer>
+    <p>$app_name $app_version (<a href="http://github.com/orfjackal/varjocafe">Original Source Code</a>), executed in $exec_note</p>
+    $copyright
+
+    <p id="bottom_banner">$bottom_banner</p>
+</footer>
 
 END;
 
