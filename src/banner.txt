@@ -1,0 +1,1 @@
+Unicafen sivusto on uudistunut, joten on taas aika evaluoida VarjoCafen tarve. Jos VarjoCafea halutaan jatkaa, niin menee jonkin aikaa päivittää se toimimaan Unicafen uusia sivuja vasten. <a href="https://github.com/orfjackal/varjocafe/issues/2">Tätä asiaa voi kommentoida githubissa</a>.
