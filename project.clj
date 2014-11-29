@@ -10,6 +10,7 @@
                  ; HTTP Server
                  [ring/ring-core "1.3.2"]
                  [ring/ring-devel "1.3.2"]
+                 [ring/ring-json "0.3.1"]
                  [http-kit "2.1.16"]
 
                  ; HTTP Routing
@@ -24,10 +25,17 @@
                  ; JSON
                  [org.clojure/data.json "0.2.5"]
 
-                 ; Command Line Interface
-                 [org.clojure/tools.cli "0.3.1"]]
+                 ; Logging
+                 [org.clojure/tools.logging "0.3.1"]
+                 [ch.qos.logback/logback-classic "1.1.2"]
+                 [org.clojars.lokori/lolog "0.1.0"]]
+
+  :profiles {:dev {:source-paths ["dev"]
+                   :dependencies [[org.clojure/tools.namespace "0.2.7"]
+                                  [midje "1.6.3"]]
+                   :plugins      [[lein-midje "3.1.1"]]}}
+  :repl-options {:init-ns user}
 
   :main varjocafe.server
-
-  :profiles {:dev {:dependencies [[midje "1.6.3"]]
-                   :plugins      [[lein-midje "3.1.1"]]}})
+  :jar-name "varjocafe.jar"
+  :uberjar-name "varjocafe-standalone.jar")
