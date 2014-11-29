@@ -27,4 +27,7 @@
                  ; Command Line Interface
                  [org.clojure/tools.cli "0.3.1"]]
 
-  :main varjocafe.server)
+  :main varjocafe.server
+
+  :profiles {:dev {:dependencies [[midje "1.6.3"]]
+                   :plugins      [[lein-midje "3.1.1"]]}})

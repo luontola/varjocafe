@@ -1,6 +1,6 @@
 (ns varjocafe.core-test
-  (:use clojure.test)
+  (:use midje.sweet)
   (:require [varjocafe.core :as core]))
 
-(deftest hello-test
-  (is (= (core/hello "world") "hello world")))
+(fact "says hello world"
+      (core/hello "world") => "hello world")
