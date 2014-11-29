@@ -16,7 +16,7 @@
 (defn ^:private shutdown! []
   {:pre  [@server]
    :post [(not @server)]}
-  ((ns-resolve 'varjocafe.server 'shutdown) @server)
+  ((ns-resolve 'varjocafe.server 'shutdown!) @server)
   (reset! server nil))
 
 (defn restart! []
