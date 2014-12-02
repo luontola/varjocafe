@@ -29,7 +29,10 @@
                  ; Logging
                  [org.clojure/tools.logging "0.3.1"]
                  [ch.qos.logback/logback-classic "1.1.2"]
-                 [org.clojars.lokori/lolog "0.1.0"]]
+                 [org.clojars.lokori/lolog "0.1.0"]
+
+                 ; Misc
+                 [commons-io/commons-io "2.4"]]
 
   :profiles {:dev {:source-paths ["dev"]
                    :dependencies [[org.clojure/tools.namespace "0.2.7"]
