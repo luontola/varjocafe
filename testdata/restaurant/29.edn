@@ -1,0 +1,331 @@
+{:data
+ [{:data
+   [{:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Päivän keitto",
+     :name_en "Soup of the day",
+     :name_sv "Dagens soppa",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Vuohenjuusto - punajuurisalaattia",
+     :name_en "Goat cheese – beetroot salad",
+     :name_sv "Getost-rödbetssallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Uunilohta ja sitruuna-kermakastiketta",
+     :name_en "Baked salmon with lemon spiced cream sauce",
+     :name_sv "Ugnlax med citrongräddsås",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "Ma 01.12",
+   :date_en "Mon 01.12",
+   :date_sv "Mån 01.12",
+   :message nil}
+  {:data
+   [{:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Päivän keitto",
+     :name_en "Soup of the day",
+     :name_sv "Dagens soppa",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Lohisalaattia",
+     :name_en "Salmon salad",
+     :name_sv "Laxsallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Karjalanpaistia",
+     :name_en "Carelian stew",
+     :name_sv "Karelsk stek",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "Ti 02.12",
+   :date_en "Tue 02.12",
+   :date_sv "Tis 02.12",
+   :message nil}
+  {:data
+   [{:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Päivän keitto",
+     :name_en "Soup of the day",
+     :name_sv "Dagens soppa",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Salaattia savustetusta kaslerista",
+     :name_en "Salad with smoked pork neck",
+     :name_sv "Sallad på rökt kassler",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Kalamureketta ja pinaattikastiketta",
+     :name_en "Fish loaf with spinach sauce",
+     :name_sv "Fiskfärs med spenatsås",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "Ke 03.12",
+   :date_en "Wed 03.12",
+   :date_sv "Ons 03.12",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Perinteinen hernekeitto",
+     :name_en "Traditional peasoup",
+     :name_sv "Gammaldags ärtsoppa",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Katkarapusalaattia",
+     :name_en "Shrimp salad",
+     :name_sv "Räksallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Kasvispiirakkaa ja vihersalaattia",
+     :name_en "Vegetable pie with green salad",
+     :name_sv "Grönsakspaj med grönsallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "To 04.12",
+   :date_en "Thu 04.12",
+   :date_sv "Tors 04.12",
+   :message nil}
+  {:data
+   [{:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Päivän keitto",
+     :name_en "Soup of the day",
+     :name_sv "Dagens soppa",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Kanasalaattia",
+     :name_en "Chicken salad",
+     :name_sv "Broilersallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "VIOLA",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Tomaattisilakoita",
+     :name_en "Baltic herrings in tomato sauce",
+     :name_sv "Tomatströmming",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "Pe 05.12",
+   :date_en "Fri 05.12",
+   :date_sv "Fre 05.12",
+   :message nil}
+  {:data [],
+   :date "La 06.12",
+   :date_en "Sat 06.12",
+   :date_sv "Lör 06.12",
+   :message nil}
+  {:data [],
+   :date "Su 07.12",
+   :date_en "Sun 07.12",
+   :date_sv "Sön 07.12",
+   :message nil}
+  {:data [],
+   :date "Ma 08.12",
+   :date_en "Mon 08.12",
+   :date_sv "Mån 08.12",
+   :message nil}
+  {:data [],
+   :date "Ti 09.12",
+   :date_en "Tue 09.12",
+   :date_sv "Tis 09.12",
+   :message nil}
+  {:data [],
+   :date "Ke 10.12",
+   :date_en "Wed 10.12",
+   :date_sv "Ons 10.12",
+   :message nil}
+  {:data [],
+   :date "To 11.12",
+   :date_en "Thu 11.12",
+   :date_sv "Tors 11.12",
+   :message nil}
+  {:data [],
+   :date "Pe 12.12",
+   :date_en "Fri 12.12",
+   :date_sv "Fre 12.12",
+   :message nil}
+  {:data [],
+   :date "La 13.12",
+   :date_en "Sat 13.12",
+   :date_sv "Lör 13.12",
+   :message nil}
+  {:data [],
+   :date "Su 14.12",
+   :date_en "Sun 14.12",
+   :date_sv "Sön 14.12",
+   :message nil}],
+ :information
+ {:address "Kaisaniemenranta 2",
+  :bistro
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :name "",
+   :regular
+   [{:close "",
+     :open "",
+     :when [false false false false false false false]}]},
+  :business
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :regular
+   [{:close "15:00",
+     :open "11:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}]},
+  :city "Helsinki",
+  :description
+  "Esteettömys<br />- sisäänkäynti : Kaisaniemenranta 2 , liuska sisääntuloon pyydettäessä.<br />- inva-wc : on",
+  :description_en
+  "Disabled access<br />-entrance : Kaisaniemenranta 2, ramp is available on request.<br />-WC for disabled : yes",
+  :description_sv
+  "Tillgänglighet för funktionshindrade<br />-ingång : Kaisaniemistranden 2, tillång till ramp för rullstol. Vänligen kontakta personalen.<br />- toalett tillgänglig för funktioshindrade.",
+  :ilta nil,
+  :lounas
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :regular
+   [{:close "14:00",
+     :open "11:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}]},
+  :restaurant "Viola",
+  :zip "00100"},
+ :status "OK"}

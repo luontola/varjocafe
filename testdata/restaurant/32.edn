@@ -1,0 +1,531 @@
+{:data
+ [{:data
+   [{:ingredients
+     "Broileria (suomi), smetanaa, ruisjauho, korppujauho, pellavansiemen, seesaminsiemen, HP- maustekastiketta[sis.mallasetikkaa (ohraa), tomaattia, siirappia, väkiviinaetikkaa, glukoosi-fruktoosia, taatelia, sokeria, suolaa, muunneltua maissitärkkelystä, ruisjauhoa, tamarindiuutetta, mausteita, sipulia], kanaliemijauhetta [suola, glukoosisiirappi, hiivauute, sokeri, kana-aromi, jauhettu kananliha [1,7 %], curry, kurkuma, riisijauho, hapettumisenestoaine (rosmariiniuute)], valkosipulia, mustapippuria.",
+     :meta {:0 ["L" "V"], :1 ["valkosipulia"], :2 []},
+     :name "Rapeaa broilerinrintaa",
+     :name_en "Crispy  chicken",
+     :name_sv "Krispig broiler",
+     :nutrition
+     "energiaa 167kcal (700kJ), hiilihydraattia 3g, rasvaa 9g, proteiinia 17g.",
+     :price
+     {:name "Maukkaasti",
+      :value
+      {:contract "7.00",
+       :graduate "6.40",
+       :graduate_hyy "6.40",
+       :normal "9.30",
+       :student "4.40",
+       :student_hyy "4.40"}}}
+    {:ingredients
+     "Alaskanseitiä, vehnäjauhoa, kasviöljyä, vettä, tärkkelystä, suolaa, muunnettua tärkkelystä, hiivaa, mausteuutetta, vehnägluteenia, nostatusainetta (E503), aromia (mm. sitruuna-aromi) ja happoa (sitruunahappo)]\r\nKermaviiliä, sitruunamehua, tilliä, suolaa, sokeria, mustapippuria.",
+     :meta {:0 ["L"], :1 [], :2 []},
+     :name "Sitruunaiset kalaleikkeet, tilli-kermaviilikastiketta",
+     :name_en "Lemon-fish schnitzel",
+     :name_sv "Citron-fiskschnitzel",
+     :nutrition
+     "energiaa 168kcal (704kJ), hiilihydraattia 11g, rasvaa 10g, proteiinia 8g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Paprikaa, kaalia, kikhernettä, vettä, soijajuomaa, sipulia, tomaattia, soijakermaa, currytahnaa, sokeria, inkivääritahnaa, valkosipulia, kurkumaa, suolaa, juustokuminaa, korianteria, garam masala-mausteseosta.",
+     :meta
+     {:0 ["G" "K" "L" "M" "[S]" "SO" "V" "VE"],
+      :1 ["soijaa" "valkosipulia"],
+      :2 []},
+     :name "Itämaista kikhernekastiketta",
+     :name_en "Oriental kikbean sauce",
+     :name_sv "Österländsk kikärtssås",
+     :nutrition
+     "energiaa 105kcal (438kJ), hiilihydraattia 16g, rasvaa 3g, proteiinia 5g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Amerikansalaatti, viinirypäle, salaattijuusto, siemeniä, kurkku, retiisi, tomaatti, persilja, ananas.",
+     :meta {:0 ["G" "K" "PÄ" "VL"], :1 [], :2 []},
+     :name "Juustosalaattia",
+     :name_en "Cheese salad",
+     :name_sv "Ostsallad",
+     :nutrition nil,
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Mustaherukoita, omenaa, kermaa, maitorahkaa, sokeria, vanilja.",
+     :meta {:0 ["G" "K" "L"], :1 [], :2 []},
+     :name "Viinimarja-omenarahkaa",
+     :name_en "Currant quark with apple",
+     :name_sv "Vinbärskvark med äppel",
+     :nutrition
+     "energiaa 201kcal (843kJ), hiilihydraattia 13g, rasvaa 14g, proteiinia 5g.",
+     :price
+     {:name "Makeasti",
+      :value
+      {:contract "1.00",
+       :graduate "1.00",
+       :graduate_hyy "1.00",
+       :normal "1.00",
+       :student "1.00",
+       :student_hyy "1.00"}}}],
+   :date "Ma 01.12",
+   :date_en "Mon 01.12",
+   :date_sv "Mån 01.12",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Lohta, mangochutney, limeä, sitruuna, smetanaa, kookosmaitoa, kalakastiketta, chipotlekastiketta.",
+     :meta {:0 ["G" "V"], :1 [], :2 []},
+     :name "Lohta Chipotle",
+     :name_en "Salmon Chipotle",
+     :name_sv "Lax Chipotle",
+     :nutrition
+     "energiaa 221kcal (923kJ), hiilihydraattia 5g, rasvaa 17g, proteiinia 12g.",
+     :price
+     {:name "Maukkaasti",
+      :value
+      {:contract "7.00",
+       :graduate "6.40",
+       :graduate_hyy "6.40",
+       :normal "9.30",
+       :student "4.40",
+       :student_hyy "4.40"}}}
+    {:ingredients
+     "Sian- ja naudanlihaa, vettä, juusto-pekonitäytettä [sis. tuorejuustoa (sis.vähälaktoosista kermaa, maitojauhetta, hyytelöimisainetta;pektiiniä), pekonia, muunnettua maissitärkkelystä, glukoosia, dekstroosia, säilöntäainetta;natriumnitriittiä], soijaproteiinivalmistetta, perunajauhoa, korppujauhoa (sis.vehnää), herneproteiinia, sipulia, mausteita (musta- ja maustepippuria, sipulia), suolaa, glukoosia, aromia, vehnäkuitua.\r\nRypsiöljyä, sipulia, tomaattia, vettä, mustapippuria, sokeria, basilikaa, oreganoa, liemijauhetta, maissitärkkelystä.",
+     :meta {:0 ["SO" "VL"], :1 ["soijaa"], :2 []},
+     :name "Pekoni-jauheliharullat, tomaattikastiketta",
+     :name_en
+     "Meat rolls filled with bacon and fresh cheese, tomato sauce",
+     :name_sv "Bacon-färksostfyllda köttfärsfullar, tomatsås",
+     :nutrition
+     "energiaa 138kcal (578kJ), hiilihydraattia 6g, proteiinia 9g, rasvaa 8g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Linssejä, herkkusieniä, täysjyvälasagnettea, tomaattia, sipulia, valkosipulia, rypsiöljyä, mustapippuria, basilikaa, timjamia, suolaa, kasvisliemijauhetta [kasvikset(porkkana, palsternakka, sipuli, purjosipuli), suola, hiivauute, palmurasva, glukoosisiirappi, persiljauute, kurkuma, mustapippuriaromi, riisijauho, maltodekstriini], sokeria, soijakermaa, vehnäjauhoja, rakuuna.",
+     :meta
+     {:0 ["K" "[S]" "V" "VE"],
+      :1 ["valkosipulia"],
+      :2 ["Ilmastovalinta"]},
+     :name "Linssi-sienilasagnettea",
+     :name_en "Lentil-mushroom lasagnette",
+     :name_sv "Lins-svamplasagnette",
+     :nutrition
+     "energiaa 121kcal (506kJ),\r\nhiilihydraattia 16g, rasvaa 4g, proteiinia 5g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Vettä, omenamehutiivistettä, rusinaa, riisiä, fariinisokeria, glögitiivistettä [vesi, glukoosi-fruktoosisiirappi, sokeri, rypäle- ja mustaherukkatäysmehutiiviste, mustikkatäysmehu, luonnonmausteet (kaneli, pomeranssinkuori, mausteneilikka, kardemumma, inkivääri), happamuudensäätöaineena sitruunahappo, säilöntäaineina kaliumsorbaatti ja natriumbentsoaatti, hapettumisenestoaineena askorbiinihappo], kanelia, kermaa",
+     :meta {:0 ["K" "L"], :1 [], :2 []},
+     :name "Omena-rusinayllätys",
+     :name_en "Apple-raisin X-mas twist",
+     :name_sv "Äpple-russin Jultwist",
+     :nutrition
+     "Ravintoarvo 100g/ energiaa 183kcal (767kj), hiilihydraattia 22g, rasvaa 10g, proteiinia 1g",
+     :price
+     {:name "Joulukalenteri-jälkiruoka",
+      :value
+      {:contract "0.80",
+       :graduate "0.80",
+       :graduate_hyy "0.80",
+       :normal "0.80",
+       :student "0.80",
+       :student_hyy "0.80"}}}],
+   :date "Ti 02.12",
+   :date_en "Tue 02.12",
+   :date_sv "Tis 02.12",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Silakkaa, kasvirasvavalmistetta, hapankorppua, sipulia, suolaa, valkopippuria, kalaliemijauhetta, tilliä, sitruunamehua.",
+     :meta {:0 ["L" "[S]"], :1 [], :2 []},
+     :name "Hapankorppusilakat",
+     :name_en "Herring coated with sour cracker",
+     :name_sv "Strömming panerad med surskorppa",
+     :nutrition
+     "energiaa 138kcal (577kJ), hiilihydraattia 7g, rasvaa 7g, proteiinia 11g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Porkkanaa, palsternakkaa, kikhernettä, rypsiöljyä, sipulia, kidneypapua, pala papua, auringonkukan siemeniä, soijaproteiinia, purjoa, suolaa, sakeuttamisaineita (E461, E407), valkosipulia, mustapippuria.\r\nSoijajogurttia, kurkkua, valkosipulia, suolaa, mustapippuria.",
+     :meta
+     {:0 ["G" "K" "L" "M" "[S]" "SO" "V" "VE"],
+      :1 ["soijaa" "valkosipulia"],
+      :2 ["Ilmastovalinta"]},
+     :name "Kasvis-papukroketit, soijajogurttizaziki",
+     :name_en "Vegetable croquettes with beans, soya-yogurth tzatziki",
+     :name_sv "Kroketter av grönsaker och bönor, soyajogurttzatziki",
+     :nutrition
+     "energiaa 112kcal (470kJ),\r\nhiilihydraattia 5g, rasvaa 7g, proteiinia 5g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Vettä, sipulia, porkkanaa, lanttua, perunaa, laakerinlehteä, suolaa, purjosipulia, lihaliemijauhetta, naudanlihaa (suomi), persiljaa, timjamia.",
+     :meta {:0 ["G" "L" "M" "[S]"], :1 [], :2 []},
+     :name "Lihakeittoa",
+     :name_en "Meat soup",
+     :name_sv "Köttsoppa",
+     :nutrition
+     "energiaa 65kcal (272kJ), hiilihydraattia 5g, rasvaa 2g, proteiinia 5g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Amerikansalaattia, tofua, hunajaa, täysjyväcouscousta, vettä, rypsiöljyä, persikkaa, rucolaa, tomaattia, kesäkurpitsaa, lanttua, purjoa, hernetitä, ananasta, porkkanaa, minttua, soijajogurttia, siirappia, suolaa.",
+     :meta {:0 ["K" "L" "M" "[S]" "SO"], :1 ["soijaa"], :2 []},
+     :name "Tofusalaattia",
+     :name_en "Tofu salad",
+     :name_sv "Tofusallad",
+     :nutrition
+     "energiaa 69kcal (287kJ), hiilihydraattia 8g, rasvaa 2g, proteiinia 4g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Luumu, omena, kerma, vaniljakastike, kaneli, sokeri.",
+     :meta {:0 ["G" "K" "L"], :1 [], :2 []},
+     :name "Luumuherkku",
+     :name_en "Plum dessert",
+     :name_sv "Plommon dessert",
+     :nutrition
+     "energiaa 153kcal (643kJ), hiilihydraattia 11g, rasvaa 11g, proteiinia 2g.",
+     :price
+     {:name "Makeasti",
+      :value
+      {:contract "1.00",
+       :graduate "1.00",
+       :graduate_hyy "1.00",
+       :normal "1.00",
+       :student "1.00",
+       :student_hyy "1.00"}}}],
+   :date "Ke 03.12",
+   :date_en "Wed 03.12",
+   :date_sv "Ons 03.12",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Öljyä, sipulia, tomaattia, purjosipulia, vettä, sulatejuustoa [sis.vettä, cheddar- ja goudajuustoa, voita, sulatesuoloja (E 339, E 450, E 451, E 452), sakeuttamisainetta (E 1442), heraa, säilöntäainetta (kaliumsorbaatti), kurkumaa, väriä (betaka¬roteeni)], mustapippuria, suolaa, kalaliemijauhetta, tilliä, vehnäjauhoa, lohta, kirjolohta, kasvirasvavalmistetta [sis.vettä, kirnumaitoa, rypsiöljyä, kovetettua kasvirasvaa, muunnetettua tärkkelystä, emulgointiainetta (E472e kasvirasvapohjainen), stabilointiainetta (guarkumi), maltodekstriiniä, sokeria, happamuudensäätöainetta (natriumsitraatit), laktaasientsyymiä, aromia, väri (betakaroteeni)], täysjyvä lasagnelevyä, juustoaraastetta.",
+     :meta {:0 ["[S]" "VL"], :1 [], :2 []},
+     :name "Lohilasagnea",
+     :name_en "Salmon lasagne",
+     :name_sv "Laxlasagne",
+     :nutrition
+     "energiaa 143kcal (598kJ), hiilihydraattia 12g, rasvaa 7g, proteiinia 7g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Kananlihaa (suomi), perunaa, kananmunaa, vettä, sipulia, perunakuitua, suolaa, stabilointiaineita (E450, E452), mustapippuria, maustepippuria, rypsiöljyä, tomaattia, sokeria, kasvisliemijauhetta [kasvikset (porkkana, palsternakka, sipuli, purjosipuli), suola, hiivauute, palmurasva, glukoosisiirappi, persiljauute, kurkuma, mustapippuriaromi, riisijauho, maltodekstriini], maissitärkkelystä, glukoosi-fruktoosisiirappia, väkiviinaetikkaa,  siirappia, muunneltua maissitärkkelystä, savuaromia, mausteita, aromeja.",
+     :meta {:0 ["G" "L" "M" "[S]"], :1 [], :2 []},
+     :name "Kanapyörykät, BBQ-kastiketta",
+     :name_en "Chicken balls with BBQ sauce",
+     :name_sv "Kycklingbuller med BBQ-sås",
+     :nutrition
+     "energiaa 129 kcal (539kJ), hiilihydraattia 6g, rasvaa 7g, proteiinia 10g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Papua (kidney, valkoinen), vettä, rypsiöljyä, chiliä, paprikaa, valkosipulia, sipulia, tomaattia, mustapippuria, kasvisliemijauhetta [Kasviksia (porkkana, palsternakka, sipuli, purjosipuli), suola, hiivauute, palmurasva, glukoosisiirappi, persiljauute, kurkuma, mustapippuriaromi, riisijauho, maltodekstriini], maissitärkkelystä, vihreätä papua, tacokuoria [sis. maissia, palmuöljyä, suolaa].",
+     :meta
+     {:0 ["G" "K" "L" "M" "[S]" "V" "VE"],
+      :1 ["valkosipulia"],
+      :2 ["Ilmastovalinta"]},
+     :name "Kasvistaco",
+     :name_en "Vegetable taco",
+     :name_sv "Grönsakstaco",
+     :nutrition
+     "energiaa 142kcal (594kJ), hiilihydraattia 16g, rasvaa 6g, proteiinia 5g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients nil,
+     :meta {:0 [], :1 [], :2 []},
+     :name "Lounassalaattia",
+     :name_en "Lunch salad",
+     :name_sv "Lunch sallad",
+     :nutrition nil,
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Mansikoita, musta- ja punaherukoita, jogurttia, sokeria, vaniljasokeria.",
+     :meta {:0 ["G" "L"], :1 [], :2 []},
+     :name "Marjasmoothie",
+     :name_en "Berry smoothie",
+     :name_sv "Bärsmoothie",
+     :nutrition
+     "energiaa 67kcal (280kJ), \r\nhiilihydraattia 6g, rasvaa 3g, proteiinia 2g.",
+     :price
+     {:name "Makeasti",
+      :value
+      {:contract "1.00",
+       :graduate "1.00",
+       :graduate_hyy "1.00",
+       :normal "1.00",
+       :student "1.00",
+       :student_hyy "1.00"}}}],
+   :date "To 04.12",
+   :date_en "Thu 04.12",
+   :date_sv "Tors 04.12",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Naudanlihaa (suomi), kidney-papuja, rypsiöljyä, sipulia, valkosipulia, chilipippuria, papuja, tomaattia, lihaliemijauhetta [glukoosisiirappi, suola, sokeri, lihauute [6,3 %], hiivauute, maltodekstriini, happo (sitruunahappo), palmurasva, väriaine (E 150c), mustapippuriaromi], mustapippuria, suolaa, maissitärkkelystä, muskottipähkinää.",
+     :meta
+     {:0 ["G" "L" "PÄ" "[S]" "V"],
+      :1 ["pähkinää" "valkosipulia"],
+      :2 []},
+     :name "Chili con Carne",
+     :name_en "Chili con Carne",
+     :name_sv "Chili con Carne",
+     :nutrition
+     "energiaa 107kcal (448kJ), hiilihydraattia 7g, rasvaa 5g, proteiinia 9g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Turskaa (MSC-sertifioitua), vehnää, kasviöljyä, vettä, tärkkelystä, maissijauhoa, suolaa, sakeuttamisainetta (E461), muunneltua tärkkelystä, riisijauhoa, sokeria, vehnägluteenia, nostatusaineita (E450, E500, E503), hiivaa, stabilointiainetta (E415).\r\nKermaviiliä, mustapippuria, sokeria, suolaa, sitruunaa, tilliä.",
+     :meta {:0 ["L" "[S]"], :1 [], :2 []},
+     :name "Seilorin turskaa, tilli-kermaviilikastiketta",
+     :name_en "Sailors cod, dil-sour cream sauce",
+     :name_sv "Sjömanstorsk, dill-gräddfilssås",
+     :nutrition
+     "energiaa 177 kcal (739 kJ), hiilihydraattia 12g, proteiinia 9g, rasvaa 11g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Kikhernettä, rypsiöljyä, sipulia, mustapippuria, vettä, suolaa, valkosipulia, maissitärkkelystä, pinaattia,  herkkusientä, kaurakasvirasvasekoitetta, makaronia, kasvisliemijauhetta, aurinkokuivattua tomaattia.",
+     :meta
+     {:0 ["K" "L" "M" "[S]" "V" "VE"],
+      :1 ["valkosipulia"],
+      :2 ["Ilmastovalinta"]},
+     :name "Pinaattista kikherne-pastaa",
+     :name_en "Pasta with spinach and chickpeas",
+     :name_sv "Pasta med spenat och kikärter",
+     :nutrition
+     "energiaa 126kcal (529kJ), hiilihydraattia 16g, rasvaa 5g, proteiinia 4g.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "Puolukkaa, kaurahiutaleita, fariinisokeria, margariinia,  maitoa, kasvirasvaa (kovetettu), sokeria, emulgointiaineita (E 472b, E 472e), aromia (vanilliini), laktaasientsyymi, stabilointiaineet (johanneksenleipäpuujauhe, E 407), väri (betakaroteeni).",
+     :meta {:0 ["K" "VL"], :1 [], :2 []},
+     :name "Puolukka-kaurapaistosta, vaniljakastiketta",
+     :name_en "Lingonberry-oat pie, vanilla sauce",
+     :name_sv "Lingon-havrepaj, vaniljsås",
+     :nutrition
+     "energiaa 291kcal (1216kJ), hiilihydraattia 29g, rasvaa 18g, proteiinia 4g.",
+     :price
+     {:name "Makeasti",
+      :value
+      {:contract "1.00",
+       :graduate "1.00",
+       :graduate_hyy "1.00",
+       :normal "1.00",
+       :student "1.00",
+       :student_hyy "1.00"}}}],
+   :date "Pe 05.12",
+   :date_en "Fri 05.12",
+   :date_sv "Fre 05.12",
+   :message nil}
+  {:data [],
+   :date "La 06.12",
+   :date_en "Sat 06.12",
+   :date_sv "Lör 06.12",
+   :message nil}
+  {:data [],
+   :date "Su 07.12",
+   :date_en "Sun 07.12",
+   :date_sv "Sön 07.12",
+   :message nil}
+  {:data [],
+   :date "Ma 08.12",
+   :date_en "Mon 08.12",
+   :date_sv "Mån 08.12",
+   :message nil}
+  {:data [],
+   :date "Ti 09.12",
+   :date_en "Tue 09.12",
+   :date_sv "Tis 09.12",
+   :message nil}
+  {:data [],
+   :date "Ke 10.12",
+   :date_en "Wed 10.12",
+   :date_sv "Ons 10.12",
+   :message nil}
+  {:data [],
+   :date "To 11.12",
+   :date_en "Thu 11.12",
+   :date_sv "Tors 11.12",
+   :message nil}
+  {:data [],
+   :date "Pe 12.12",
+   :date_en "Fri 12.12",
+   :date_sv "Fre 12.12",
+   :message nil}
+  {:data [],
+   :date "La 13.12",
+   :date_en "Sat 13.12",
+   :date_sv "Lör 13.12",
+   :message nil}
+  {:data [],
+   :date "Su 14.12",
+   :date_en "Sun 14.12",
+   :date_sv "Sön 14.12",
+   :message nil}],
+ :information
+ {:address "Fabianinkatu 33 ( 2.krs )",
+  :bistro
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :name "Bistro",
+   :regular
+   [{:close "16:00",
+     :open "12:00",
+     :when [false false false false false false false]}]},
+  :business
+  {:exception
+   [{:close "13:00",
+     :closed false,
+     :from "5.12",
+     :open "11:00",
+     :to "5.12"}],
+   :regular
+   [{:close "14:00",
+     :open "11:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}]},
+  :city "Helsinki",
+  :description
+  "Esteettömyys<br />- sisäänkäynti : pääovien yhteydessä erikseen sisäänkäynti liikkumisesteisille, automaattiovet.<br />- inva-wc sisäänkäyntiä viistosti vastapäätä ilmoitustaulujen lähellä, vahtimestarit aukaisevat.",
+  :description_en
+  "Disabled access<br />- Entry: beside the main entrance a separate disabled entrance, automatic doors<br />- Disabled toilet: diagonally opposite the entrance near the notice boards, the porters will open the door.",
+  :description_sv
+  "Tillgänglighet för funktionshindrade<br />- ingång: skild ingång för rörelsehindrade i samband med huvudenträn, automatiska dörrar.<br />- inva-wc finns snett mot ingången i närheten av anslagstavlorna, vaktmästarna öppnar.",
+  :ilta nil,
+  :lounas
+  {:exception
+   [{:close "13:00",
+     :closed false,
+     :from "21.11",
+     :open "11:00",
+     :to "21.11"}],
+   :regular
+   [{:close "14:00",
+     :open "11:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}
+    {:close "",
+     :open "",
+     :when
+     ["previous"
+      "previous"
+      "previous"
+      "previous"
+      "previous"
+      false
+      false]}]},
+  :restaurant "Päärakennus Opettajien ravintola",
+  :zip "00170"},
+ :status "OK"}

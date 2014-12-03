@@ -1,0 +1,421 @@
+{:data
+ [{:data
+   [{:ingredients "Eri täytevaihtoehtoja.",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "* Mozzarella * BBQ-Kana-Pekoni * Kinkku-Salami * Kana Mangoraja",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "Ma 01.12",
+   :date_en "Mon 01.12",
+   :date_sv "Mån 01.12",
+   :message nil}
+  {:data
+   [{:ingredients "Eri täytevaihtoehtoja.",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "* Mozzarella * BBQ-Kana-Pekoni * Kinkku-Salami * Kana Mangoraja",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "Ti 02.12",
+   :date_en "Tue 02.12",
+   :date_sv "Tis 02.12",
+   :message nil}
+  {:data
+   [{:ingredients "Eri täytevaihtoehtoja.",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "* Mozzarella * BBQ-Kana-Pekoni * Kinkku-Salami * Kana Mangoraja",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "Ke 03.12",
+   :date_en "Wed 03.12",
+   :date_sv "Ons 03.12",
+   :message nil}
+  {:data
+   [{:ingredients "Eri täytevaihtoehtoja.",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "* Mozzarella * BBQ-Kana-Pekoni * Kinkku-Salami * Kana Mangoraja",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "To 04.12",
+   :date_en "Thu 04.12",
+   :date_sv "Tors 04.12",
+   :message nil}
+  {:data
+   [{:ingredients "Eri täytevaihtoehtoja.",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients
+     "* Mozzarella * BBQ-Kana-Pekoni * Kinkku-Salami * Kana Mangoraja",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "Pe 05.12",
+   :date_en "Fri 05.12",
+   :date_sv "Fre 05.12",
+   :message nil}
+  {:data [],
+   :date "La 06.12",
+   :date_en "Sat 06.12",
+   :date_sv "Lör 06.12",
+   :message nil}
+  {:data [],
+   :date "Su 07.12",
+   :date_en "Sun 07.12",
+   :date_sv "Sön 07.12",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Täytevaihtoehdot: \n*Mozzarella *Kana Mangoraja *BBQ-Kana Peloni *Kinkku Salami",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients "Päivittäin vaihtuvat täytevaihtoehdot",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "Ma 08.12",
+   :date_en "Mon 08.12",
+   :date_sv "Mån 08.12",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Täytevaihtoehdot: \n*Mozzarella *Kana Mangoraja *BBQ-Kana Peloni *Kinkku Salami",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients "Päivittäin vaihtuvat täytevaihtoehdot",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition nil,
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "Ti 09.12",
+   :date_en "Tue 09.12",
+   :date_sv "Tis 09.12",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Täytevaihtoehdot: \n*Mozzarella *Kana Mangoraja *BBQ-Kana Peloni *Kinkku Salami",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients "Päivittäin vaihtuvat täytevaihtoehdot",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition nil,
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "Ke 10.12",
+   :date_en "Wed 10.12",
+   :date_sv "Ons 10.12",
+   :message ""}
+  {:data
+   [{:ingredients
+     "Täytevaihtoehdot: \n*Mozzarella *Kana Mangoraja *BBQ-Kana Peloni *Kinkku Salami",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients "Päivittäin vaihtuvat täytevaihtoehdot",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition nil,
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "To 11.12",
+   :date_en "Thu 11.12",
+   :date_sv "Tors 11.12",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Täytevaihtoehdot: \n*Mozzarella *Kana Mangoraja *BBQ-Kana Peloni *Kinkku Salami",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Paninilounas",
+     :name_en "Panini",
+     :name_sv "Panini",
+     :nutrition "Vaihtelee eri täytteillä.",
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}
+    {:ingredients "Päivittäin vaihtuvat täytevaihtoehdot",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Patonkiateria",
+     :name_en "Baguette meal",
+     :name_sv "Bagettmat",
+     :nutrition nil,
+     :price
+     {:name "Edullisesti",
+      :value
+      {:contract "5.50",
+       :graduate "4.60",
+       :graduate_hyy "4.60",
+       :normal "7.80",
+       :student "2.60",
+       :student_hyy "2.60"}}}],
+   :date "Pe 12.12",
+   :date_en "Fri 12.12",
+   :date_sv "Fre 12.12",
+   :message "Mukavaa viikonloppua!"}
+  {:data [],
+   :date "La 13.12",
+   :date_en "Sat 13.12",
+   :date_sv "Lör 13.12",
+   :message nil}
+  {:data [],
+   :date "Su 14.12",
+   :date_en "Sun 14.12",
+   :date_sv "Sön 14.12",
+   :message nil}],
+ :information
+ {:address "Gustaf Hällströmin katu 2",
+  :bistro
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :name "",
+   :regular
+   [{:close "",
+     :open "",
+     :when [false false false false false false false]}]},
+  :business
+  {:exception [{:close "", :closed false, :from "", :open "", :to ""}],
+   :regular
+   [{:close "18:00",
+     :open "09:00",
+     :when ["Ma" "Ti" "Ke" "To" false false false]}
+    {:close "17:00",
+     :open "09:00",
+     :when
+     ["previous" "previous" "previous" "previous" "Pe" false false]}]},
+  :city "Helsinki",
+  :description "Esteettömyys<br />-Esteetön kulku pääovien kautta.",
+  :description_en
+  "Disabled access<br />- Free access through main doors",
+  :description_sv
+  "Tillgänglighet för funktionshindrade<br />- Obehindrad inträde genom huvuddörren",
+  :ilta nil,
+  :lounas
+  {:exception [{:close "", :closed false, :from "", :open "", :to ""}],
+   :regular
+   [{:close "18:00",
+     :open "10:00",
+     :when ["Ma" "Ti" "Ke" "To" false false false]}
+    {:close "17:00",
+     :open "10:00",
+     :when
+     ["previous" "previous" "previous" "previous" "Pe" false false]}]},
+  :restaurant "Physicum",
+  :zip "00560"},
+ :status "OK"}

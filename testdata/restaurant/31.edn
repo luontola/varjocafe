@@ -1,0 +1,266 @@
+{:data
+ [{:data
+   [{:ingredients "GKK",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Jauhelihakeittoa",
+     :name_en "Minced meat soup",
+     :name_sv "Köttfärssoppa",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "GKK",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Tomaatti-mozzarellasalaatti",
+     :name_en "Tomato-mozzarella salad",
+     :name_sv "Tomat och mozzarella sallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "Ma 01.12",
+   :date_en "Mon 01.12",
+   :date_sv "Mån 01.12",
+   :message nil}
+  {:data
+   [{:ingredients "GKK",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Tomaatti-vuohenjuustokeittoa",
+     :name_en "Tomato- goat cheese soup",
+     :name_sv "Tomato-getost soppa",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "GKK",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Katkarapusalaattia",
+     :name_en "Shrimp salad",
+     :name_sv "Räksallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "Ti 02.12",
+   :date_en "Tue 02.12",
+   :date_sv "Tis 02.12",
+   :message ""}
+  {:data
+   [{:ingredients "GKK",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Mausteista linssikeittoa",
+     :name_en "Spicy lentil soup",
+     :name_sv "Kryddig linssoppa",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "GKK",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Kana-Caesarsalaattia",
+     :name_en "Chicken - Caesar salad",
+     :name_sv "Broiler - caesar sallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "Ke 03.12",
+   :date_en "Wed 03.12",
+   :date_sv "Ons 03.12",
+   :message ""}
+  {:data
+   [{:ingredients "GKK",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Sienikeittoa",
+     :name_en "Mushroom soup",
+     :name_sv "Svampsoppa",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "GKK",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Maalaissalaattia",
+     :name_en "Rustic salad",
+     :name_sv "Lantlig sallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "To 04.12",
+   :date_en "Thu 04.12",
+   :date_sv "Tors 04.12",
+   :message ""}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Lohikeitto",
+     :name_en "Laxsoppa",
+     :name_sv "Salmon soup",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}
+    {:ingredients "GKK",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Leipäjuustosalaattia",
+     :name_en "Finnish squeaky cheese salad",
+     :name_sv "Brödostsallad",
+     :nutrition nil,
+     :price
+     {:name "Bistro",
+      :value
+      {:contract "9.00",
+       :graduate "6.90",
+       :graduate_hyy "6.90",
+       :normal "10.00",
+       :student "4.95",
+       :student_hyy "4.95"}}}],
+   :date "Pe 05.12",
+   :date_en "Fri 05.12",
+   :date_sv "Fre 05.12",
+   :message ""}
+  {:data [],
+   :date "La 06.12",
+   :date_en "Sat 06.12",
+   :date_sv "Lör 06.12",
+   :message nil}
+  {:data [],
+   :date "Su 07.12",
+   :date_en "Sun 07.12",
+   :date_sv "Sön 07.12",
+   :message nil}
+  {:data [],
+   :date "Ma 08.12",
+   :date_en "Mon 08.12",
+   :date_sv "Mån 08.12",
+   :message nil}
+  {:data [],
+   :date "Ti 09.12",
+   :date_en "Tue 09.12",
+   :date_sv "Tis 09.12",
+   :message nil}
+  {:data [],
+   :date "Ke 10.12",
+   :date_en "Wed 10.12",
+   :date_sv "Ons 10.12",
+   :message nil}
+  {:data [],
+   :date "To 11.12",
+   :date_en "Thu 11.12",
+   :date_sv "Tors 11.12",
+   :message nil}
+  {:data [],
+   :date "Pe 12.12",
+   :date_en "Fri 12.12",
+   :date_sv "Fre 12.12",
+   :message nil}
+  {:data [],
+   :date "La 13.12",
+   :date_en "Sat 13.12",
+   :date_sv "Lör 13.12",
+   :message nil}
+  {:data [],
+   :date "Su 14.12",
+   :date_en "Sun 14.12",
+   :date_sv "Sön 14.12",
+   :message nil}],
+ :information
+ {:address "Vuorikatu 7",
+  :bistro
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :name "",
+   :regular
+   [{:close "",
+     :open "",
+     :when [false false false false false false false]}]},
+  :business
+  {:exception
+   [{:close nil, :closed false, :from "", :open nil, :to nil}],
+   :regular
+   [{:close "20:00",
+     :open "09:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}
+    {:close "16:00",
+     :open "10:00",
+     :when
+     ["previous"
+      "previous"
+      "previous"
+      "previous"
+      "previous"
+      "La"
+      false]}]},
+  :city "Helsinki",
+  :description
+  "Esteettömyys<br />-Esteetön sisäänkäynti kahvilaan Vuorikadun puolelta.<br />-Kahvilassa on inva-wc.",
+  :description_en
+  "Disabled access<br />-Free access to cafe from Vuorikatu<br />-There is WC for disabled",
+  :description_sv
+  "Tillgänglighet för funktionshindrade<br />-invalidtoalett i restaurangen",
+  :ilta nil,
+  :lounas
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :regular
+   [{:close "15:00",
+     :open "11:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" "La" false]}]},
+  :restaurant "Gaudeamus Kirja & Kahvi",
+  :zip "00100"},
+ :status "OK"}
