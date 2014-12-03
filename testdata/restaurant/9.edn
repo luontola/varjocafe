@@ -123,6 +123,23 @@
    :message nil}
   {:data
    [{:ingredients
+     "Alaskan-seitiä, vehnäjauhoa, vettä, kasviöljyä, maitoa, cheddarjuustoa, muunnettua tärkkelystä, kermaa, suolaa, riisijauhoa, tärkkelystä, vehnägluteenia, maissijauhoa, juustoa, sitruunamehua, maitoproteiinia, paprikaa, ruohosipulia, sokeria, hiivaa, rypälesokeria, sinappijauhetta, hiivauutetta, kalauutetta, maitosokeria, sipulia, glukoosisiirappia, valkosipulia, mausteuutetta, happamuudensäätöainetta E500, stabilointiainetta E464 ja väriä E160a.\nVettä, kasvirasvavalmistetta [sis. vettä, maitoa, rypsiöljyä, kovetettua kasvirasvaa, muunneltua tärkkelystä, emulgointiainetta (E472e kasvirasvapohjainen), stabilointiainetta (guarkumia), maltodekstriinia, sokeria, happamuudensäätöainetta (natriumsitraatit), laktaasientsyymiä, aromia, väriä (betakaroteenia)], vehnäjauhoa, kermaviiliä, maustekurkkua, hunajaa, mustapippuria, kaprista, tilliä.",
+     :meta {:0 ["[S]" "V"], :1 ["valkosipulia"], :2 []},
+     :name "Cheddar-täytteinen kalarulla, venäläinen kermaviili",
+     :name_en "Cheddar stuffed fish roll with Russian sour cream",
+     :name_sv "Fiskrulle fylld med cheddarost med rysk gräddfilsås",
+     :nutrition
+     "Ravintoarvo 100 g/ energiaa 147kcal (616kJ), hiilihydraattia 12g, rasvaa 8g, proteiinia 7g.",
+     :price
+     {:name "Maukkaasti",
+      :value
+      {:contract "7.00",
+       :graduate "6.40",
+       :graduate_hyy "6.40",
+       :normal "9.30",
+       :student "4.40",
+       :student_hyy "4.40"}}}
+    {:ingredients
      "Kebablihaa (naudanlihaa), paprikaa, vihreitä papuja, kidneypapuja, kaalia, rypsiöljyä, tomaattia, sipulia, valkosipulia, sokeria, inkivääriä, juustokuminaa, soijakastiketta, chiliä, omenaviinietikkaa, maissitärkkelystä.",
      :meta {:0 ["G" "L" "M" "V"], :1 ["valkosipulia"], :2 []},
      :name "Kebabwokkia",
