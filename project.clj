@@ -34,10 +34,11 @@
                  ; Misc
                  [commons-io/commons-io "2.4"]]
 
-  :profiles {:dev {:source-paths ["dev"]
-                   :dependencies [[org.clojure/tools.namespace "0.2.7"]
-                                  [midje "1.6.3"]]
-                   :plugins      [[lein-midje "3.1.1"]]}}
+  :profiles {:dev     {:source-paths ["dev"]
+                       :dependencies [[org.clojure/tools.namespace "0.2.7"]
+                                      [midje "1.6.3"]]
+                       :plugins      [[lein-midje "3.1.1"]]}
+             :uberjar {:aot :all}}
   :repl-options {:init-ns user}
 
   :main varjocafe.server
