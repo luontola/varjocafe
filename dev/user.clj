@@ -4,9 +4,10 @@
             [clojure.repl :refer :all]
             [clojure.pprint :refer [pprint]]
             [clojure.tools.namespace.repl :refer [refresh]]
-            [varjocafe.updater :as updater])
-  (:import (java.nio.file Paths Files)
-           (org.apache.commons.io FileUtils)))
+            [varjocafe.updater :as updater]
+            [varjocafe.settings :as settings])
+  (:import (org.apache.commons.io FileUtils)
+           (varjocafe.updater RestRestaurantApi)))
 
 (defonce ^:private server (atom nil))
 
@@ -43,9 +44,10 @@
     (spit file (with-out-str (pprint data)))))
 
 (defn update-testdata []
-  (let [index @(updater/get-restaurants)
+  (let [api (RestRestaurantApi. (:restaurant-api-url settings/defaultsettings))
+        index @(updater/get-restaurants api)
         ids (map :id (:data index))
-        restaurants (doall (map (fn [id] [id (updater/get-restaurant id)])
+        restaurants (doall (map (fn [id] [id (updater/get-restaurant api id)])
                                 ids))]
     (delete-testdata)
     (save-testdata "restaurants.edn" index)
