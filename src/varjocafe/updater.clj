@@ -1,11 +1,21 @@
 (ns varjocafe.updater
-  (:import (org.apache.commons.io FileUtils))
   (:require [clojure.data.json :as json]
             [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.pprint :refer [pprint]]
             [clojure.tools.logging :as log]
-            [org.httpkit.client :as http]))
+            [clojure.algo.generic.functor :refer [fmap]]
+            [clj-time.format :as tf]
+            [org.httpkit.client :as http])
+  (:import (org.apache.commons.io FileUtils)
+           (org.joda.time LocalDate Days)))
+
+(defprotocol RestaurantApi
+  (get-restaurants [this])
+  (get-restaurant [this id]))
+
+
+; RestRestaurantApi
 
 (defn- json-body [response]
   (if (= 200 (:status response))
@@ -14,15 +24,13 @@
       (log/warn "Request failed:" (pr-str response))
       nil)))
 
-(defprotocol RestaurantApi
-  (get-restaurants [this])
-  (get-restaurant [this id]))
-
 (deftype RestRestaurantApi [base-url]
   RestaurantApi
   (get-restaurants [_] (future (json-body @(http/get (str base-url "/restaurants")))))
   (get-restaurant [_ id] (future (json-body @(http/get (str base-url "/restaurant/" id))))))
 
+
+; LocalRestaurantApi
 
 (defprotocol Cache
   (refresh [this origin]))
@@ -64,3 +72,51 @@
   (get-restaurant [_ id] (future (edn/read-string (slurp (restaurant-file base-dir id)))))
   Cache
   (refresh [_ origin] (refresh-cache origin base-dir)))
+
+
+; Enrich restaurant data
+
+(defn abs-days [days]
+  (if (.isLessThan days Days/ZERO)
+    (.negated days)
+    days))
+
+(defn- distance-in-days [date1 date2]
+  (abs-days (Days/daysBetween (.toDateTimeAtStartOfDay date1)
+                              (.toDateTimeAtStartOfDay date2))))
+
+(defn- fix-year [date-without-year today]
+  (let [this-year (.getYear today)
+        possible-years [(inc this-year)
+                        this-year
+                        (dec this-year)]
+        possibilities (map #(.withYear date-without-year %) possible-years)
+        closest-possibility (first (sort-by #(distance-in-days % today)
+                                            possibilities))]
+    closest-possibility))
+
+(def ^:private date-formatter (tf/formatter "dd.MM"))
+
+(defn parse-date [date-str today]
+  (let [without-weekday (clojure.string/replace-first date-str #"\w+ " "")
+        date (tf/parse-local-date date-formatter without-weekday)]
+    (fix-year date today)))
+
+(defn- group-by-date [data today]
+  (zipmap (->> (map :date data)
+               (map #(parse-date % today)))
+          data))
+
+(defn- enrich-restaurant [restaurant api today]
+  (let [details @(get-restaurant api (:id restaurant))]
+    (assoc restaurant
+           :information (:information details)
+           :menu (group-by-date (:data details) today))))
+
+(defn- group-by-restaurant-id [index]
+  (fmap first (group-by :id (:data index))))
+
+(defn enriched-data [api today]
+  (->> @(get-restaurants api)
+       (group-by-restaurant-id)
+       (fmap #(enrich-restaurant % api today))))

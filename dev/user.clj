@@ -30,7 +30,8 @@
 
 ; Test Data
 
+(def rest-api (RestRestaurantApi. (:restaurant-api-url settings/defaultsettings)))
+(def local-api (LocalRestaurantApi. (:testdata-dir settings/defaultsettings)))
+
 (defn update-testdata []
-  (let [origin (RestRestaurantApi. (:restaurant-api-url settings/defaultsettings))
-        cache (LocalRestaurantApi. (:testdata-dir settings/defaultsettings))]
-    (updater/refresh cache origin)))
+  (updater/refresh local-api rest-api))

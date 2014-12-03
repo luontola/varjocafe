@@ -32,6 +32,7 @@
                  [org.clojars.lokori/lolog "0.1.0"]
 
                  ; Misc
+                 [org.clojure/algo.generic "0.1.2"]
                  [commons-io/commons-io "2.4"]]
 
   :profiles {:dev     {:source-paths ["dev"]
