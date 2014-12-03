@@ -1,13 +1,10 @@
 (ns user
-  (:require [clojure.java.io :as io]
-            [clojure.tools.logging :as log]
-            [clojure.repl :refer :all]
+  (:require [clojure.repl :refer :all]
             [clojure.pprint :refer [pprint]]
             [clojure.tools.namespace.repl :refer [refresh]]
             [varjocafe.updater :as updater]
             [varjocafe.settings :as settings])
-  (:import (org.apache.commons.io FileUtils)
-           (varjocafe.updater RestRestaurantApi)))
+  (:import (varjocafe.updater RestRestaurantApi LocalRestaurantApi)))
 
 (defonce ^:private server (atom nil))
 
@@ -33,35 +30,7 @@
 
 ; Test Data
 
-(def testdata-dir (io/file "testdata"))
-
-(defn- delete-testdata []
-  (FileUtils/deleteDirectory testdata-dir))
-
-(defn- save-testdata [filename data]
-  (let [file (io/file testdata-dir filename)]
-    (io/make-parents file)
-    (spit file (with-out-str (pprint data)))))
-
-(defn- normalize-maps [data]
-  (clojure.walk/postwalk
-    (fn [form] (if (map? form)
-                 (into (sorted-map) form)
-                 form))
-    data))
-
 (defn update-testdata []
-  (let [api (RestRestaurantApi. (:restaurant-api-url settings/defaultsettings))
-        index @(updater/get-restaurants api)
-        ids (map :id (:data index))
-        restaurants (doall (map (fn [id] [id (updater/get-restaurant api id)])
-                                ids))]
-    (delete-testdata)
-    (save-testdata "restaurants.edn"
-                   (normalize-maps index))
-    (log/info "Saved restaurants")
-    (doseq [[id restaurant] restaurants]
-      (save-testdata (str "restaurant/" id ".edn")
-                     (normalize-maps @restaurant))
-      (log/info "Saved restaurant" id))
-    (log/info "Test data updated")))
+  (let [origin (RestRestaurantApi. (:restaurant-api-url settings/defaultsettings))
+        cache (LocalRestaurantApi. (:testdata-dir settings/defaultsettings))]
+    (updater/refresh cache origin)))
