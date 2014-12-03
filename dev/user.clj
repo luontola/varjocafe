@@ -43,6 +43,13 @@
     (io/make-parents file)
     (spit file (with-out-str (pprint data)))))
 
+(defn- normalized [data]
+  (clojure.walk/postwalk
+    (fn [form] (if (map? form)
+                 (into (sorted-map) form)
+                 form))
+    data))
+
 (defn update-testdata []
   (let [api (RestRestaurantApi. (:restaurant-api-url settings/defaultsettings))
         index @(updater/get-restaurants api)
@@ -53,6 +60,7 @@
     (save-testdata "restaurants.edn" index)
     (log/info "Saved restaurants")
     (doseq [[id restaurant] restaurants]
-      (save-testdata (str "restaurant/" id ".edn") @restaurant)
+      (save-testdata (str "restaurant/" id ".edn")
+                     (normalized @restaurant))
       (log/info "Saved restaurant" id))
     (log/info "Test data updated")))
