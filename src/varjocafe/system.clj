@@ -1,23 +1,18 @@
 (ns varjocafe.system
   (:gen-class)
-  (:require [clojure.tools.logging :as log]
+  (:require [com.stuartsierra.component :as component]
             [varjocafe.settings :as settings]
             [varjocafe.server :as server]))
 
-(defn init [configuration]
-  {:settings   configuration
-   :stop-hooks nil})
+(defn init [settings]
+  (component/system-map
+    :server (server/init settings)))
 
 (defn start! [system]
-  (server/start! system))
+  (component/start system))
 
 (defn stop! [system]
-  (doseq [stop-hook (:stop-hooks system)]
-    (try
-      (stop-hook)
-      (catch Throwable t
-        (log/error t "Failure when shutting down"))))
-  (log/info "System stopped"))
+  (component/stop system))
 
 (defn -main [& args]
   (->

@@ -10,6 +10,7 @@
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.force-reload :refer [wrap-force-reload]]
+            [com.stuartsierra.component :as component]
             [lolog.core :refer [wrap-log-request]]
             [varjocafe.views :as views]))
 
@@ -19,7 +20,7 @@
       (rsp/content-type "text/html")
       (rsp/charset "UTF-8")))
 
-(defn ^:private routes [system]
+(defn ^:private routes []
   (c/routes
     (c/GET "/status" [] "OK")
     (c/GET "/" [] (using-template views/main-page))
@@ -30,12 +31,10 @@
     (apply handler next args)
     next))
 
-(defn app
-  "Application without HTTP bindings. Just the Ring stack"
-  [system]
+(defn app [settings]
   (->
-    (routes system)
-    (wrap-if-dev (:settings system) wrap-force-reload ['varjocafe.views])
+    (routes)
+    (wrap-if-dev settings wrap-force-reload ['varjocafe.views])
     wrap-keyword-params
     wrap-json-params
     (wrap-resource "public/app")
@@ -43,9 +42,18 @@
     wrap-content-type
     wrap-log-request))
 
-(defn start! [system]
-  (let [port (get-in system [:settings :server :port])
-        shutdown (hs/run-server (varjocafe.server/app system)
-                                {:port port})]
-    (log/info "Server listening on port" port)
-    (update-in system [:stop-hooks] conj shutdown)))
+(defrecord Server [settings shutdown]
+  component/Lifecycle
+
+  (start [component]
+    (let [port (get-in settings [:server :port])
+          shutdown (hs/run-server (app settings) {:port port})]
+      (log/info "Server listening on port" port)
+      (assoc component :shutdown shutdown)))
+
+  (stop [component]
+    (log/info "Server shutting down")
+    ((:shutdown component))))
+
+(defn init [settings]
+  (map->Server {:settings settings}))
