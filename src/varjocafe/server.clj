@@ -1,5 +1,4 @@
 (ns varjocafe.server
-  (:gen-class)
   (:require [clojure.tools.logging :as log]
             [compojure.route :as r]
             [compojure.core :as c]
@@ -12,7 +11,6 @@
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.force-reload :refer [wrap-force-reload]]
             [lolog.core :refer [wrap-log-request]]
-            [varjocafe.settings :as settings]
             [varjocafe.views :as views]))
 
 (defn using-template
@@ -21,7 +19,7 @@
       (rsp/content-type "text/html")
       (rsp/charset "UTF-8")))
 
-(defn ^:private routes [settings]
+(defn ^:private routes [system]
   (c/routes
     (c/GET "/status" [] "OK")
     (c/GET "/" [] (using-template views/main-page))
@@ -34,10 +32,10 @@
 
 (defn app
   "Application without HTTP bindings. Just the Ring stack"
-  [settings]
+  [system]
   (->
-    (routes settings)
-    (wrap-if-dev settings wrap-force-reload ['varjocafe.views])
+    (routes system)
+    (wrap-if-dev (:settings system) wrap-force-reload ['varjocafe.views])
     wrap-keyword-params
     wrap-json-params
     (wrap-resource "public/app")
@@ -45,22 +43,9 @@
     wrap-content-type
     wrap-log-request))
 
-(defn start! [defaultsettings]
-  (try
-    (log/info "Server starting up")
-    (let [configuration (settings/read-configuration defaultsettings)
-          port (get-in configuration [:server :port])
-          shutdown (hs/run-server (app configuration)
-                                  {:port port})]
-      (log/info "Server started at port" port)
-      {:shutdown shutdown})
-    (catch Throwable t
-      (log/error t "Failed to start server"))))
-
-(defn shutdown! [server]
-  (log/info "Shutting down server")
-  ((:shutdown server))
-  (log/info "Server shutdown ok"))
-
-(defn -main [& args]
-  (start! settings/defaultsettings))
+(defn start! [system]
+  (let [port (get-in system [:settings :server :port])
+        shutdown (hs/run-server (varjocafe.server/app system)
+                                {:port port})]
+    (log/info "Server listening on port" port)
+    (update-in system [:stop-hooks] conj shutdown)))

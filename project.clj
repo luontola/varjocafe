@@ -42,6 +42,6 @@
              :uberjar {:aot :all}}
   :repl-options {:init-ns user}
 
-  :main varjocafe.server
+  :main varjocafe.system
   :jar-name "varjocafe.jar"
   :uberjar-name "varjocafe-standalone.jar")

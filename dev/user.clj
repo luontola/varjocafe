@@ -6,25 +6,30 @@
             [varjocafe.settings :as settings])
   (:import (varjocafe.updater RestRestaurantApi LocalRestaurantApi)))
 
-(defonce ^:private server (atom nil))
+(defonce ^:private system (atom nil))
 
-(defn ^:private start! []
-  {:pre  [(not @server)]
-   :post [@server]}
-  (require 'varjocafe.server)
-  (reset! server ((ns-resolve 'varjocafe.server 'start!)
-                   (assoc @(ns-resolve 'varjocafe.settings 'defaultsettings)
-                          :development-mode true))))
+(defn start! []
+  {:pre  [(not @system)]
+   :post [@system]}
+  (require 'varjocafe.system)
+  (let [defaultsettings @(ns-resolve 'varjocafe.settings 'defaultsettings)
+        settings (assoc defaultsettings
+                        :development-mode true)
+        init (ns-resolve 'varjocafe.system 'init)
+        start (ns-resolve 'varjocafe.system 'start!)]
+    (reset! system (-> (init settings)
+                       (start)))))
 
-(defn ^:private shutdown! []
-  {:pre  [@server]
-   :post [(not @server)]}
-  ((ns-resolve 'varjocafe.server 'shutdown!) @server)
-  (reset! server nil))
+(defn stop! []
+  {:pre  [@system]
+   :post [(not @system)]}
+  (let [stop (ns-resolve 'varjocafe.system 'stop!)]
+    (stop @system)
+    (reset! system nil)))
 
 (defn restart! []
-  (when @server
-    (shutdown!))
+  (when @system
+    (stop!))
   (refresh :after 'user/start!))
 
 
