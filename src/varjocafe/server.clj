@@ -55,5 +55,5 @@
     (log/info "Server shutting down")
     ((:shutdown component))))
 
-(defn init [settings]
-  (map->Server {:settings settings}))
+(defn init []
+  (map->Server {}))
