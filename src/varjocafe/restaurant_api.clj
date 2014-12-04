@@ -1,4 +1,4 @@
-(ns varjocafe.updater
+(ns varjocafe.restaurant-api
   (:require [clojure.data.json :as json]
             [clojure.edn :as edn]
             [clojure.java.io :as io]
@@ -15,7 +15,7 @@
   (get-restaurant [this id]))
 
 
-; RestRestaurantApi
+; RemoteRestaurantApi
 
 (defn- json-body [response]
   (if (= 200 (:status response))
@@ -24,10 +24,13 @@
       (log/warn "Request failed:" (pr-str response))
       nil)))
 
-(deftype RestRestaurantApi [base-url]
+(deftype RemoteRestaurantApi [base-url]
   RestaurantApi
   (get-restaurants [_] (future (json-body @(http/get (str base-url "/restaurants")))))
   (get-restaurant [_ id] (future (json-body @(http/get (str base-url "/restaurant/" id))))))
+
+(defn init-remote [base-url]
+  (RemoteRestaurantApi. base-url))
 
 
 ; LocalRestaurantApi
@@ -72,6 +75,9 @@
   (get-restaurant [_ id] (future (edn/read-string (slurp (restaurant-file base-dir id)))))
   Cache
   (refresh [_ origin] (refresh-cache origin base-dir)))
+
+(defn init-local [base-dir]
+  (LocalRestaurantApi. base-dir))
 
 
 ; Enrich restaurant data
