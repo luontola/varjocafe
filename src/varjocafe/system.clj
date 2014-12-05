@@ -17,7 +17,7 @@
       :settings settings
       :database (atom {})
       :server (component/using (server/init)
-                               [:settings])
+                               [:database :settings])
       :updater (component/using (updater/init)
                                 [:database :data-provider :settings])
       :restaurant-api api

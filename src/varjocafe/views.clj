@@ -2,9 +2,8 @@
   (:require [net.cgrand.enlive-html :as en]))
 
 (en/deftemplate layout "templates/layout.html"
-                [{:keys [title]}]
-                [:title] (en/content title)
-                [:h1] (en/content title))
+                [{:keys [data]}]
+                [:#content] (en/content data))
 
-(defn main-page []
-  (layout {:title "VarjoCafe"}))
+(defn main-page [data]
+  (layout {:data data}))

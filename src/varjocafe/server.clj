@@ -14,26 +14,26 @@
             [lolog.core :refer [wrap-log-request]]
             [varjocafe.views :as views]))
 
-(defn using-template
+(defn- using-template
   [template & args]
   (-> (rsp/response (apply str (apply template args)))
       (rsp/content-type "text/html")
       (rsp/charset "UTF-8")))
 
-(defn ^:private routes []
+(defn- routes [database]
   (c/routes
     (c/GET "/status" [] "OK")
-    (c/GET "/" [] (using-template views/main-page))
+    (c/GET "/" [] (using-template views/main-page @database))
     (r/not-found "Not found")))
 
-(defn wrap-if-dev [next settings handler & args]
+(defn- wrap-if-dev [next settings handler & args]
   (if (:development-mode settings)
     (apply handler next args)
     next))
 
-(defn app [settings]
+(defn ring-stack [database settings]
   (->
-    (routes)
+    (routes database)
     (wrap-if-dev settings wrap-force-reload ['varjocafe.views])
     wrap-keyword-params
     wrap-json-params
@@ -42,12 +42,12 @@
     wrap-content-type
     wrap-log-request))
 
-(defrecord Server [settings shutdown]
+(defrecord Server [shutdown database settings]
   component/Lifecycle
 
   (start [component]
     (let [port (get-in settings [:server :port])
-          shutdown (hs/run-server (app settings) {:port port})]
+          shutdown (hs/run-server (ring-stack database settings) {:port port})]
       (log/info "Server listening on port" port)
       (assoc component :shutdown shutdown)))
 
