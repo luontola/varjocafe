@@ -26,9 +26,12 @@
 
 (fact "Handles failures from data provider gracefully"
       (with-silent-logger
-        (fact "No failure"
+        (fact "no failure; update normally"
               (run-update-command menu-r1-d1 (fn [] menu-r1-d2)) => menu-r1-d2)
-        (fact "Throws exception"
+        (fact "throws an exception; keep old value"
               (run-update-command menu-r1-d1 (fn [] (throw (Exception. "dummy")))) => menu-r1-d1)
-        (fact "Returns nil"
-              (run-update-command menu-r1-d1 (fn [] nil)) => menu-r1-d1)))
+        (fact "returns nil; keep old value"
+              (run-update-command menu-r1-d1 (fn [] nil)) => menu-r1-d1)
+        (fact "throws InterruptedException; keep old value & keep interrupted status"
+              (run-update-command menu-r1-d1 (fn [] (throw (InterruptedException. "dummy")))) => menu-r1-d1
+              (Thread/interrupted) => true)))

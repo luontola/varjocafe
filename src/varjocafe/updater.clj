@@ -12,6 +12,8 @@
     (log/info "Updating...")
     (swap! database update-database data-provider)
     (log/info "Update finished")
+    (catch InterruptedException _
+      (.interrupt (Thread/currentThread)))
     (catch Throwable t
       (log/warn t "Failed to update"))))
 
