@@ -9,7 +9,7 @@
 (fact "Enriched restaurant data"
       ; XXX: Date and food constants must be updated when test data is updated.
       (let [today (t/local-date 2014 12 3)
-            api (restaurants/init-local (:testdata-dir settings/defaultsettings))
+            api (restaurants/init-local (:testdata-dir settings/dev-settings))
             data (core/data api today)]
 
         (fact "contains restaurants by id"

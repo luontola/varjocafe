@@ -4,8 +4,9 @@
             [clj-time.core :as t]
             [varjocafe.core :as core]
             [varjocafe.restaurants :as restaurants]
+            [varjocafe.server :as server]
             [varjocafe.settings :as settings]
-            [varjocafe.server :as server]))
+            [varjocafe.updater :as updater]))
 
 (defn init [settings]
   (let [api (if (:development-mode settings)
@@ -17,6 +18,8 @@
       :database (atom {})
       :server (component/using (server/init)
                                [:settings])
+      :updater (component/using (updater/init)
+                                [:database :data-provider :settings])
       :restaurant-api api
       :data-provider data-provider)))
 
@@ -28,6 +31,6 @@
 
 (defn -main [& args]
   (->
-    (settings/read-configuration settings/defaultsettings)
+    (settings/read-configuration settings/default-settings)
     (init)
     (start!)))

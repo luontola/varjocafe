@@ -6,16 +6,23 @@
 
 (defn with-system [f]
   (let [port 8082
-        system (-> settings/defaultsettings
+        system (-> settings/dev-settings
                    (assoc-in [:server :port] port)
                    (system/init)
                    (system/start!))]
     (try
-      (f port)
+      (f system port)
       (finally
         (system/stop! system)))))
 
 (fact "Starts up an HTTP server"
       (with-system
-        (fn [port]
+        (fn [system port]
           @(http/get (str "http://localhost:" port)) => (contains {:status 200}))))
+
+(fact :slow "Updates the database periodically"
+      (with-system
+        (fn [system port]
+          ; TODO: no sleep
+          (Thread/sleep 1000)
+          @(:database system) => (contains {1 anything}))))

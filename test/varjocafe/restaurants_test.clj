@@ -1,12 +1,10 @@
 (ns varjocafe.restaurants-test
   (:use midje.sweet)
-  (:require [clj-time.core :as t]
-            [varjocafe.restaurants :as r]
-            [varjocafe.settings :as settings])
-  (:import (org.joda.time Days)))
+  (:require [varjocafe.restaurants :as r]
+            [varjocafe.settings :as settings]))
 
-(def restaurant-api-url (:restaurant-api-url settings/defaultsettings))
-(def testdata-dir (:testdata-dir settings/defaultsettings))
+(def restaurant-api-url (:restaurant-api-url settings/dev-settings))
+(def testdata-dir (:testdata-dir settings/dev-settings))
 
 (fact :slow "RemoteRestaurantApi"
       (let [api (r/init-remote restaurant-api-url)]
