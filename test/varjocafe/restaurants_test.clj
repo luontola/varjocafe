@@ -1,7 +1,7 @@
-(ns varjocafe.restaurant-api-test
+(ns varjocafe.restaurants-test
   (:use midje.sweet)
   (:require [clj-time.core :as t]
-            [varjocafe.restaurant-api :as ra]
+            [varjocafe.restaurants :as ra]
             [varjocafe.settings :as settings])
   (:import (org.joda.time Days)))
 

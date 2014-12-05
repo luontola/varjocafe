@@ -1,7 +1,7 @@
 (ns varjocafe.system
   (:gen-class)
   (:require [com.stuartsierra.component :as component]
-            [varjocafe.restaurant-api :as restaurant-api]
+            [varjocafe.restaurants :as restaurant-api]
             [varjocafe.settings :as settings]
             [varjocafe.server :as server]))
 

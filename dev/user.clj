@@ -3,7 +3,7 @@
   (:require [clojure.repl :refer :all]
             [clojure.pprint :refer [pprint]]
             [clojure.tools.namespace.repl :refer [refresh]]
-            [varjocafe.restaurant-api :as ra]
+            [varjocafe.restaurants :as restaurants]
             [varjocafe.settings :as settings]))
 
 (defonce ^:private system (atom nil))
@@ -35,8 +35,8 @@
 
 ; Test Data
 
-(def local-api (ra/init-local (:testdata-dir settings/defaultsettings)))
-(def remote-api (ra/init-remote (:restaurant-api-url settings/defaultsettings)))
+(def local-api (restaurants/init-local (:testdata-dir settings/defaultsettings)))
+(def remote-api (restaurants/init-remote (:restaurant-api-url settings/defaultsettings)))
 
 (defn update-testdata []
-  (ra/refresh local-api remote-api))
+  (restaurants/refresh local-api remote-api))

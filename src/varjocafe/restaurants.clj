@@ -1,4 +1,4 @@
-(ns varjocafe.restaurant-api
+(ns varjocafe.restaurants
   (:require [clojure.data.json :as json]
             [clojure.edn :as edn]
             [clojure.java.io :as io]
@@ -8,7 +8,7 @@
             [clj-time.format :as tf]
             [org.httpkit.client :as http])
   (:import (org.apache.commons.io FileUtils)
-           (org.joda.time LocalDate Days)))
+           (org.joda.time DateTime LocalDate Days)))
 
 (defprotocol RestaurantApi
   (get-restaurants [this])
@@ -126,3 +126,6 @@
   (->> @(get-restaurants api)
        (group-by-restaurant-id)
        (fmap #(enrich-restaurant % api today))))
+
+(defn enriched-data-provider [api clock]
+  (fn [] (enriched-data api (.toLocalDate (clock)))))
