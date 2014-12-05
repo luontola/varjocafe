@@ -3,14 +3,14 @@
   (:import (org.joda.time Days))
   (:require [clj-time.core :as t]
             [varjocafe.core :as core]
-            [varjocafe.backend :as restaurants]
+            [varjocafe.backend :as backend]
             [varjocafe.settings :as settings]))
 
 (fact "Enriched restaurant data"
       ; XXX: Date and food constants must be updated when test data is updated.
       (let [today (t/local-date 2014 12 3)
-            api (restaurants/init-local (:testdata-dir settings/dev-settings))
-            data (core/data api today)]
+            backend (backend/init-local (:testdata-dir settings/dev-settings))
+            data (core/data backend today)]
 
         (fact "contains restaurants by id"
               (get-in data [1 :name]) => "Metsätalo")

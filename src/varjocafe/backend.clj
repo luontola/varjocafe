@@ -1,21 +1,19 @@
 (ns varjocafe.backend
+  (:import (org.apache.commons.io FileUtils))
   (:require [clojure.data.json :as json]
             [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.pprint :refer [pprint]]
             [clojure.tools.logging :as log]
             [clojure.algo.generic.functor :refer [fmap]]
-            [clj-time.format :as tf]
-            [org.httpkit.client :as http])
-  (:import (org.apache.commons.io FileUtils)
-           (org.joda.time DateTime LocalDate Days)))
+            [org.httpkit.client :as http]))
 
-(defprotocol RestaurantApi
+(defprotocol Backend
   (get-restaurants [this])
   (get-restaurant [this id]))
 
 
-; RemoteRestaurantApi
+; RemoteBackend
 
 (defn- json-body [response]
   (if (= 200 (:status response))
@@ -24,16 +22,16 @@
       (log/warn "Request failed:" (pr-str response))
       nil)))
 
-(deftype RemoteRestaurantApi [base-url]
-  RestaurantApi
+(deftype RemoteBackend [base-url]
+  Backend
   (get-restaurants [_] (future (json-body @(http/get (str base-url "/restaurants")))))
   (get-restaurant [_ id] (future (json-body @(http/get (str base-url "/restaurant/" id))))))
 
 (defn init-remote [base-url]
-  (RemoteRestaurantApi. base-url))
+  (RemoteBackend. base-url))
 
 
-; LocalRestaurantApi
+; LocalBackend
 
 (defprotocol Cache
   (refresh [this origin]))
@@ -69,12 +67,12 @@
       (log/info "Cached restaurant" id))
     (log/info "Cache refreshed")))
 
-(deftype LocalRestaurantApi [base-dir]
-  RestaurantApi
+(deftype LocalBackend [base-dir]
+  Backend
   (get-restaurants [_] (future (edn/read-string (slurp (index-file base-dir)))))
   (get-restaurant [_ id] (future (edn/read-string (slurp (restaurant-file base-dir id)))))
   Cache
   (refresh [_ origin] (refresh-cache origin base-dir)))
 
 (defn init-local [base-dir]
-  (LocalRestaurantApi. base-dir))
+  (LocalBackend. base-dir))

@@ -3,7 +3,7 @@
   (:require [clojure.pprint :refer [pprint]]
             [clojure.algo.generic.functor :refer [fmap]]
             [clj-time.format :as tf]
-            [varjocafe.backend :as r]))
+            [varjocafe.backend :as backend]))
 
 
 ; Enrich restaurant data
@@ -39,8 +39,8 @@
                (map #(parse-date % today)))
           data))
 
-(defn- enrich-restaurant [restaurant api today]
-  (let [details @(r/get-restaurant api (:id restaurant))]
+(defn- enrich-restaurant [restaurant backend today]
+  (let [details @(backend/get-restaurant backend (:id restaurant))]
     (assoc restaurant
            :information (:information details)
            :menu (group-by-date (:data details) today))))
@@ -48,10 +48,10 @@
 (defn- group-by-restaurant-id [index]
   (fmap first (group-by :id (:data index))))
 
-(defn data [api today]
-  (->> @(r/get-restaurants api)
+(defn data [backend today]
+  (->> @(backend/get-restaurants backend)
        (group-by-restaurant-id)
-       (fmap #(enrich-restaurant % api today))))
+       (fmap #(enrich-restaurant % backend today))))
 
-(defn data-provider [api clock]
-  (fn [] (data api (.toLocalDate (clock)))))
+(defn data-provider [backend clock]
+  (fn [] (data backend (.toLocalDate (clock)))))

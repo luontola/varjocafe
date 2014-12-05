@@ -1,25 +1,25 @@
 (ns varjocafe.backend-test
   (:use midje.sweet)
-  (:require [varjocafe.backend :as r]
+  (:require [varjocafe.backend :as backend]
             [varjocafe.settings :as settings]))
 
-(def restaurant-api-url (:restaurant-api-url settings/dev-settings))
+(def backend-url (:backend-url settings/dev-settings))
 (def testdata-dir (:testdata-dir settings/dev-settings))
 
-(fact :slow "RemoteRestaurantApi"
-      (let [api (r/init-remote restaurant-api-url)]
+(fact :slow "RemoteBackend"
+      (let [backend (backend/init-remote backend-url)]
 
         (fact "downloads restaurants index"
-              @(r/get-restaurants api) => (contains {:status "OK"}))
+              @(backend/get-restaurants backend) => (contains {:status "OK"}))
 
         (fact "downloads restaurant by id"
-              @(r/get-restaurant api 1) => (contains {:status "OK"}))))
+              @(backend/get-restaurant backend 1) => (contains {:status "OK"}))))
 
-(fact "LocalRestaurantApi"
-      (let [api (r/init-local testdata-dir)]
+(fact "LocalBackend"
+      (let [backend (backend/init-local testdata-dir)]
 
         (fact "reads restaurants index"
-              @(r/get-restaurants api) => (contains {:status "OK"}))
+              @(backend/get-restaurants backend) => (contains {:status "OK"}))
 
         (fact "reads restaurant by id"
-              @(r/get-restaurant api 1) => (contains {:status "OK"}))))
+              @(backend/get-restaurant backend 1) => (contains {:status "OK"}))))

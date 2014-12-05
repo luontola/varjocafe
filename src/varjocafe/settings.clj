@@ -2,12 +2,12 @@
   (:import (java.util.concurrent TimeUnit)))
 
 (def default-settings
-  {:restaurant-api-url "http://messi.hyyravintolat.fi/publicapi"
-   :server             {:port     8080
-                        :base-url ""}
-   :updater            {:interval      30
-                        :interval-unit TimeUnit/MINUTES}
-   :development-mode   false})
+  {:backend-url      "http://messi.hyyravintolat.fi/publicapi"
+   :server           {:port     8080
+                      :base-url ""}
+   :updater          {:interval      30
+                      :interval-unit TimeUnit/MINUTES}
+   :development-mode false})
 
 (def dev-settings
   (assoc default-settings
