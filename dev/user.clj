@@ -3,7 +3,7 @@
   (:require [clojure.repl :refer :all]
             [clojure.pprint :refer [pprint]]
             [clojure.tools.namespace.repl :refer [refresh]]
-            [varjocafe.restaurants :as restaurants]
+            [varjocafe.backend :as restaurants]
             [varjocafe.settings :as settings]))
 
 (defonce ^:private system (atom nil))

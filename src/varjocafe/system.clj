@@ -3,7 +3,7 @@
   (:require [com.stuartsierra.component :as component]
             [clj-time.core :as t]
             [varjocafe.core :as core]
-            [varjocafe.restaurants :as restaurants]
+            [varjocafe.backend :as restaurants]
             [varjocafe.server :as server]
             [varjocafe.settings :as settings]
             [varjocafe.updater :as updater]))

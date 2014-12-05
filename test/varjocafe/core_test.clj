@@ -3,7 +3,7 @@
   (:import (org.joda.time Days))
   (:require [clj-time.core :as t]
             [varjocafe.core :as core]
-            [varjocafe.restaurants :as restaurants]
+            [varjocafe.backend :as restaurants]
             [varjocafe.settings :as settings]))
 
 (fact "Enriched restaurant data"

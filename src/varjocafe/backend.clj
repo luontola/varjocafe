@@ -1,4 +1,4 @@
-(ns varjocafe.restaurants
+(ns varjocafe.backend
   (:require [clojure.data.json :as json]
             [clojure.edn :as edn]
             [clojure.java.io :as io]

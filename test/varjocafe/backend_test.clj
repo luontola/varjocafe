@@ -1,6 +1,6 @@
-(ns varjocafe.restaurants-test
+(ns varjocafe.backend-test
   (:use midje.sweet)
-  (:require [varjocafe.restaurants :as r]
+  (:require [varjocafe.backend :as r]
             [varjocafe.settings :as settings]))
 
 (def restaurant-api-url (:restaurant-api-url settings/dev-settings))

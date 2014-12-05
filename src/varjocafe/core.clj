@@ -3,7 +3,7 @@
   (:require [clojure.pprint :refer [pprint]]
             [clojure.algo.generic.functor :refer [fmap]]
             [clj-time.format :as tf]
-            [varjocafe.restaurants :as r]))
+            [varjocafe.backend :as r]))
 
 
 ; Enrich restaurant data
