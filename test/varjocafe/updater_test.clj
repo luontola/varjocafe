@@ -15,3 +15,18 @@
 
 (fact "Replaces old data with new data"
       (updater/update-database menu-r1-d1 (fn [] menu-r1-d2)) => menu-r1-d2)
+
+
+(defn run-update-command [old-data data-provider]
+  (let [database (atom old-data)
+        command (updater/make-update-command database data-provider)]
+    (command)
+    @database))
+
+(fact "Handles failures from data provider gracefully"
+      (fact "No failure"
+            (run-update-command menu-r1-d1 (fn [] menu-r1-d2)) => menu-r1-d2)
+      (fact "Throws exception"
+            (run-update-command menu-r1-d1 (fn [] (throw (Exception. "dummy")))) => menu-r1-d1)
+      (fact "Returns nil"
+            (run-update-command menu-r1-d1 (fn [] nil)) => menu-r1-d1))
