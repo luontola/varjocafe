@@ -3,7 +3,8 @@
 
 (en/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]
                [restaurant]
-               [[:.restaurant-name]] (en/content (:name restaurant)))
+               [[:.restaurant-name]] (en/content (:name restaurant))
+               [[:.menu]] (en/content (first (vals (:menu restaurant)))))
 
 (en/deftemplate layout "templates/layout.html"
                 [{:keys [data]}]

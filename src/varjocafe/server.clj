@@ -37,7 +37,7 @@
     (wrap-if-dev settings wrap-force-reload ['varjocafe.views])
     wrap-keyword-params
     wrap-json-params
-    (wrap-resource "public/app")
+    (wrap-resource "public")
     wrap-params
     wrap-content-type
     wrap-log-request))
