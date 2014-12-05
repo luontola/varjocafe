@@ -1,5 +1,6 @@
 (ns varjocafe.updater-test
-  (:use midje.sweet)
+  (:use midje.sweet
+        varjocafe.testutil)
   (:require [varjocafe.updater :as updater]
             [clj-time.core :as t]))
 
@@ -24,9 +25,10 @@
     @database))
 
 (fact "Handles failures from data provider gracefully"
-      (fact "No failure"
-            (run-update-command menu-r1-d1 (fn [] menu-r1-d2)) => menu-r1-d2)
-      (fact "Throws exception"
-            (run-update-command menu-r1-d1 (fn [] (throw (Exception. "dummy")))) => menu-r1-d1)
-      (fact "Returns nil"
-            (run-update-command menu-r1-d1 (fn [] nil)) => menu-r1-d1))
+      (with-silent-logger
+        (fact "No failure"
+              (run-update-command menu-r1-d1 (fn [] menu-r1-d2)) => menu-r1-d2)
+        (fact "Throws exception"
+              (run-update-command menu-r1-d1 (fn [] (throw (Exception. "dummy")))) => menu-r1-d1)
+        (fact "Returns nil"
+              (run-update-command menu-r1-d1 (fn [] nil)) => menu-r1-d1)))
