@@ -9,22 +9,22 @@
 
 (html/defsnippet date-cell "templates/layout.html" [:.date]
                  [date]
-                 [[:.date]] (html/content (.print date-format date)))
+                 [:.date] (html/content (.print date-format date)))
 
 (html/defsnippet food-line "templates/layout.html" [:.food]
                  [food]
-                 [[:.food]] (html/content (:name food)))
+                 [:.food] (html/content (:name food)))
 
 (html/defsnippet menu-cell "templates/layout.html" [:.menu]
                  [restaurant date]
-                 [[:.food]] (html/clone-for [food (get-in restaurant [:menu date :data])]
-                                            (html/substitute (food-line food))))
+                 [:.food] (html/clone-for [food (get-in restaurant [:menu date :data])]
+                                          (html/substitute (food-line food))))
 
 (html/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]
                  [restaurant dates]
-                 [[:.restaurant-name]] (html/content (:name restaurant))
-                 [[:.menu]] (html/clone-for [date dates]
-                                            (html/substitute (menu-cell restaurant date))))
+                 [:.restaurant-name] (html/content (:name restaurant))
+                 [:.menu] (html/clone-for [date dates]
+                                          (html/substitute (menu-cell restaurant date))))
 
 (html/defsnippet area-restaurants "templates/layout.html" [#{:.area-row :.restaurant-row}]
                  [area dates]
