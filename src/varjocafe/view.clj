@@ -1,10 +1,15 @@
 (ns varjocafe.view
+  (:import (java.util Locale)
+           (org.joda.time.format DateTimeFormat DateTimeFormatter))
   (:require [net.cgrand.enlive-html :as html]
             [varjocafe.core :as core]))
 
+(def date-format (-> (DateTimeFormat/forPattern "E d.M.")
+                     (.withLocale (Locale/forLanguageTag "fi"))))
+
 (html/defsnippet date-cell "templates/layout.html" [:.date]
                  [date]
-                 [[:.date]] (html/content (str date)))
+                 [[:.date]] (html/content (.print date-format date)))
 
 (html/defsnippet food-line "templates/layout.html" [:.food]
                  [food]

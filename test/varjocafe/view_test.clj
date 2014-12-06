@@ -18,6 +18,6 @@
         (fact "has restaurant names"
               page => (contains "Exactum"))
         (fact "has today's menu"
-              page => (contains "2014-12-03"))
+              page => (contains "ke 3.12."))
         (fact "has foods on menu"
               page => (contains "Porsaan grillipihvi"))))
