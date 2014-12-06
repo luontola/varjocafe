@@ -9,29 +9,35 @@
 
 (html/defsnippet date-cell "templates/layout.html" [:.date]
                  [date]
-                 [:.date] (html/content (.print date-format date)))
+                 [:.date] (html/content (.print date-format date))
+                 [:.date] (html/after "\n        "))
 
 (html/defsnippet food-line "templates/layout.html" [:.food]
                  [food]
-                 [:.food] (html/content (:name food)))
+                 [:.food] (html/content (:name food))
+                 [:.food] (html/after "\n            "))
 
 (html/defsnippet menu-cell "templates/layout.html" [:.menu]
                  [restaurant date]
                  [:.food] (html/clone-for [food (get-in restaurant [:menu date :data])]
-                                          (html/substitute (food-line food))))
+                                          (html/substitute (food-line food)))
+                 [:.menu] (html/after "\n        "))
 
 (html/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]
                  [restaurant dates]
                  [:.restaurant-name] (html/content (:name restaurant))
                  [:.menu] (html/clone-for [date dates]
-                                          (html/substitute (menu-cell restaurant date))))
+                                          (html/substitute (menu-cell restaurant date)))
+                 [:.restaurant-row] (html/after "\n"))
 
 (html/defsnippet area-restaurants "templates/layout.html" [#{:.area-row :.restaurant-row}]
                  [area dates]
                  [:.area-name] (html/set-attr :colspan (+ 1 (count dates)))
                  [:.area-name] (html/content (:name area))
                  [:.restaurant-row] (html/clone-for [restaurant (:restaurants area)]
-                                                    (html/substitute (restaurant-row restaurant dates))))
+                                                    (html/substitute (restaurant-row restaurant dates)))
+                 [:.restaurant-row] (html/before "\n    ")
+                 [:.area-row] (html/before "\n    "))
 
 (html/deftemplate layout "templates/layout.html"
                   [{:keys [dates areadata]}]
