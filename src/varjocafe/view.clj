@@ -17,26 +17,29 @@
 
 (html/defsnippet menu-cell "templates/layout.html" [:.menu]
                  [restaurant date]
-                 [[:.food]] (html/substitute (map #(food-line %) (get-in restaurant [:menu date :data]))))
+                 [[:.food]] (html/clone-for [food (get-in restaurant [:menu date :data])]
+                                            (html/substitute (food-line food))))
 
 (html/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]
                  [restaurant dates]
                  [[:.restaurant-name]] (html/content (:name restaurant))
-                 [[:.menu]] (html/substitute (map #(menu-cell restaurant %) dates)))
+                 [[:.menu]] (html/clone-for [date dates]
+                                            (html/substitute (menu-cell restaurant date))))
 
 (html/defsnippet area-restaurants "templates/layout.html" [#{:.area-row :.restaurant-row}]
                  [area dates]
                  [:.area-name] (html/set-attr :colspan (+ 1 (count dates)))
                  [:.area-name] (html/content (:name area))
-                 [:.restaurant-row] (html/substitute (map #(restaurant-row % dates)
-                                                          (:restaurants area))))
+                 [:.restaurant-row] (html/clone-for [restaurant (:restaurants area)]
+                                                    (html/substitute (restaurant-row restaurant dates))))
 
 (html/deftemplate layout "templates/layout.html"
                   [{:keys [dates areadata]}]
-                  [:.date] (html/substitute (map #(date-cell %) dates))
-                  [:.restaurant-row] nil                    ; inserted by area-restaurants
-                  [:.area-row] (html/substitute (map #(area-restaurants % dates)
-                                                     areadata)))
+                  [:.date] (html/clone-for [date dates]
+                                           (html/substitute (date-cell date)))
+                  [:.restaurant-row] nil                    ; will be inserted by area-restaurants
+                  [:.area-row] (html/clone-for [area areadata]
+                                               (html/substitute (area-restaurants area dates))))
 
 (defn main-page [data settings]
   (layout {:dates    (take 5 (core/dates data))
