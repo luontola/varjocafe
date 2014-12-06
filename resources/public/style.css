@@ -5,3 +5,7 @@
 .food {
     display: block;
 }
+
+.copyright {
+    font-style: italic;
+}
