@@ -60,10 +60,26 @@
 ; Accessors
 
 (defn dates [data]
-  (->> data
-       (vals)
+  (->> (vals data)
        (map :menu)
        (map keys)
        (flatten)
        (into #{})
        (sort)))
+
+(defn- areacodes [data]
+  (->> (vals data)
+       (map :areacode)
+       (into #{})
+       (sort)))
+
+(defn- restaurants-for-area [data areacode]
+  (->> (vals data)
+       (filter #(= areacode (:areacode %)))
+       (sort-by :name)))
+
+(defn restaurants-by-area [data areacode-names]
+  (for [areacode (areacodes data)]
+    {:areacode    areacode
+     :name        (areacode-names areacode "???")
+     :restaurants (restaurants-for-area data areacode)}))

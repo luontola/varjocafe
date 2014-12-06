@@ -7,7 +7,12 @@
                       :base-url ""}
    :updater          {:interval      30
                       :interval-unit TimeUnit/MINUTES}
-   :development-mode false})
+   :development-mode false
+   :areacode-names   {1 "Keskusta"
+                      2 "Kumpula"
+                      3 "Meilahti"
+                      5 "Viikki"
+                      6 "Metropolia"}})
 
 (def dev-settings
   (assoc default-settings
