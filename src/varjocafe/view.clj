@@ -1,4 +1,4 @@
-(ns varjocafe.views
+(ns varjocafe.view
   (:require [net.cgrand.enlive-html :as en]))
 
 (en/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]

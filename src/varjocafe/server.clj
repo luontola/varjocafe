@@ -12,7 +12,7 @@
             [ring.middleware.force-reload :refer [wrap-force-reload]]
             [com.stuartsierra.component :as component]
             [lolog.core :refer [wrap-log-request]]
-            [varjocafe.views :as views]))
+            [varjocafe.view :as view]))
 
 (defn- using-template
   [template & args]
@@ -23,7 +23,7 @@
 (defn- routes [database]
   (c/routes
     (c/GET "/status" [] "OK")
-    (c/GET "/" [] (using-template views/main-page @database))
+    (c/GET "/" [] (using-template view/main-page @database))
     (r/not-found "Not found")))
 
 (defn- wrap-if-dev [next settings handler & args]
@@ -34,7 +34,7 @@
 (defn ring-stack [database settings]
   (->
     (routes database)
-    (wrap-if-dev settings wrap-force-reload ['varjocafe.views])
+    (wrap-if-dev settings wrap-force-reload ['varjocafe.view])
     wrap-keyword-params
     wrap-json-params
     (wrap-resource "public")
