@@ -56,7 +56,7 @@
                                                (t/local-date 2014 12 14)))
 
         (fact "get restaurants grouped by area"
-              (let [areadata (core/restaurants-by-area data (:areacode-names settings/default-settings))]
+              (let [areadata (core/restaurants-by-area data (:areacode-names settings/dev-settings))]
                 (fact "areas are ordered by areacode"
                       areadata => (contains [(contains {:areacode 1, :name "Keskusta"})
                                              (contains {:areacode 2, :name "Kumpula"})]
