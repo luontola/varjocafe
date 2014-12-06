@@ -55,3 +55,15 @@
 
 (defn data-provider [backend clock]
   (fn [] (data backend (.toLocalDate (clock)))))
+
+
+; Accessors
+
+(defn dates [data]
+  (->> data
+       (vals)
+       (map :menu)
+       (map keys)
+       (flatten)
+       (into #{})
+       (sort)))
