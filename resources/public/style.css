@@ -1,3 +1,7 @@
+.area-name {
+    font-weight: bold;
+}
+
 .restaurant-row td {
     vertical-align: text-top;
 }

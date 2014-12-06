@@ -20,10 +20,10 @@
       (rsp/content-type "text/html")
       (rsp/charset "UTF-8")))
 
-(defn- routes [database]
+(defn- routes [database settings]
   (c/routes
     (c/GET "/status" [] "OK")
-    (c/GET "/" [] (using-template view/main-page @database))
+    (c/GET "/" [] (using-template view/main-page @database settings))
     (r/not-found "Not found")))
 
 (defn- wrap-if-dev [next settings handler & args]
@@ -33,7 +33,7 @@
 
 (defn ring-stack [database settings]
   (->
-    (routes database)
+    (routes database settings)
     (wrap-if-dev settings wrap-force-reload ['varjocafe.view])
     wrap-keyword-params
     wrap-json-params

@@ -73,7 +73,7 @@
        (into #{})
        (sort)))
 
-(defn- restaurants-for-area [data areacode]
+(defn- restaurants-with-areacode [data areacode]
   (->> (vals data)
        (filter #(= areacode (:areacode %)))
        (sort-by :name)))
@@ -82,4 +82,4 @@
   (for [areacode (areacodes data)]
     {:areacode    areacode
      :name        (areacode-names areacode "???")
-     :restaurants (restaurants-for-area data areacode)}))
+     :restaurants (restaurants-with-areacode data areacode)}))
