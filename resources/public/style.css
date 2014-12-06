@@ -1,13 +1,39 @@
+table {
+    border-spacing: 0;
+}
+
+.date-row td {
+    border-bottom: 1px solid #ccc;
+}
+
+.date {
+    font-weight: bold;
+}
+
+.area-row {
+    background-color: #eee;
+}
+
 .area-name {
     font-weight: bold;
+    font-style: italic;
+    font-size: 120%;
 }
 
 .restaurant-row td {
     vertical-align: text-top;
+    padding-top: 0.5em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #ccc;
+}
+
+.restaurant-name {
+    font-weight: bold;
 }
 
 .food {
     display: block;
+    padding-bottom: 0.2em;
 }
 
 .copyright {

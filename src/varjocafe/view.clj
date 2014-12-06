@@ -21,6 +21,7 @@
 
 (html/defsnippet area-restaurants "templates/layout.html" [#{:.area-row :.restaurant-row}]
                  [area dates]
+                 [:.area-name] (html/set-attr :colspan (+ 1 (count dates)))
                  [:.area-name] (html/content (:name area))
                  [:.restaurant-row] (html/substitute (map #(restaurant-row % dates)
                                                           (:restaurants area))))
