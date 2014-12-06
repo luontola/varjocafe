@@ -19,21 +19,19 @@
                  [[:.restaurant-name]] (html/content (:name restaurant))
                  [[:.menu]] (html/substitute (map #(menu-cell restaurant %) dates)))
 
-(html/defsnippet area-row "templates/layout.html" [:.area-row]
-                 [area]
-                 [[:.area-name]] (html/content (:name area)))
-
+(html/defsnippet area-restaurants "templates/layout.html" [#{:.area-row :.restaurant-row}]
+                 [area dates]
+                 [:.area-name] (html/content (:name area))
+                 [:.restaurant-row] (html/substitute (map #(restaurant-row % dates)
+                                                          (:restaurants area))))
 
 (html/deftemplate layout "templates/layout.html"
-                  [{:keys [data dates areadata]}]
+                  [{:keys [dates areadata]}]
                   [:.date] (html/substitute (map #(date-cell %) dates))
-                  [:.area-row] (html/substitute (map #(area-row %)
-                                                     areadata))
-                  ; TODO: areas and restaurants must be in groups
-                  [:.restaurant-row] (html/substitute (map #(restaurant-row % dates)
-                                                           (vals data))))
+                  [:.restaurant-row] nil                    ; inserted by area-restaurants
+                  [:.area-row] (html/substitute (map #(area-restaurants % dates)
+                                                     areadata)))
 
 (defn main-page [data settings]
-  (layout {:data     data
-           :dates    (take 5 (core/dates data))
+  (layout {:dates    (take 5 (core/dates data))
            :areadata (core/restaurants-by-area data (:areacode-names settings))}))
