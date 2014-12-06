@@ -6,11 +6,13 @@
                [date]
                [[:.date]] (en/content (str date)))
 
+(en/defsnippet food-line "templates/layout.html" [:.food]
+               [food]
+               [[:.food]] (en/content (:name food)))
+
 (en/defsnippet menu-cell "templates/layout.html" [:.menu]
                [restaurant date]
-               [[:.menu]] (en/content (->> (get-in restaurant [:menu date :data])
-                                           (map :name)
-                                           (clojure.string/join ", "))))
+               [[:.food]] (en/substitute (map #(food-line %) (get-in restaurant [:menu date :data]))))
 
 (en/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]
                [restaurant dates]
@@ -21,8 +23,7 @@
                 [{:keys [data dates]}]
                 [:.date] (en/substitute (map #(date-cell %) dates))
                 [:.restaurant-row] (en/substitute (map #(restaurant-row % dates)
-                                                       (vals data)))
-                [:#data-dump] (en/content data))
+                                                       (vals data))))
 
 (defn main-page [data]
   (layout {:data  data

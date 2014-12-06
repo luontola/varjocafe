@@ -1,3 +1,7 @@
 .restaurant-row td {
     vertical-align: text-top;
 }
+
+.food {
+    display: block;
+}
