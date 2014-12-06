@@ -30,6 +30,10 @@
     (stop!))
   (refresh :after 'user/start!))
 
+(defn data []
+  {:pre [@system]}
+  @(:database @system))
+
 
 ; Test Data
 
