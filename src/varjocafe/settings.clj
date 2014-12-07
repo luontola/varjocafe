@@ -1,5 +1,10 @@
 (ns varjocafe.settings
-  (:import (java.util.concurrent TimeUnit)))
+  (:import (java.util.concurrent TimeUnit)
+           (java.io FileNotFoundException)
+           (java.util Properties))
+  (:require [clojure.tools.logging :as log]
+            [clojure.java.io :as io]
+            [clojure.string :as string]))
 
 (def default-settings
   {:backend-url      "http://messi.hyyravintolat.fi/publicapi"
@@ -19,5 +24,24 @@
          :testdata-dir "testdata"
          :development-mode true))
 
+
+(defn read-properties-file [path]
+  (try
+    (with-open [in (io/reader path)]
+      (doto
+        (Properties.)
+        (.load in)))
+    (catch FileNotFoundException _
+      (log/info "Configuration file" path "not found. Using defaults")
+      {})))
+
+(defn dotkeys->tree [m]
+  (reduce #(let [[k v] %2
+                 path (map keyword (string/split (name k) #"\."))]
+            (assoc-in %1 path v))
+          {}
+          m))
+
 (defn read-configuration [defaults]
-  defaults)                                                 ; TODO: allow overriding the port etc.
+  ; TODO: allow overriding the port etc.
+  defaults)
