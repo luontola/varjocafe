@@ -37,8 +37,11 @@
 
 ; Test Data
 
-(def backend-local (backend/init-local (:testdata-dir settings/dev-settings)))
-(def backend-remote (backend/init-remote (:backend-url settings/dev-settings)))
+(defn local-backend []
+  (backend/init-local (:testdata-dir settings/dev-settings)))
+
+(defn remote-backend []
+  (backend/init-remote (:backend-url settings/dev-settings)))
 
 (defn update-testdata! []
-  (backend/refresh backend-local backend-remote))
+  (backend/refresh (local-backend) (remote-backend)))
