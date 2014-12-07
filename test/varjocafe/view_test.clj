@@ -15,4 +15,26 @@
         (fact "has tomorrow's menu"
               page => (contains "to 4.12."))
         (fact "has foods on menu"
-              page => (contains "Porsaan grillipihvi"))))
+              page => (contains "Broileriwrap"))
+        (fact "has food allergens on menu"
+              page => (contains "(PÄ, SE, SO, V, soijaa, valkosipulia)"))))
+
+(fact "#format-food"
+      (fact "No allergens"
+            (view/format-food {:name "Spam"
+                               :meta {:0 [],
+                                      :1 [],
+                                      :2 []}})
+            => "Spam")
+      (fact "Has allergens"
+            (view/format-food {:name "Spam"
+                               :meta {:0 ["PÄ" "V"],
+                                      :1 [],
+                                      :2 []}})
+            => "Spam (PÄ, V)")
+      (fact "Other ingredient warnings"
+            (view/format-food {:name "Spam"
+                               :meta {:0 ["PÄ" "V"],
+                                      :1 ["valkosipulia"],
+                                      :2 []}})
+            => "Spam (PÄ, V, valkosipulia)"))

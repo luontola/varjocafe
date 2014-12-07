@@ -2,7 +2,8 @@
   (:import (java.util Locale)
            (org.joda.time.format DateTimeFormat DateTimeFormatter))
   (:require [net.cgrand.enlive-html :as html]
-            [varjocafe.core :as core]))
+            [varjocafe.core :as core]
+            [clojure.string :as string]))
 
 (def date-format (-> (DateTimeFormat/forPattern "E d.M.")
                      (.withLocale (Locale/forLanguageTag "fi"))))
@@ -15,9 +16,17 @@
                             identity)
                  [:.date] (html/after "\n        "))
 
+(defn format-food [food]
+  (let [allergens (->> food :meta vals flatten)
+        allergens (if (empty? allergens)
+                    ""
+                    (str " (" (string/join ", " allergens) ")"))]
+    (str (:name food)
+         allergens)))
+
 (html/defsnippet food-line "templates/layout.html" [:.food]
                  [food]
-                 [:.food] (html/content (:name food))
+                 [:.food] (html/content (format-food food))
                  [:.food] (html/after "\n            "))
 
 (html/defsnippet menu-cell "templates/layout.html" [:.menu]
