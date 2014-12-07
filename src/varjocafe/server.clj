@@ -1,4 +1,5 @@
 (ns varjocafe.server
+  (:import (org.joda.time DateTime))
   (:require [clojure.tools.logging :as log]
             [compojure.route :as r]
             [compojure.core :as c]
@@ -20,10 +21,10 @@
       (rsp/content-type "text/html")
       (rsp/charset "UTF-8")))
 
-(defn- routes [database settings]
+(defn- routes [database clock settings]
   (c/routes
     (c/GET "/status" [] "OK")
-    (c/GET "/" [] (using-template view/main-page @database settings))
+    (c/GET "/" [] (using-template view/main-page @database (.toLocalDate (clock)) settings))
     (r/not-found "Not found")))
 
 (defn- wrap-if-dev [next settings handler & args]
@@ -31,9 +32,9 @@
     (apply handler next args)
     next))
 
-(defn ring-stack [database settings]
+(defn ring-stack [database clock settings]
   (->
-    (routes database settings)
+    (routes database clock settings)
     (wrap-if-dev settings wrap-force-reload ['varjocafe.view])
     wrap-keyword-params
     wrap-json-params
@@ -42,12 +43,12 @@
     wrap-content-type
     wrap-log-request))
 
-(defrecord Server [shutdown database settings]
+(defrecord Server [shutdown database clock settings]
   component/Lifecycle
 
   (start [component]
     (let [port (get-in settings [:server :port])
-          shutdown (hs/run-server (ring-stack database settings) {:port port})]
+          shutdown (hs/run-server (ring-stack database clock settings) {:port port})]
       (log/info "Server listening on port" port)
       (assoc component :shutdown shutdown)))
 

@@ -18,13 +18,13 @@
         data-provider (core/data-provider backend clock)]
     (component/system-map
       :settings settings
+      :clock clock
+      :data-provider data-provider
       :database (atom {})
       :server (component/using (server/init)
-                               [:database :settings])
+                               [:database :clock :settings])
       :updater (component/using (updater/init)
-                                [:database :data-provider :settings])
-      :backend backend
-      :data-provider data-provider)))
+                                [:database :data-provider :settings]))))
 
 (defn start! [system]
   (component/start system))

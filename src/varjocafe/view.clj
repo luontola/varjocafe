@@ -47,6 +47,9 @@
                   [:.area-row] (html/clone-for [area areadata]
                                                (html/substitute (area-restaurants area dates))))
 
-(defn main-page [data settings]
-  (layout {:dates    (take 5 (core/dates data))
-           :areadata (core/restaurants-by-area data (:areacode-names settings))}))
+(defn main-page [data today settings]
+  (let [in-past? #(< (compare % today) 0)]
+    (layout {:dates    (->> (core/dates data)
+                            (drop-while in-past?)
+                            (take 2))
+             :areadata (core/restaurants-by-area data (:areacode-names settings))})))
