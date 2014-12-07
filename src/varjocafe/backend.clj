@@ -1,5 +1,8 @@
 (ns varjocafe.backend
-  (:import (org.apache.commons.io FileUtils))
+  (:import (org.apache.commons.io FileUtils)
+           (java.io File)
+           (org.joda.time DateTime)
+           (org.joda.time.format ISODateTimeFormat DateTimeFormatter))
   (:require [clojure.data.json :as json]
             [clojure.edn :as edn]
             [clojure.java.io :as io]
@@ -51,6 +54,14 @@
 
 (defn- index-file [base-dir] (io/file base-dir "restaurants.edn"))
 (defn- restaurant-file [base-dir id] (io/file base-dir "restaurant" (str id ".edn")))
+(defn- updated-file [base-dir] (io/file base-dir "updated.edn"))
+(def ^:private updated-format (ISODateTimeFormat/dateTime))
+
+(defn local-updated [base-dir]
+  (let [file (updated-file base-dir)]
+    (if (.exists file)
+      (.parseDateTime updated-format (edn/read-string (slurp file)))
+      nil)))
 
 (defn- refresh-cache [origin base-dir]
   (let [index @(get-restaurants origin)
@@ -58,6 +69,8 @@
         restaurants (doall (map (fn [id] [id (get-restaurant origin id)])
                                 ids))]
     (delete-directory base-dir)
+    (write-file (updated-file base-dir)
+                (.print updated-format (DateTime.)))
     (write-file (index-file base-dir)
                 (normalize-maps index))
     (log/info "Cached restaurants index")

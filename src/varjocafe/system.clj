@@ -1,7 +1,7 @@
 (ns varjocafe.system
   (:gen-class)
+  (:import (org.joda.time DateTime))
   (:require [com.stuartsierra.component :as component]
-            [clj-time.core :as t]
             [varjocafe.core :as core]
             [varjocafe.backend :as backend]
             [varjocafe.server :as server]
@@ -9,10 +9,13 @@
             [varjocafe.updater :as updater]))
 
 (defn init [settings]
-  (let [backend (if (:development-mode settings)
+  (let [clock (if (:development-mode settings)
+                (fn [] (backend/local-updated (:testdata-dir settings)))
+                (fn [] (DateTime.)))
+        backend (if (:development-mode settings)
                   (backend/init-local (:testdata-dir settings))
                   (backend/init-remote (:backend-url settings)))
-        data-provider (core/data-provider backend t/now)]
+        data-provider (core/data-provider backend clock)]
     (component/system-map
       :settings settings
       :database (atom {})

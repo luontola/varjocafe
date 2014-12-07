@@ -3,8 +3,8 @@
   (:import (org.joda.time Days LocalDate))
   (:require [clj-time.core :as t]
             [varjocafe.core :as core]
-            [varjocafe.backend :as backend]
-            [varjocafe.settings :as settings]))
+            [varjocafe.settings :as settings]
+            [varjocafe.testdata :as testdata]))
 
 (defn dates-since [start]
   (cons start (lazy-seq (dates-since (.plusDays start 1)))))
@@ -37,9 +37,7 @@
 
 (fact "Enriched restaurant data"
       ; XXX: Date and food constants must be updated when test data is updated.
-      (let [today (t/local-date 2014 12 3)
-            backend (backend/init-local (:testdata-dir settings/dev-settings))
-            data (core/data backend today)]
+      (let [data testdata/data]
 
         (fact "contains restaurants by id"
               (get-in data [1 :name]) => "Metsätalo")
