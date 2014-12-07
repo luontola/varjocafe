@@ -16,13 +16,14 @@
                             identity)
                  [:.date] (html/after "\n        "))
 
+(defn format-allergens [food]
+  (let [allergens (->> food :meta vals flatten)]
+    (if (empty? allergens)
+      nil
+      (html/html " " [:span.allergens (str "(" (string/join ", " allergens) ")")]))))
+
 (defn format-food [food]
-  (let [allergens (->> food :meta vals flatten)
-        allergens (if (empty? allergens)
-                    ""
-                    (str " (" (string/join ", " allergens) ")"))]
-    (str (:name food)
-         allergens)))
+  (html/html (:name food) (format-allergens food)))
 
 (html/defsnippet food-line "templates/layout.html" [:.food]
                  [food]
