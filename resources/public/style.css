@@ -10,6 +10,12 @@ table {
     font-weight: bold;
 }
 
+.today {
+    border: 3px solid #f33;
+    border-radius: 50%;
+    padding: 0.4em;
+}
+
 .area-row {
     background-color: #eee;
 }

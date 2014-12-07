@@ -8,8 +8,11 @@
                      (.withLocale (Locale/forLanguageTag "fi"))))
 
 (html/defsnippet date-cell "templates/layout.html" [:.date]
-                 [date]
+                 [date today]
                  [:.date] (html/content (.print date-format date))
+                 [:.date] (if (= date today)
+                            (html/transform-content (html/wrap "span" {:class "today"}))
+                            identity)
                  [:.date] (html/after "\n        "))
 
 (html/defsnippet food-line "templates/layout.html" [:.food]
@@ -40,9 +43,9 @@
                  [:.area-row] (html/before "\n    "))
 
 (html/deftemplate layout "templates/layout.html"
-                  [{:keys [dates areadata]}]
+                  [{:keys [dates today areadata]}]
                   [:.date] (html/clone-for [date dates]
-                                           (html/substitute (date-cell date)))
+                                           (html/substitute (date-cell date today)))
                   [:.restaurant-row] nil                    ; will be inserted by area-restaurants
                   [:.area-row] (html/clone-for [area areadata]
                                                (html/substitute (area-restaurants area dates))))
@@ -52,4 +55,5 @@
     (layout {:dates    (->> (core/dates data)
                             (drop-while in-past?)
                             (take 2))
+             :today    today
              :areadata (core/restaurants-by-area data (:areacode-names settings))})))
