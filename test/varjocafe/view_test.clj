@@ -41,4 +41,10 @@
                                        :meta {:0 ["PÄ" "V"],
                                               :1 ["valkosipulia"],
                                               :2 []}}))
-            => "Spam <span class=\"allergens\">(PÄ, V, valkosipulia)</span>"))
+            => "Spam <span class=\"allergens\">(PÄ, V, valkosipulia)</span>")
+      (fact "Additional information"
+            (render (view/format-food {:name "Spam"
+                                       :meta {:0 ["PÄ" "V"],
+                                              :1 ["valkosipulia"],
+                                              :2 ["Ilmastovalinta"]}}))
+            => "Spam <span class=\"allergens\">(PÄ, V, valkosipulia, Ilmastovalinta)</span>"))

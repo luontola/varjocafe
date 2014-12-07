@@ -17,7 +17,11 @@
                  [:.date] (html/after "\n        "))
 
 (defn format-allergens [food]
-  (let [allergens (->> food :meta vals flatten)]
+  (let [allergens (->> food
+                       :meta
+                       (sort-by first)
+                       vals
+                       flatten)]
     (if (empty? allergens)
       nil
       (html/html " " [:span.allergens (str "(" (string/join ", " allergens) ")")]))))
