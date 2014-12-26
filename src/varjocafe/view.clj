@@ -42,13 +42,16 @@
 
 (html/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]
                  [restaurant dates]
+                 [:.restaurant-row] (html/set-attr :data-restaurant-id (:id restaurant))
                  [:.restaurant-name] (html/content (:name restaurant))
+                 [:.collapsed :.restaurant-name] (html/set-attr :colspan (+ 1 (count dates)))
                  [:.menu] (html/clone-for [date dates]
                                           (html/substitute (menu-cell restaurant date)))
                  [:.restaurant-row] (html/after "\n"))
 
 (html/defsnippet area-restaurants "templates/layout.html" [#{:.area-row :.restaurant-row}]
                  [area dates]
+                 [:.area-row] (html/set-attr :data-area-id (:areacode area))
                  [:.area-name] (html/set-attr :colspan (+ 1 (count dates)))
                  [:.area-name] (html/content (:name area))
                  [:.restaurant-row] (html/clone-for [restaurant (:restaurants area)]

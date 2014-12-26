@@ -9,8 +9,12 @@
       (let [page (apply str (view/main-page testdata/data testdata/today testdata/settings))]
         (fact "has area names"
               page => (contains "Kumpula"))
+        (fact "has area IDs"
+              page => (contains "data-area-id=\"2\""))
         (fact "has restaurant names"
               page => (contains "Exactum"))
+        (fact "has restaurant IDs"
+              page => (contains "data-restaurant-id=\"11\""))
         (fact "has today's menu"
               page => (contains "ke 3.12."))
         (fact "has tomorrow's menu"
