@@ -13,7 +13,8 @@
             [ring.middleware.force-reload :refer [wrap-force-reload]]
             [com.stuartsierra.component :as component]
             [lolog.core :refer [wrap-log-request]]
-            [varjocafe.view :as view]))
+            [varjocafe.view :as view]
+            [clojure.string :as string]))
 
 (defn- using-template
   [template & args]
@@ -32,14 +33,25 @@
     (apply handler next args)
     next))
 
+(defn wrap-source-maps [handler]
+  (fn [request]
+    (let [response (handler request)
+          uri (:uri request)
+          minified-ext #"\.min\.js$"]
+      (if (and uri
+               (re-find minified-ext uri))
+        (assoc-in response [:headers "X-SourceMap"] (string/replace-first uri minified-ext ".min.map"))
+        response))))
+
 (defn ring-stack [database clock settings]
   (->
     (routes database clock settings)
     (wrap-if-dev settings wrap-force-reload ['varjocafe.view])
     wrap-keyword-params
     wrap-json-params
-    (wrap-resource "public")
     wrap-params
+    (wrap-resource "public")
+    wrap-source-maps
     wrap-content-type
     wrap-log-request))
 
