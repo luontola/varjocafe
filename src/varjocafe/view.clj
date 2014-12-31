@@ -54,6 +54,7 @@
                  [:.area-row] (html/set-attr :data-area-id (:areacode area))
                  [:.area-name] (html/set-attr :colspan (+ 1 (count dates)))
                  [:.area-name] (html/content (:name area))
+                 [:.restaurant-row.collapsed] nil
                  [:.restaurant-row] (html/clone-for [restaurant (:restaurants area)]
                                                     (html/substitute (restaurant-row restaurant dates)))
                  [:.restaurant-row] (html/before "\n    ")
