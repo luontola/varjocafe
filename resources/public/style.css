@@ -21,9 +21,11 @@ table {
 }
 
 .area-name {
+    cursor: pointer;
     font-weight: bold;
     font-style: italic;
     font-size: 120%;
+    padding-left: 1ex;
 }
 
 .restaurant-row td {
@@ -34,6 +36,7 @@ table {
 }
 
 .restaurant-name {
+    cursor: pointer;
     font-weight: bold;
 }
 
