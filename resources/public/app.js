@@ -1,15 +1,20 @@
+"use strict";
+
 $(function () {
 
     var areas = {};
     var restaurants = {};
 
     function updateRestaurantVisibilities() {
+        var menusVisible = false;
+
         Object.keys(areas).forEach(function (areaId) {
             var area = areas[areaId];
             var mode = area.expanded ? 0 : 1;
             area.expandedRow.style.display = [null, 'none'][mode];
             area.collapsedRow.style.display = ['none', null][mode];
         });
+
         Object.keys(restaurants).forEach(function (restaurantId) {
             var restaurant = restaurants[restaurantId];
             var area = areas[restaurant.areaId];
@@ -19,7 +24,10 @@ $(function () {
             }
             restaurant.expandedRow.style.display = [null, 'none', 'none'][mode];
             restaurant.collapsedRow.style.display = ['none', null, 'none'][mode];
-        })
+            menusVisible |= (mode == 0);
+        });
+
+        $('.date').css('visibility', menusVisible ? '' : 'hidden')
     }
 
     function expandArea(areaId) {

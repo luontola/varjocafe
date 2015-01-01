@@ -8,13 +8,13 @@
 (def date-format (-> (DateTimeFormat/forPattern "E d.M.")
                      (.withLocale (Locale/forLanguageTag "fi"))))
 
-(html/defsnippet date-cell "templates/layout.html" [:.date]
+(html/defsnippet date-cell "templates/layout.html" [:.date-column]
                  [date today]
-                 [:.date] (html/content (.print date-format date))
+                 [:.date html/any-node] (html/replace-vars {:date (.print date-format date)})
                  [:.date] (if (= date today)
-                            (html/transform-content (html/wrap "span" {:class "today"}))
+                            (html/add-class "today")
                             identity)
-                 [:.date] (html/after "\n        "))
+                 [:.date-column] (html/after "\n        "))
 
 (defn format-allergens [food]
   (let [allergens (->> food
@@ -62,8 +62,8 @@
 
 (html/deftemplate layout "templates/layout.html"
                   [{:keys [dates today areadata]}]
-                  [:.date] (html/clone-for [date dates]
-                                           (html/substitute (date-cell date today)))
+                  [:.date-column] (html/clone-for [date dates]
+                                                  (html/substitute (date-cell date today)))
                   [:.restaurant-row] nil                    ; will be inserted by area-restaurants
                   [:.area-row.collapsed] nil
                   [:.area-row] (html/clone-for [area areadata]
