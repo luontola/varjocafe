@@ -65,6 +65,7 @@
                   [:.date] (html/clone-for [date dates]
                                            (html/substitute (date-cell date today)))
                   [:.restaurant-row] nil                    ; will be inserted by area-restaurants
+                  [:.area-row.collapsed] nil
                   [:.area-row] (html/clone-for [area areadata]
                                                (html/substitute (area-restaurants area dates))))
 

@@ -4,22 +4,33 @@ $(function () {
     var restaurants = {};
 
     function updateRestaurantVisibilities() {
+        Object.keys(areas).forEach(function (areaId) {
+            var area = areas[areaId];
+            var mode = area.expanded ? 0 : 1;
+            area.expandedRow.style.display = [null, 'none'][mode];
+            area.collapsedRow.style.display = ['none', null][mode];
+        });
         Object.keys(restaurants).forEach(function (restaurantId) {
             var restaurant = restaurants[restaurantId];
             var area = areas[restaurant.areaId];
-            var mode = 0;
+            var mode = 2;
             if (area.expanded) {
-                mode = restaurant.expanded ? 1 : 2;
+                mode = restaurant.expanded ? 0 : 1;
             }
-            restaurant.expandedRow.style.display = ['none', null, 'none'][mode];
-            restaurant.collapsedRow.style.display = ['none', 'none', null][mode];
+            restaurant.expandedRow.style.display = [null, 'none', 'none'][mode];
+            restaurant.collapsedRow.style.display = ['none', null, 'none'][mode];
         })
     }
 
-    function toggleArea(areaId) {
-        var area = areas[areaId];
-        area.expanded = !area.expanded;
-        console.log(area.expanded ? "Expand area" : "Collapse area", areaId);
+    function expandArea(areaId) {
+        console.log("Expand area", areaId);
+        areas[areaId].expanded = true;
+        updateRestaurantVisibilities();
+    }
+
+    function collapseArea(areaId) {
+        console.log("Collapse area", areaId);
+        areas[areaId].expanded = false;
         updateRestaurantVisibilities();
     }
 
@@ -35,15 +46,22 @@ $(function () {
         updateRestaurantVisibilities();
     }
 
-    $('.area-row').each(function (index, row) {
+    $('.area-row.collapsed').each(function (index, row) {
         var areaId = $(row).attr('data-area-id');
         areas[areaId] = {
             areaId: areaId,
             expanded: false,
-            row: row
+            collapsedRow: row
         };
         $(row).click(function () {
-            toggleArea(areaId);
+            expandArea(areaId);
+        });
+    });
+    $('.area-row.expanded').each(function (index, row) {
+        var areaId = $(row).attr('data-area-id');
+        areas[areaId].expandedRow = row;
+        $(row).click(function () {
+            collapseArea(areaId);
         });
     });
 
@@ -60,7 +78,6 @@ $(function () {
             expandRestaurant(restaurantId);
         });
     });
-
     $('.restaurant-row.expanded').each(function (index, row) {
         var restaurantId = $(row).attr('data-restaurant-id');
         restaurants[restaurantId].expandedRow = row;
