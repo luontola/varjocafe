@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>VarjoCafe</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <script type="text/javascript" src="/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="/app.js"></script>
 </head>
@@ -19,18 +20,18 @@
 <table>
     <tr class="date-row">
         <td></td>
-        <td class="date">[date]</td>
+        <td class="date">${date}</td>
     </tr>
     <tr data-area-id="" class="area-row">
-        <td class="area-name" colspan="2">[area-name]</td>
+        <td class="area-name" colspan="2"><i class="fa fa-caret-right"></i> ${area-name}</td>
     </tr>
     <tr data-restaurant-id="" class="restaurant-row collapsed" style="display: none">
-        <td class="restaurant-name" colspan="2">[restaurant-name]</td>
+        <td class="restaurant-name" colspan="2"><i class="fa fa-caret-right"></i> ${restaurant-name}</td>
     </tr>
     <tr data-restaurant-id="" class="restaurant-row expanded">
-        <td class="restaurant-name">[restaurant-name]</td>
+        <td class="restaurant-name"><i class="fa fa-caret-down"></i> ${restaurant-name}</td>
         <td class="menu">
-            <span class="food">[food]</span>
+            <span class="food">${food}</span>
         </td>
     </tr>
 </table>
