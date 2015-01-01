@@ -26,6 +26,9 @@ table {
     font-style: italic;
     font-size: 120%;
 }
+.area-name:hover {
+    color: #00f;
+}
 
 .restaurant-row td {
     vertical-align: text-top;
@@ -37,6 +40,9 @@ table {
 .restaurant-name {
     cursor: pointer;
     font-weight: bold;
+}
+.restaurant-name:hover {
+    color: #00f;
 }
 
 .food {
