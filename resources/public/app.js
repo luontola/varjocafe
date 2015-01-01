@@ -11,8 +11,8 @@ $(function () {
         Object.keys(areas).forEach(function (areaId) {
             var area = areas[areaId];
             var mode = area.expanded ? 0 : 1;
-            area.expandedRow.style.display = [null, 'none'][mode];
-            area.collapsedRow.style.display = ['none', null][mode];
+            area.expandedRow.style.display = ['', 'none'][mode];
+            area.collapsedRow.style.display = ['none', ''][mode];
         });
 
         Object.keys(restaurants).forEach(function (restaurantId) {
@@ -22,8 +22,8 @@ $(function () {
             if (area.expanded) {
                 mode = restaurant.expanded ? 0 : 1;
             }
-            restaurant.expandedRow.style.display = [null, 'none', 'none'][mode];
-            restaurant.collapsedRow.style.display = ['none', null, 'none'][mode];
+            restaurant.expandedRow.style.display = ['', 'none', 'none'][mode];
+            restaurant.collapsedRow.style.display = ['none', '', 'none'][mode];
             menusVisible |= (mode == 0);
         });
 
