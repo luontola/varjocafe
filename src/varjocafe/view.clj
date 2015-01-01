@@ -34,7 +34,7 @@
                  [:.food] (html/content (format-food food))
                  [:.food] (html/after "\n            "))
 
-(html/defsnippet menu-cell "templates/layout.html" [:.menu]
+(html/defsnippet menu-cell "templates/layout.html" [:.restaurant-row.expanded :.menu]
                  [restaurant date]
                  [:.food] (html/clone-for [food (get-in restaurant [:menu date :data])]
                                           (html/substitute (food-line food)))
@@ -44,9 +44,10 @@
                  [restaurant dates]
                  [:.restaurant-row] (html/set-attr :data-restaurant-id (:id restaurant))
                  [:.restaurant-name html/any-node] (html/replace-vars {:restaurant-name (:name restaurant)})
-                 [:.collapsed :.restaurant-name] (html/set-attr :colspan (+ 1 (count dates)))
-                 [:.menu] (html/clone-for [date dates]
-                                          (html/substitute (menu-cell restaurant date)))
+                 [:.collapsed :.menu] (html/clone-for [date dates]
+                                                      (html/after "\n        "))
+                 [:.expanded :.menu] (html/clone-for [date dates]
+                                                     (html/substitute (menu-cell restaurant date)))
                  [:.restaurant-row] (html/after "\n"))
 
 (html/defsnippet area-restaurants "templates/layout.html" [#{:.area-row :.restaurant-row}]
