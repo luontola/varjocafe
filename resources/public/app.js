@@ -61,14 +61,14 @@ $(function () {
             expanded: false,
             collapsedRow: row
         };
-        $(row).find('.area-name').click(function () {
+        $(row).click(function () {
             expandArea(areaId);
         });
     });
     $('.area-row.expanded').each(function (index, row) {
         var areaId = $(row).attr('data-area-id');
         areas[areaId].expandedRow = row;
-        $(row).find('.area-name').click(function () {
+        $(row).click(function () {
             collapseArea(areaId);
         });
     });
@@ -82,7 +82,7 @@ $(function () {
             expanded: true,
             collapsedRow: row
         };
-        $(row).find('.restaurant-name').click(function () {
+        $(row).click(function () {
             expandRestaurant(restaurantId);
         });
     });

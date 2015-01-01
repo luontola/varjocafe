@@ -20,14 +20,15 @@ table {
     background-color: #eee;
 }
 
-.area-name {
+.area-row:hover {
     cursor: pointer;
+    color: #00f;
+}
+
+.area-name {
     font-weight: bold;
     font-style: italic;
     font-size: 120%;
-}
-.area-name:hover {
-    color: #00f;
 }
 
 .restaurant-row td {
@@ -37,12 +38,13 @@ table {
     border-bottom: 1px solid #ccc;
 }
 
-.restaurant-name {
+.restaurant-row.collapsed:hover, .restaurant-row.expanded .restaurant-name:hover {
     cursor: pointer;
-    font-weight: bold;
-}
-.restaurant-name:hover {
     color: #00f;
+}
+
+.restaurant-name {
+    font-weight: bold;
 }
 
 .food {
