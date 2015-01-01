@@ -12,6 +12,6 @@ Mashup of [UniCafe](http://www.unicafe.fi/)'s daily lunch menus.
 License
 -------
 
-Copyright © 2005-2015 Esko Luontola, <http://www.orfjackal.net>
+Copyright © 2005-2015 Esko Luontola, <http://www.orfjackal.net>  
 This software is released under the Apache License 2.0.  
 The license text is at http://www.apache.org/licenses/LICENSE-2.0
