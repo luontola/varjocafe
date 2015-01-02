@@ -3,7 +3,7 @@ table#restaurants {
     width: 100%;
 }
 
-.date-row td {
+table#restaurants td {
     border-bottom: 1px solid #ccc;
 }
 
@@ -36,7 +36,6 @@ table#restaurants {
     vertical-align: text-top;
     padding-top: 0.5em;
     padding-bottom: 0.3em;
-    border-bottom: 1px solid #ccc;
 }
 
 .restaurant-row.collapsed:hover, .restaurant-row.expanded .restaurant-name:hover {
