@@ -13,6 +13,7 @@ $(function () {
             var mode = area.expanded ? 0 : 1;
             area.expandedRow.style.display = ['', 'none'][mode];
             area.collapsedRow.style.display = ['none', ''][mode];
+            menusVisible |= area.expanded;
         });
 
         Object.keys(restaurants).forEach(function (restaurantId) {
@@ -24,7 +25,6 @@ $(function () {
             }
             restaurant.expandedRow.style.display = ['', 'none', 'none'][mode];
             restaurant.collapsedRow.style.display = ['none', '', 'none'][mode];
-            menusVisible |= (mode == 0);
         });
 
         $('.date').css('visibility', menusVisible ? '' : 'hidden')
