@@ -5,6 +5,51 @@ $(function () {
     var areas = {};
     var restaurants = {};
 
+    $.cookie.json = true;
+
+    function loadState() {
+        var state = $.cookie('state');
+        if (!state) {
+            return;
+        }
+        try {
+            state.areas.forEach(function (unsafe) {
+                var area = areas[unsafe.areaId];
+                if (area) {
+                    area.expanded = !!unsafe.expanded;
+                }
+            });
+            state.restaurants.forEach(function (unsafe) {
+                var restaurant = restaurants[unsafe.restaurantId];
+                if (restaurant) {
+                    restaurant.expanded = !!unsafe.expanded;
+                }
+            });
+        } catch (e) {
+            console.log('Failed to load state', e);
+        }
+    }
+
+    function saveState() {
+        var state = {
+            areas: Object.keys(areas).map(function (areaId) {
+                var area = areas[areaId];
+                return {
+                    areaId: area.areaId,
+                    expanded: area.expanded
+                };
+            }),
+            restaurants: Object.keys(restaurants).map(function (restaurantId) {
+                var restaurant = restaurants[restaurantId];
+                return {
+                    restaurantId: restaurant.restaurantId,
+                    expanded: restaurant.expanded
+                };
+            })
+        };
+        $.cookie('state', state, {expires: 365, path: '/'});
+    }
+
     function updateRestaurantVisibilities() {
         var menusVisible = false;
 
@@ -27,7 +72,8 @@ $(function () {
             restaurant.collapsedRow.style.display = ['none', '', 'none'][mode];
         });
 
-        $('.date').css('visibility', menusVisible ? '' : 'hidden')
+        $('.date').css('visibility', menusVisible ? '' : 'hidden');
+        saveState();
     }
 
     function expandArea(areaId) {
@@ -75,7 +121,7 @@ $(function () {
 
     $('.restaurant-row.collapsed').each(function (index, row) {
         var restaurantId = $(row).attr('data-restaurant-id');
-        var areaId = $(row).prevAll('.area-row').attr('data-area-id')
+        var areaId = $(row).prevAll('.area-row').attr('data-area-id');
         restaurants[restaurantId] = {
             restaurantId: restaurantId,
             areaId: areaId,
@@ -94,5 +140,6 @@ $(function () {
         });
     });
 
+    loadState();
     updateRestaurantVisibilities();
 });
