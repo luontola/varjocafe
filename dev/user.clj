@@ -2,7 +2,9 @@
   (:use midje.repl)
   (:require [clojure.repl :refer :all]
             [clojure.pprint :refer [pprint]]
-            [clojure.tools.namespace.repl :refer [refresh]]))
+            [clojure.tools.namespace.repl :refer [refresh]]
+            [varjocafe.backend :as backend]
+            [varjocafe.settings :as settings]))
 
 (defonce ^:private system (atom nil))
 
@@ -36,10 +38,10 @@
 ; Test Data
 
 (defn local-backend []
-  ((ns-resolve 'varjocafe.backend 'init-local) (:testdata-dir (ns-resolve 'varjocafe.settings 'dev-settings))))
+  (backend/init-local (:testdata-dir settings/dev-settings)))
 
 (defn remote-backend []
-  ((ns-resolve 'varjocafe.backend 'init-remote) (:backend-url (ns-resolve 'varjocafe.settings 'dev-settings))))
+  (backend/init-remote (:backend-url settings/dev-settings)))
 
 (defn update-testdata! []
-  ((ns-resolve 'varjocafe.backend 'refresh) (local-backend) (remote-backend)))
+  (backend/refresh (local-backend) (remote-backend)))
