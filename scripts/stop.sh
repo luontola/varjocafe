@@ -1,2 +1,4 @@
 #!/bin/bash
-pkill -f 'java -jar varjocafe-standalone.jar'
+set -eu
+pkill -f 'java .*varjocafe'
+echo "Stopped"
