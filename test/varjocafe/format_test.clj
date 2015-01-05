@@ -51,11 +51,11 @@
             (format/day-range [false false false false false false false]) => ""))
 
 (fact "Opening times format"
-      (fact "Contiguous date ranges are delimited with a line"
+      (fact "Contiguous date ranges are delimited with a dash"
             (format/opening-times [{:when ["Ma" "Ti" "Ke" "To" "Pe" false false]
                                     :open "10:30", :close "16:00"}])
             => ["Ma-Pe" "10:30-16:00"])
-      (fact "Non-contiguous dates are delimited with a comma"
+      (fact "Non-contiguous date ranges are delimited with a comma"
             (format/opening-times [{:when ["Ma" false "Ke" false "Pe" false false]
                                     :open "10:30", :close "16:00"}])
             => ["Ma, Ke, Pe" "10:30-16:00"])

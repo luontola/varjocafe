@@ -32,10 +32,10 @@
 (defn day-range [days]
   (cond
     (empty? days) ""
-    (not (day-set? (first days))) (day-range (rest days))
-    :else (comma-delimited
-            (dash-delimited (take-while day-set? days))
-            (day-range (drop-while day-set? days)))))
+    (day-set? (first days)) (comma-delimited
+                              (dash-delimited (take-while day-set? days))
+                              (day-range (drop-while day-set? days)))
+    :else (recur (rest days))))
 
 (defn time-range [open close]
   (str open "-" close))
