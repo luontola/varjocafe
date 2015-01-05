@@ -52,3 +52,38 @@
                                               :1 ["valkosipulia"],
                                               :2 ["Ilmastovalinta"]}}))
             => "Spam <span class=\"allergens\">(PÄ, V, valkosipulia, Ilmastovalinta)</span>"))
+
+(fact "#format-day-range"
+      (fact "Contiguous full week"
+            (view/format-day-range ["Ma" "Ti" "Ke" "To" "Pe" "La" "Su"]) => "Ma-Su")
+      (fact "Contiguous beginning of week"
+            (view/format-day-range ["Ma" "Ti" "Ke" "To" "Pe" "La" false]) => "Ma-La")
+      (fact "Contiguous end of week"
+            (view/format-day-range [false "Ti" "Ke" "To" "Pe" "La" "Su"]) => "Ti-Su")
+      (fact "Contiguous minimum range"
+            (view/format-day-range ["Ma" "Ti" false false false false false]) => "Ma-Ti")
+      (fact "Multiple contiguous ranges"
+            (view/format-day-range ["Ma" "Ti" false "To" "Pe" false false]) => "Ma-Ti, To-Pe")
+      (fact "Non-contiguous"
+            (view/format-day-range ["Ma" false "Ke" false "Pe" false "Su"]) => "Ma, Ke, Pe, Su")
+      (fact "Single day"
+            (view/format-day-range ["Ma" false false false false false false]) => "Ma")
+      (fact "No days"
+            (view/format-day-range [false false false false false false false]) => ""))
+
+(fact "#format-opening-times"
+      (fact "Contiguous date ranges are delimited with a line"
+            (view/format-opening-times [{:when ["Ma" "Ti" "Ke" "To" "Pe" false false]
+                                         :open "10:30", :close "16:00"}])
+            => ["Ma-Pe" "10:30-16:00"])
+      (fact "Non-contiguous dates are delimited with a comma"
+            (view/format-opening-times [{:when ["Ma" false "Ke" false "Pe" false false]
+                                         :open "10:30", :close "16:00"}])
+            => ["Ma, Ke, Pe" "10:30-16:00"])
+      (fact "Opening and closing times may vary by day of week"
+            (view/format-opening-times [{:when ["Ma" "Ti" "Ke" "To" false false false]
+                                         :open "10:30", :close "16:00"}
+                                        {:when ["previous" "previous" "previous" "previous" "Pe" false false]
+                                         :open "10:30", :close "15:00"}])
+            => ["Ma-To" "10:30-16:00"
+                "Pe" "10:30-15:00"]))
