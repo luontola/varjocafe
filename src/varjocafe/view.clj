@@ -1,73 +1,19 @@
 (ns varjocafe.view
-  (:import (java.util Locale)
-           (org.joda.time.format DateTimeFormat DateTimeFormatter))
   (:require [net.cgrand.enlive-html :as html]
             [varjocafe.core :as core]
-            [clojure.string :as string]))
-
-(def date-format (-> (DateTimeFormat/forPattern "E d.M.")
-                     (.withLocale (Locale/forLanguageTag "fi"))))
+            [varjocafe.format :as format]))
 
 (html/defsnippet date-cell "templates/layout.html" [:.date-column]
                  [date today]
-                 [:.date html/any-node] (html/replace-vars {:date (.print date-format date)})
+                 [:.date html/any-node] (html/replace-vars {:date (format/date date)})
                  [:.date] (if (= date today)
                             (html/add-class "today")
                             identity)
                  [:.date-column] (html/after "\n        "))
 
-(defn day-set? [date]
-  (cond
-    (false? date) false
-    (= "previous" date) false
-    :else true))
-
-(defn comma-delimited [prefix suffix]
-  (if (empty? suffix)
-    prefix
-    (str prefix ", " suffix)))
-
-(defn dash-delimited [contiguous]
-  (if (= 1 (count contiguous))
-    (first contiguous)
-    (str (first contiguous) "-" (last contiguous))))
-
-(defn format-day-range [days]
-  (cond
-    (empty? days) ""
-    (not (day-set? (first days))) (format-day-range (rest days))
-    :else (comma-delimited
-            (dash-delimited (take-while day-set? days))
-            (format-day-range (drop-while day-set? days)))))
-
-(defn format-time-range [open close]
-  (str open "-" close))
-
-(defn format-opening-time [{:keys [when open close]}]
-  [(format-day-range when)
-   (format-time-range open close)])
-
-(defn format-opening-times [spec]
-  (->> spec
-       (map format-opening-time)
-       flatten))
-
-(defn format-allergens [food]
-  (let [allergens (->> food
-                       :meta
-                       (sort-by first)
-                       vals
-                       flatten)]
-    (if (empty? allergens)
-      nil
-      (html/html " " [:span.allergens (str "(" (string/join ", " allergens) ")")]))))
-
-(defn format-food [food]
-  (html/html (:name food) (format-allergens food)))
-
 (html/defsnippet food-line "templates/layout.html" [:.food]
                  [food]
-                 [:.food] (html/content (format-food food))
+                 [:.food] (html/content (format/food food))
                  [:.food] (html/after "\n            "))
 
 (html/defsnippet menu-cell "templates/layout.html" [:.restaurant-row.expanded :.menu]
