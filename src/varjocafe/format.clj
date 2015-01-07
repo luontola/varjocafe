@@ -10,6 +10,11 @@
 (defn date [date]
   (.print date-formatter date))
 
+(defn restaurant-address [restaurant]
+  (str (:address (:information restaurant))
+       ", "
+       (:city (:information restaurant))))
+
 
 ; Opening Times
 

@@ -42,6 +42,7 @@
                  [restaurant dates]
                  [:.restaurant-row] (html/set-attr :data-restaurant-id (:id restaurant))
                  [:.restaurant-name html/any-node] (html/replace-vars {:restaurant-name (:name restaurant)})
+                 [:.restaurant-address html/any-node] (html/replace-vars {:restaurant-address (format/restaurant-address restaurant)})
                  [:.collapsed :.menu] (html/clone-for [date dates]
                                                       (html/after "\n        "))
                  [:.expanded :.menu] (html/clone-for [date dates]

@@ -44,7 +44,15 @@ table#restaurants td {
 }
 
 .restaurant-name {
+    display: block;
     font-weight: bold;
+}
+
+.restaurant-address {
+    display: block;
+    margin-left: 21px;
+    font-size: 85%;
+    color: #666;
 }
 
 .opening-times {

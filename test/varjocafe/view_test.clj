@@ -15,6 +15,8 @@
               page => (contains "Exactum"))
         (fact "has restaurant IDs"
               page => (contains "data-restaurant-id=\"11\""))
+        (fact "has restaurant addresses"
+              page => (contains "Gustaf Hällströmin katu 2b, Helsinki"))
         (fact "has restaurant opening times"
               page => (contains "Ma-Pe")
               page => (contains "09:00-15:00"))
