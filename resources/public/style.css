@@ -73,7 +73,8 @@ table#restaurants td {
 .opening-times .dates {
     display: block;
     float: left;
-    width: 7.5ex;
+    min-width: 6.5ex;
+    padding-right: 1ex;
 }
 
 .opening-times .times {
