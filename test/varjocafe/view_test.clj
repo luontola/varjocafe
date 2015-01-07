@@ -15,6 +15,12 @@
               page => (contains "Exactum"))
         (fact "has restaurant IDs"
               page => (contains "data-restaurant-id=\"11\""))
+        (fact "has restaurant opening times"
+              page => (contains "Ma-Pe")
+              page => (contains "09:00-15:00"))
+        (fact "has restaurant lunch times"
+              page => (contains "Ma-Pe")
+              page => (contains "11:00-14:00"))
         (fact "has today's menu"
               page => (contains "ke 3.12."))
         (fact "has tomorrow's menu"

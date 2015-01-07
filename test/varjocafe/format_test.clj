@@ -8,28 +8,28 @@
 
 (fact "Food format"
       (fact "No allergens"
-            (render (format/food {:name "Spam"
-                                  :meta {:0 [],
-                                         :1 [],
-                                         :2 []}}))
+            (render (format/food-html {:name "Spam"
+                                       :meta {:0 [],
+                                              :1 [],
+                                              :2 []}}))
             => "Spam")
       (fact "Has allergens"
-            (render (format/food {:name "Spam"
-                                  :meta {:0 ["PÄ" "V"],
-                                         :1 [],
-                                         :2 []}}))
+            (render (format/food-html {:name "Spam"
+                                       :meta {:0 ["PÄ" "V"],
+                                              :1 [],
+                                              :2 []}}))
             => "Spam <span class=\"allergens\">(PÄ, V)</span>")
       (fact "Other ingredient warnings"
-            (render (format/food {:name "Spam"
-                                  :meta {:0 ["PÄ" "V"],
-                                         :1 ["valkosipulia"],
-                                         :2 []}}))
+            (render (format/food-html {:name "Spam"
+                                       :meta {:0 ["PÄ" "V"],
+                                              :1 ["valkosipulia"],
+                                              :2 []}}))
             => "Spam <span class=\"allergens\">(PÄ, V, valkosipulia)</span>")
       (fact "Additional information"
-            (render (format/food {:name "Spam"
-                                  :meta {:0 ["PÄ" "V"],
-                                         :1 ["valkosipulia"],
-                                         :2 ["Ilmastovalinta"]}}))
+            (render (format/food-html {:name "Spam"
+                                       :meta {:0 ["PÄ" "V"],
+                                              :1 ["valkosipulia"],
+                                              :2 ["Ilmastovalinta"]}}))
             => "Spam <span class=\"allergens\">(PÄ, V, valkosipulia, Ilmastovalinta)</span>"))
 
 (fact "Day range format"
@@ -65,4 +65,12 @@
                                    {:when ["previous" "previous" "previous" "previous" "Pe" false false]
                                     :open "10:30", :close "15:00"}])
             => ["Ma-To" "10:30-16:00"
-                "Pe" "10:30-15:00"]))
+                "Pe" "10:30-15:00"])
+      (fact "HTML is <br> delimited"
+            (render (format/opening-times-html [{:when ["Ma" false false false false false false]
+                                                 :open "10:30", :close "16:00"}
+                                                {:when [false "Ti" "Ke" "To" false false false]
+                                                 :open "10:30", :close "15:00"}
+                                                {:when [false false false false "Pe" false false]
+                                                 :open "10:30", :close "14:00"}]))
+            => "Ma: 10:30-16:00<br />Ti-To: 10:30-15:00<br />Pe: 10:30-14:00"))

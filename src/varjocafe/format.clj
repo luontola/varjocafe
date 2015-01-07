@@ -47,20 +47,35 @@
 (defn opening-times [spec]
   (->> spec
        (map opening-time)
-       flatten))
+       (flatten)))
+
+(defn- br-delimited [rows]
+  (reduce (fn [a b] (html/html a [:br] b))
+          rows))
+
+(defn- opening-time-line [pair]
+  (str (first pair) ": " (second pair)))
+
+(defn opening-times-html [spec]
+  (->> spec
+       (opening-times)
+       (partition 2)
+       (map opening-time-line)
+       (br-delimited)))
 
 
 ; Food
 
 (defn allergens [food]
-  (let [allergens (->> food
-                       :meta
-                       (sort-by first)
-                       vals
-                       flatten)]
-    (if (empty? allergens)
-      nil
-      (html/html " " [:span.allergens (str "(" (string/join ", " allergens) ")")]))))
+  (->> food
+       :meta
+       (sort-by first)
+       vals
+       flatten
+       (string/join ", ")))
 
-(defn food [food]
-  (html/html (:name food) (allergens food)))
+(defn food-html [food]
+  (let [allergens (allergens food)]
+    (html/html (:name food)
+               (when (not (empty? allergens))
+                 (html/html " " [:span.allergens (str "(" allergens ")")])))))

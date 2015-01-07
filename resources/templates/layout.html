@@ -35,7 +35,13 @@
         <td class="menu"><i class="fa fa-ellipsis-h"></i></td>
     </tr>
     <tr data-restaurant-id="" class="restaurant-row expanded">
-        <td class="restaurant-name"><i class="fa fa-caret-down fa-fw"></i>${restaurant-name}</td>
+        <td class="restaurant">
+            <span class="restaurant-name"><i class="fa fa-caret-down fa-fw"></i>${restaurant-name}</span>
+            <dl class="opening-times">
+                <dt>${title}</dt>
+                <dd>${times}</dd>
+            </dl>
+        </td>
         <td class="menu">
             <span class="food">${food}</span>
         </td>

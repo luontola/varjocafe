@@ -13,7 +13,7 @@
 
 (html/defsnippet food-line "templates/layout.html" [:.food]
                  [food]
-                 [:.food] (html/content (format/food food))
+                 [:.food] (html/content (format/food-html food))
                  [:.food] (html/after "\n            "))
 
 (html/defsnippet menu-cell "templates/layout.html" [:.restaurant-row.expanded :.menu]
@@ -21,6 +21,12 @@
                  [:.food] (html/clone-for [food (get-in restaurant [:menu date :data])]
                                           (html/substitute (food-line food)))
                  [:.menu] (html/after "\n        "))
+
+(html/defsnippet opening-times "templates/layout.html" [:.restaurant-row.expanded :.opening-times]
+                 [restaurant]
+                 [:dt html/any-node] (html/replace-vars {:title "Aukioloajat"})
+                 [:dd] (html/content (->> (get-in restaurant [:information :business :regular])
+                                          (format/opening-times-html))))
 
 (html/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]
                  [restaurant dates]
@@ -30,6 +36,7 @@
                                                       (html/after "\n        "))
                  [:.expanded :.menu] (html/clone-for [date dates]
                                                      (html/substitute (menu-cell restaurant date)))
+                 [:.expanded :.opening-times] (html/substitute (opening-times restaurant))
                  [:.restaurant-row] (html/after "\n"))
 
 (html/defsnippet area-restaurants "templates/layout.html" [#{:.area-row :.restaurant-row}]
