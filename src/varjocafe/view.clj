@@ -22,11 +22,20 @@
                                           (html/substitute (food-line food)))
                  [:.menu] (html/after "\n        "))
 
+(def opening-times-category-name {:business "Aukioloajat"
+                                  :lounas   "Lounas"
+                                  :bistro   "Bistro"})
+
+(html/defsnippet opening-times-category "templates/layout.html" [:.restaurant-row.expanded :.opening-times :> html/any-node]
+                 [restaurant category]
+                 [:dt html/any-node] (html/replace-vars {:title (opening-times-category-name category)})
+                 [:dd] (html/content (->> (get-in restaurant [:information category :regular])
+                                          (format/opening-times-html))))
+
 (html/defsnippet opening-times "templates/layout.html" [:.restaurant-row.expanded :.opening-times]
                  [restaurant]
-                 [:dt html/any-node] (html/replace-vars {:title "Aukioloajat"})
-                 [:dd] (html/content (->> (get-in restaurant [:information :business :regular])
-                                          (format/opening-times-html))))
+                 [:.opening-times] (html/content (->> [:business :lounas :bistro]
+                                                      (map #(opening-times-category restaurant %)))))
 
 (html/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]
                  [restaurant dates]
