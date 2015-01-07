@@ -38,19 +38,27 @@
     :else (recur (rest days))))
 
 (defn time-range [open close]
-  (str open "-" close))
+  (when (not-any? empty? [open close])
+    (str open "-" close)))
 
 (defn- opening-time [{:keys [when open close]}]
-  [(day-range when)
-   (time-range open close)])
+  (let [days (day-range when)
+        times (time-range open close)]
+    (if (or (empty? days)
+            (empty? times))
+      nil
+      [days times])))
 
 (defn opening-times [spec]
   (->> spec
        (map opening-time)
+       (remove empty?)
        (flatten)))
 
 (defn- br-delimited [rows]
-  (reduce (fn [a b] (html/html a [:br] b))
+  (reduce (fn
+            ([] nil)
+            ([a b] (html/html a [:br] b)))
           rows))
 
 (defn- opening-time-line [pair]

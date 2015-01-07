@@ -22,20 +22,26 @@
                                           (html/substitute (food-line food)))
                  [:.menu] (html/after "\n        "))
 
-(def opening-times-category-name {:business "Aukioloajat"
-                                  :lounas   "Lounas"
-                                  :bistro   "Bistro"})
+(def opening-times-title {:business "Aukioloajat"
+                          :lounas   "Lounas"
+                          :bistro   "Bistro"})
 
-(html/defsnippet opening-times-category "templates/layout.html" [:.restaurant-row.expanded :.opening-times :> html/any-node]
-                 [restaurant category]
-                 [:dt html/any-node] (html/replace-vars {:title (opening-times-category-name category)})
-                 [:dd] (html/content (->> (get-in restaurant [:information category :regular])
-                                          (format/opening-times-html))))
+(html/defsnippet opening-times-entry "templates/layout.html" [:.restaurant-row.expanded :.opening-times :> html/any-node]
+                 [title times]
+                 [:dt html/any-node] (html/replace-vars {:title title})
+                 [:dd] (html/content times))
+
+(defn opening-times-for-category [restaurant category]
+  (let [title (opening-times-title category)
+        times (format/opening-times-html
+                (get-in restaurant [:information category :regular]))]
+    (when times
+      (opening-times-entry title times))))
 
 (html/defsnippet opening-times "templates/layout.html" [:.restaurant-row.expanded :.opening-times]
                  [restaurant]
                  [:.opening-times] (html/content (->> [:business :lounas :bistro]
-                                                      (map #(opening-times-category restaurant %)))))
+                                                      (map #(opening-times-for-category restaurant %)))))
 
 (html/defsnippet restaurant-row "templates/layout.html" [:.restaurant-row]
                  [restaurant dates]
