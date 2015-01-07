@@ -49,8 +49,8 @@
       nil
       [days times])))
 
-(defn opening-times [spec]
-  (->> spec
+(defn opening-times [schedule]
+  (->> schedule
        (map opening-time)
        (remove empty?)
        (flatten)))
@@ -67,8 +67,8 @@
 (defn opening-times-html
   ([restaurant category]
     (opening-times-html (get-in restaurant [:information category :regular])))
-  ([spec]
-    (->> spec
+  ([schedule]
+    (->> schedule
          (opening-times)
          (partition 2)
          (map opening-time-html)
