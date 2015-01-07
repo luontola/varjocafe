@@ -64,13 +64,24 @@
 (defn- opening-time-html [[dates times]]
   (html/html [:span.dates dates] " " [:span.times times]))
 
-(defn opening-times-html [spec]
-  (->> spec
-       (opening-times)
-       (partition 2)
-       (map opening-time-html)
-       (br-delimited)))
+(defn opening-times-html
+  ([restaurant category]
+    (opening-times-html (get-in restaurant [:information category :regular])))
+  ([spec]
+    (->> spec
+         (opening-times)
+         (partition 2)
+         (map opening-time-html)
+         (br-delimited))))
 
+(def ^:private opening-times-categories {:business "Aukioloajat"
+                                         :lounas   "Lounas"
+                                         :bistro   "Bistro"})
+
+(defn opening-times-title [restaurant category]
+  (or (get-in restaurant [:information category :name])
+      (opening-times-categories category)
+      "???"))
 
 ; Food
 

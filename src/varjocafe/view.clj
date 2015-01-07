@@ -22,19 +22,14 @@
                                           (html/substitute (food-line food)))
                  [:.menu] (html/after "\n        "))
 
-(def opening-times-title {:business "Aukioloajat"
-                          :lounas   "Lounas"
-                          :bistro   "Bistro"})
-
 (html/defsnippet opening-times-entry "templates/layout.html" [:.restaurant-row.expanded :.opening-times :> html/any-node]
                  [title times]
                  [:dt html/any-node] (html/replace-vars {:title title})
                  [:dd] (html/content times))
 
 (defn opening-times-for-category [restaurant category]
-  (let [title (opening-times-title category)
-        times (format/opening-times-html
-                (get-in restaurant [:information category :regular]))]
+  (let [title (format/opening-times-title restaurant category)
+        times (format/opening-times-html restaurant category)]
     (when times
       (opening-times-entry title times))))
 

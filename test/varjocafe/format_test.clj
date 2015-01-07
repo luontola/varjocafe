@@ -87,3 +87,12 @@
             (format/opening-times-html [{:when [false false false false false false false]
                                          :open "", :close ""}])
             => nil))
+
+(fact "#opening-times-title"
+      (fact "Default name"
+            (format/opening-times-title {} :bistro) => "Bistro")
+      (fact "Custom name"
+            (format/opening-times-title {:information {:bistro {:name "Pizza"}}}
+                                        :bistro) => "Pizza")
+      (fact "Unknown category"
+            (format/opening-times-title {} :foo) => "???"))
