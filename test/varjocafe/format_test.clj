@@ -73,14 +73,16 @@
             (format/opening-times [{:when ["Ma" "Ti" "Ke" "To" "Pe" false false]
                                     :open "", :close ""}])
             => [])
-      (fact "HTML is <br> delimited"
+      (fact "HTML format"
             (render (format/opening-times-html [{:when ["Ma" false false false false false false]
                                                  :open "10:30", :close "16:00"}
                                                 {:when [false "Ti" "Ke" "To" false false false]
                                                  :open "10:30", :close "15:00"}
                                                 {:when [false false false false "Pe" false false]
                                                  :open "10:30", :close "14:00"}]))
-            => "Ma: 10:30-16:00<br />Ti-To: 10:30-15:00<br />Pe: 10:30-14:00")
+            => (str "<span class=\"dates\">Ma</span> <span class=\"times\">10:30-16:00</span><br />"
+                    "<span class=\"dates\">Ti-To</span> <span class=\"times\">10:30-15:00</span><br />"
+                    "<span class=\"dates\">Pe</span> <span class=\"times\">10:30-14:00</span>"))
       (fact "No HTML when not open"
             (format/opening-times-html [{:when [false false false false false false false]
                                          :open "", :close ""}])

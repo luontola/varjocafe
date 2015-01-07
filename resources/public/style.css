@@ -47,6 +47,40 @@ table#restaurants td {
     font-weight: bold;
 }
 
+.opening-times {
+    margin: 0.5ex 0;
+    font-size: 85%;
+}
+
+.opening-times dt {
+    float: left;
+    clear: left;
+    width: 11ex;
+    text-align: right;
+    font-weight: bold;
+}
+
+.opening-times dd {
+    margin: 0 0 0.5ex 12ex;
+}
+
+.opening-times dd:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.opening-times .dates {
+    display: block;
+    float: left;
+    width: 7ex;
+}
+
+.opening-times .times {
+    display: block;
+    float: left;
+}
+
 .food {
     display: block;
     padding-bottom: 0.2em;

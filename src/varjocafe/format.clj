@@ -61,14 +61,14 @@
             ([a b] (html/html a [:br] b)))
           rows))
 
-(defn- opening-time-line [pair]
-  (str (first pair) ": " (second pair)))
+(defn- opening-time-html [[dates times]]
+  (html/html [:span.dates dates] " " [:span.times times]))
 
 (defn opening-times-html [spec]
   (->> spec
        (opening-times)
        (partition 2)
-       (map opening-time-line)
+       (map opening-time-html)
        (br-delimited)))
 
 
