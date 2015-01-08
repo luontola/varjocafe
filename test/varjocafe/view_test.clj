@@ -46,3 +46,15 @@
       (fact "Ignores missing text nodes"
             (let [page (html/html [:div "\n" [:h1 "T1"] [:h2 "T2"] "\n\n\nx"])]
               (select page [(view/indented :h2)]) => (html/html [:h2 "T2"]))))
+
+(fact "#indent-of"
+      (fact "Selects the text node preceding the node"
+            (let [page (html/html [:div "\n" [:h1 "T1"] "\n\n" [:h2 "T2"] "\n\n\n"])]
+              (select page [(view/indent-of :h1)]) => (html/html "\n")
+              (select page [(view/indent-of :h2)]) => (html/html "\n\n")))
+      (fact "Ignores non-whitespace text nodes"
+            (let [page (html/html [:div "\n" [:h1 "T1"] "xxx" [:h2 "T2"] "\n\n\n"])]
+              (select page [(view/indent-of :h2)]) => (html/html)))
+      (fact "Ignores missing text nodes"
+            (let [page (html/html [:div "\n" [:h1 "T1"] [:h2 "T2"] "\n\n\nx"])]
+              (select page [(view/indent-of :h2)]) => (html/html))))

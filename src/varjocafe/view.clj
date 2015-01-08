@@ -9,14 +9,17 @@
   (and (string? s)
        (re-matches #"\s*" s)))
 
-(defn indented [selector-step]
+(defn indent-of [selector-step]
   (let [selector (compile-step selector-step)]
     (fn [current]
       (let [next (clojure.zip/right current)]
-        (boolean (or (selector current)
-                     (and (whitespace? (clojure.zip/node current))
-                          next
-                          (selector next))))))))
+        (boolean (and (whitespace? (clojure.zip/node current))
+                      next
+                      (selector next)))))))
+
+(defn indented [selector-step]
+  (html/union [(compile-step selector-step)
+               (indent-of selector-step)]))
 
 (defn refine [selector transformation]
   (fn [nodes] (html/at nodes selector transformation)))
@@ -38,10 +41,11 @@
 
 (html/defsnippet menu-cell "templates/layout.html" [:.restaurant-row.expanded (indented :.menu)]
                  [restaurant date]
+                 [(indent-of :.food)] nil
                  [:.food] (html/clone-for [food (get-in restaurant [:menu date :data])]
                                           (html/substitute (food-line food))))
 
-(html/defsnippet opening-times-entry "templates/layout.html" [:.restaurant-row.expanded :.opening-times :> html/any-node]
+(html/defsnippet opening-times-entry "templates/layout.html" [:.opening-times #{(indented :dt) (indented :dd)}]
                  [title times]
                  [:dt html/any-node] (html/replace-vars {:title title})
                  [:dd] (html/content times))
@@ -52,9 +56,10 @@
     (when times
       (opening-times-entry title times))))
 
-(html/defsnippet opening-times "templates/layout.html" [:.restaurant-row.expanded :.opening-times]
+(html/defsnippet opening-times "templates/layout.html" [:.opening-times]
                  [restaurant]
-                 [:.opening-times] (html/content (->> [:business :lounas :bistro]
+                 [:.opening-times #{(indented :dt) (indented :dd)}] nil ; keep only the whitespace before </dl>
+                 [:.opening-times] (html/prepend (->> [:business :lounas :bistro]
                                                       (map #(opening-times-for-category restaurant %)))))
 
 (html/defsnippet restaurant-row "templates/layout.html" [(indented :.restaurant-row)]
@@ -62,6 +67,7 @@
                  [:.restaurant-row] (html/set-attr :data-restaurant-id (:id restaurant))
                  [:.restaurant-name html/any-node] (html/replace-vars {:restaurant-name (:name restaurant)})
                  [:.restaurant-address html/any-node] (html/replace-vars {:restaurant-address (format/restaurant-address restaurant)})
+                 [:.expanded (indent-of :.menu)] nil
                  [:.expanded :.menu] (html/clone-for [date dates]
                                                      (html/substitute (menu-cell restaurant date)))
                  [:.expanded :.opening-times] (html/substitute (opening-times restaurant)))
@@ -77,9 +83,11 @@
 
 (html/deftemplate layout "templates/layout.html"
                   [{:keys [dates today areadata]}]
+                  [(indent-of :.date-column)] nil
                   [:.date-column] (html/clone-for [date dates]
                                                   (html/substitute (date-cell date today)))
-                  [:.restaurant-row] nil                    ; will be inserted by area-restaurants
+                  [(indented :.restaurant-row)] nil         ; will be inserted by area-restaurants
+                  [(indent-of :.area-row)] nil
                   [:.area-row.collapsed] nil
                   [:.area-row] (html/clone-for [area areadata]
                                                (html/substitute (area-restaurants area dates))))
