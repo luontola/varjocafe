@@ -3,6 +3,9 @@
             [varjocafe.core :as core]
             [varjocafe.format :as format]))
 
+(defn refine [selector transformation]
+  (fn [nodes] (html/at nodes selector transformation)))
+
 (html/defsnippet date-cell "templates/layout.html" [:.date-column]
                  [date today]
                  [:.date html/any-node] (html/replace-vars {:date (format/date date)})
@@ -13,11 +16,11 @@
 
 (html/defsnippet food-line "templates/layout.html" [:.food]
                  [food]
-                 [:.allergens] (if (empty? (format/allergens food))
-                                 nil
-                                 identity)
-                 [:.food html/any-node] (html/replace-vars {:food      (:name food)
-                                                            :allergens (format/allergens food)})
+                 [:.allergens] (let [allergens (format/allergens food)]
+                                 (if (empty? allergens)
+                                   nil
+                                   (refine [html/any-node] (html/replace-vars {:allergens allergens}))))
+                 [:.food html/any-node] (html/replace-vars {:food (:name food)})
                  [:.food] (html/after "\n            "))
 
 (html/defsnippet menu-cell "templates/layout.html" [:.restaurant-row.expanded :.menu]
