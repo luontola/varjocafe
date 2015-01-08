@@ -97,9 +97,3 @@
        vals
        flatten
        (string/join ", ")))
-
-(defn food-html [food]
-  (let [allergens (allergens food)]
-    (html/html (:name food)
-               (when (not (empty? allergens))
-                 (html/html " " [:span.allergens (str "(" allergens ")")])))))

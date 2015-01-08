@@ -6,31 +6,31 @@
 (defn render [nodes]
   (apply str (html/emit* nodes)))
 
-(fact "Food format"
+(fact "Allergens format"
       (fact "No allergens"
-            (render (format/food-html {:name "Spam"
-                                       :meta {:0 [],
-                                              :1 [],
-                                              :2 []}}))
-            => "Spam")
+            (format/allergens {:name "Spam"
+                               :meta {:0 [],
+                                      :1 [],
+                                      :2 []}})
+            => "")
       (fact "Has allergens"
-            (render (format/food-html {:name "Spam"
-                                       :meta {:0 ["PÄ" "V"],
-                                              :1 [],
-                                              :2 []}}))
-            => "Spam <span class=\"allergens\">(PÄ, V)</span>")
+            (format/allergens {:name "Spam"
+                               :meta {:0 ["PÄ" "V"],
+                                      :1 [],
+                                      :2 []}})
+            => "PÄ, V")
       (fact "Other ingredient warnings"
-            (render (format/food-html {:name "Spam"
-                                       :meta {:0 ["PÄ" "V"],
-                                              :1 ["valkosipulia"],
-                                              :2 []}}))
-            => "Spam <span class=\"allergens\">(PÄ, V, valkosipulia)</span>")
+            (format/allergens {:name "Spam"
+                               :meta {:0 ["PÄ" "V"],
+                                      :1 ["valkosipulia"],
+                                      :2 []}})
+            => "PÄ, V, valkosipulia")
       (fact "Additional information"
-            (render (format/food-html {:name "Spam"
-                                       :meta {:0 ["PÄ" "V"],
-                                              :1 ["valkosipulia"],
-                                              :2 ["Ilmastovalinta"]}}))
-            => "Spam <span class=\"allergens\">(PÄ, V, valkosipulia, Ilmastovalinta)</span>"))
+            (format/allergens {:name "Spam"
+                               :meta {:0 ["PÄ" "V"],
+                                      :1 ["valkosipulia"],
+                                      :2 ["Ilmastovalinta"]}})
+            => "PÄ, V, valkosipulia, Ilmastovalinta"))
 
 (fact "Day range format"
       (fact "Contiguous full week"

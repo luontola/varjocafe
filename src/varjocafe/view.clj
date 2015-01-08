@@ -13,7 +13,11 @@
 
 (html/defsnippet food-line "templates/layout.html" [:.food]
                  [food]
-                 [:.food] (html/content (format/food-html food))
+                 [:.allergens] (if (empty? (format/allergens food))
+                                 nil
+                                 identity)
+                 [:.food html/any-node] (html/replace-vars {:food      (:name food)
+                                                            :allergens (format/allergens food)})
                  [:.food] (html/after "\n            "))
 
 (html/defsnippet menu-cell "templates/layout.html" [:.restaurant-row.expanded :.menu]
