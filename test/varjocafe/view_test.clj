@@ -31,3 +31,18 @@
               page => (contains "Broileriwrap"))
         (fact "has food allergens on menu"
               page => (contains "(PÄ, SE, SO, V, soijaa, valkosipulia)"))))
+
+(defn select [& args]
+  (html/flatten-nodes-coll (apply html/select args)))
+
+(fact "#indented"
+      (fact "Selects node and its preceding text node"
+            (let [page (html/html [:div "\n" [:h1 "T1"] "\n\n" [:h2 "T2"] "\n\n\n"])]
+              (select page [(view/indented :h1)]) => (html/html "\n" [:h1 "T1"])
+              (select page [(view/indented :h2)]) => (html/html "\n\n" [:h2 "T2"])))
+      (fact "Ignores non-whitespace text nodes"
+            (let [page (html/html [:div "\n" [:h1 "T1"] "xxx" [:h2 "T2"] "\n\n\n"])]
+              (select page [(view/indented :h2)]) => (html/html [:h2 "T2"])))
+      (fact "Ignores missing text nodes"
+            (let [page (html/html [:div "\n" [:h1 "T1"] [:h2 "T2"] "\n\n\nx"])]
+              (select page [(view/indented :h2)]) => (html/html [:h2 "T2"]))))
