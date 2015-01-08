@@ -39,6 +39,9 @@
                                    (refine [html/any-node] (html/replace-vars {:allergens allergens}))))
                  [:.food html/any-node] (html/replace-vars {:food (:name food)}))
 
+(html/defsnippet collapsed-menu-cell "templates/layout.html" [:.restaurant-row.collapsed (indented :.menu)]
+                 [])
+
 (html/defsnippet menu-cell "templates/layout.html" [:.restaurant-row.expanded (indented :.menu)]
                  [restaurant date]
                  [(indent-of :.food)] nil
@@ -67,6 +70,9 @@
                  [:.restaurant-row] (html/set-attr :data-restaurant-id (:id restaurant))
                  [:.restaurant-name html/any-node] (html/replace-vars {:restaurant-name (:name restaurant)})
                  [:.restaurant-address html/any-node] (html/replace-vars {:restaurant-address (format/restaurant-address restaurant)})
+                 [:.collapsed (indent-of :.menu)] nil
+                 [:.collapsed :.menu] (html/clone-for [date dates]
+                                                      (html/substitute (collapsed-menu-cell)))
                  [:.expanded (indent-of :.menu)] nil
                  [:.expanded :.menu] (html/clone-for [date dates]
                                                      (html/substitute (menu-cell restaurant date)))
