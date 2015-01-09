@@ -79,7 +79,7 @@
          (map opening-time-html)
          (br-delimited))))
 
-(def ^:private opening-times-categories {:business "Aukioloajat"
+(def ^:private opening-times-categories {:business "Auki"
                                          :lounas   "Lounas"
                                          :bistro   "Bistro"})
 

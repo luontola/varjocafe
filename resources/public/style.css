@@ -62,13 +62,13 @@ table#restaurants td {
 .opening-times dt {
     float: left;
     clear: left;
-    width: 11.5ex;
+    width: 9.5ex;
     text-align: right;
     font-weight: bold;
 }
 
 .opening-times dd {
-    margin: 0 0 0.5ex 13ex;
+    margin: 0 0 0.5ex 11ex;
 }
 
 .opening-times dd:after {
