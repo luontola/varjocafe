@@ -29,23 +29,63 @@
     closest-possibility))
 
 (def ^:private day-month-formatter (tf/formatter "dd.MM"))
-(def ^:private day-month-year-formatter (tf/formatter "dd.MM.yyyy"))
+(def ^:private day-month-year-formatter (tf/formatter "dd.MM.yy"))
 
 (defn parse-date [today date-str]
-  (let [parsers [#"\w+ (\d+\.\d+)\.?" #(fix-year today (tf/parse-local-date day-month-formatter %))
-                 #"(\d+\.\d+)\.?" #(fix-year today (tf/parse-local-date day-month-formatter %))
-                 #"(\d+\.\d+.\d+)" #(tf/parse-local-date day-month-year-formatter %)]
-        date (some (fn [[pattern parser]]
-                     (let [match (re-matches pattern date-str)]
-                       (if match
-                         (parser (second match))
-                         nil)))
-                   (partition 2 parsers))]
-    (if date
-      date
-      (do
-        (log/error "Unknown date format, unable to parse:" date-str)
-        date-str))))
+  (and date-str
+       (let [original date-str
+             date-str (clojure.string/replace date-str #"[,/]" ".")
+             parsers [#"\w+ (\d+\.\d+)\.?" #(fix-year today (tf/parse-local-date day-month-formatter %))
+                      #"(\d+\.\d+)\.?" #(fix-year today (tf/parse-local-date day-month-formatter %))
+                      #"(\d+\.\d+.\d+)" #(tf/parse-local-date day-month-year-formatter %)]
+             date (some (fn [[pattern parser]]
+                          (let [match (re-matches pattern date-str)]
+                            (if match
+                              (parser (second match))
+                              nil)))
+                        (partition 2 parsers))]
+         (if date
+           date
+           (do
+             (log/error "Unknown date format, unable to parse:" original)
+             original)))))
+
+
+; Opening time exception parsing
+
+(defn- pre-process-exception [exception]
+  (let [{:keys [from]} exception]
+    (cond
+      (.contains from "-") (let [[from to] (clojure.string/split from #"-")]
+                             (assoc exception :from from
+                                              :to to))
+      :else exception)))
+
+(defn- post-process-exception [exception]
+  (when (instance? LocalDate (:from exception))
+    (as-> exception $
+          (if (instance? LocalDate (:to $))
+            $
+            (assoc $ :to (:from $)))
+          (if (:closed $)
+            (select-keys $ [:from :to :closed])
+            (select-keys $ [:from :to :open :close])))))
+
+(defn- enrich-exception [today exception]
+  (-> exception
+      (pre-process-exception)
+      (update-in [:from] #(parse-date today %))
+      (update-in [:to] #(parse-date today %))
+      (post-process-exception)))
+
+(defn- exception? [exception]
+  (seq (:from exception)))
+
+(defn enrich-exceptions [today exceptions]
+  (->> exceptions
+       (filter exception?)
+       (map #(enrich-exception today %))
+       (remove nil?)))
 
 
 ; Enrich restaurant data
@@ -56,7 +96,10 @@
           data))
 
 (defn- enrich-restaurant [restaurant backend today]
-  (let [details @(backend/get-restaurant backend (:id restaurant))]
+  (let [details @(backend/get-restaurant backend (:id restaurant))
+        details (update-in details [:information :business :exception] #(enrich-exceptions today %))
+        details (update-in details [:information :lounas :exception] #(enrich-exceptions today %))
+        details (update-in details [:information :bistro :exception] #(enrich-exceptions today %))]
     (assoc restaurant
       :information (:information details)
       :menu (group-by-date (:data details) today))))
