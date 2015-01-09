@@ -26,14 +26,37 @@
       (core/abs-days (Days/days -1)) => (Days/days 1))
 
 (fact "Parses formatted dates to LocalDate objects"
-      (fact "parses DD.MM format dates"
+      (fact "EEE dd.MM format dates"
             (core/parse-date (t/local-date 2014 1 1) "Ke 01.01") => (t/local-date 2014 1 1)
             (core/parse-date (t/local-date 2014 1 1) "To 02.01") => (t/local-date 2014 1 2))
-      (fact "sets the year to the one closest to today"
-            (core/parse-date (t/local-date 2014 12 15) "Ke 31.12") => (t/local-date 2014 12 31)
-            (core/parse-date (t/local-date 2015 1 15) "Ke 31.12") => (t/local-date 2014 12 31)
-            (core/parse-date (t/local-date 2014 12 15) "To 01.01") => (t/local-date 2015 1 1)
-            (core/parse-date (t/local-date 2015 1 15) "To 01.01") => (t/local-date 2015 1 1)))
+      (fact "EEE dd.MM. format dates"
+            (core/parse-date (t/local-date 2014 1 1) "Ke 01.01.") => (t/local-date 2014 1 1)
+            (core/parse-date (t/local-date 2014 1 1) "To 02.01.") => (t/local-date 2014 1 2))
+      (fact "dd.MM format dates"
+            (core/parse-date (t/local-date 2014 1 1) "01.01") => (t/local-date 2014 1 1)
+            (core/parse-date (t/local-date 2014 1 1) "02.01") => (t/local-date 2014 1 2))
+      (fact "dd.MM. format dates"
+            (core/parse-date (t/local-date 2014 1 1) "01.01.") => (t/local-date 2014 1 1)
+            (core/parse-date (t/local-date 2014 1 1) "02.01.") => (t/local-date 2014 1 2))
+      (fact "d.M format dates"
+            (core/parse-date (t/local-date 2014 1 1) "1.1") => (t/local-date 2014 1 1)
+            (core/parse-date (t/local-date 2014 1 1) "2.1") => (t/local-date 2014 1 2))
+      (fact "d.M. format dates"
+            (core/parse-date (t/local-date 2014 1 1) "1.1.") => (t/local-date 2014 1 1)
+            (core/parse-date (t/local-date 2014 1 1) "2.1.") => (t/local-date 2014 1 2))
+      (fact "dd.MM.yyyy format dates"
+            (core/parse-date (t/local-date 2014 1 1) "01.01.2014") => (t/local-date 2014 1 1)
+            (core/parse-date (t/local-date 2014 1 1) "02.01.2014") => (t/local-date 2014 1 2)
+            (core/parse-date (t/local-date 2014 1 1) "01.01.2015") => (t/local-date 2015 1 1))
+      (fact "d.M.yyyy format dates"
+            (core/parse-date (t/local-date 2014 1 1) "1.1.2014") => (t/local-date 2014 1 1)
+            (core/parse-date (t/local-date 2014 1 1) "2.1.2014") => (t/local-date 2014 1 2)
+            (core/parse-date (t/local-date 2014 1 1) "1.1.2015") => (t/local-date 2015 1 1))
+      (fact "Sets an undefined year to the one closest to today"
+            (core/parse-date (t/local-date 2014 12 15) "31.12") => (t/local-date 2014 12 31)
+            (core/parse-date (t/local-date 2015 1 15) "31.12") => (t/local-date 2014 12 31)
+            (core/parse-date (t/local-date 2014 12 15) "01.01") => (t/local-date 2015 1 1)
+            (core/parse-date (t/local-date 2015 1 15) "01.01") => (t/local-date 2015 1 1)))
 
 (fact "Enriched restaurant data"
       ; XXX: Date and food constants must be updated when test data is updated.

@@ -3,7 +3,8 @@
   (:require [clojure.pprint :refer [pprint]]
             [clojure.algo.generic.functor :refer [fmap]]
             [clj-time.format :as tf]
-            [varjocafe.backend :as backend]))
+            [varjocafe.backend :as backend]
+            [clojure.tools.logging :as log]))
 
 
 ; Date parsing
@@ -17,7 +18,7 @@
   (abs-days (Days/daysBetween (.toDateTimeAtStartOfDay date1)
                               (.toDateTimeAtStartOfDay date2))))
 
-(defn- fix-year [date-without-year today]
+(defn- fix-year [today date-without-year]
   (let [this-year (.getYear today)
         possible-years [(inc this-year)
                         this-year
@@ -27,12 +28,24 @@
                                             possibilities))]
     closest-possibility))
 
-(def ^:private date-formatter (tf/formatter "dd.MM"))
+(def ^:private day-month-formatter (tf/formatter "dd.MM"))
+(def ^:private day-month-year-formatter (tf/formatter "dd.MM.yyyy"))
 
 (defn parse-date [today date-str]
-  (let [without-weekday (clojure.string/replace-first date-str #"\w+ " "")
-        date (tf/parse-local-date date-formatter without-weekday)]
-    (fix-year date today)))
+  (let [parsers [#"\w+ (\d+\.\d+)\.?" #(fix-year today (tf/parse-local-date day-month-formatter %))
+                 #"(\d+\.\d+)\.?" #(fix-year today (tf/parse-local-date day-month-formatter %))
+                 #"(\d+\.\d+.\d+)" #(tf/parse-local-date day-month-year-formatter %)]
+        date (some (fn [[pattern parser]]
+                     (let [match (re-matches pattern date-str)]
+                       (if match
+                         (parser (second match))
+                         nil)))
+                   (partition 2 parsers))]
+    (if date
+      date
+      (do
+        (log/error "Unknown date format, unable to parse:" date-str)
+        date-str))))
 
 
 ; Enrich restaurant data
