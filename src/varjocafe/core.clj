@@ -6,7 +6,7 @@
             [varjocafe.backend :as backend]))
 
 
-; Enrich restaurant data
+; Date parsing
 
 (defn abs-days [days]
   (if (.isLessThan days Days/ZERO)
@@ -29,21 +29,24 @@
 
 (def ^:private date-formatter (tf/formatter "dd.MM"))
 
-(defn parse-date [date-str today]
+(defn parse-date [today date-str]
   (let [without-weekday (clojure.string/replace-first date-str #"\w+ " "")
         date (tf/parse-local-date date-formatter without-weekday)]
     (fix-year date today)))
 
+
+; Enrich restaurant data
+
 (defn- group-by-date [data today]
   (zipmap (->> (map :date data)
-               (map #(parse-date % today)))
+               (map #(parse-date today %)))
           data))
 
 (defn- enrich-restaurant [restaurant backend today]
   (let [details @(backend/get-restaurant backend (:id restaurant))]
     (assoc restaurant
-           :information (:information details)
-           :menu (group-by-date (:data details) today))))
+      :information (:information details)
+      :menu (group-by-date (:data details) today))))
 
 (defn- group-by-restaurant-id [index]
   (fmap first (group-by :id (:data index))))

@@ -27,13 +27,13 @@
 
 (fact "Parses formatted dates to LocalDate objects"
       (fact "parses DD.MM format dates"
-            (core/parse-date "Ke 01.01" (t/local-date 2014 1 1)) => (t/local-date 2014 1 1)
-            (core/parse-date "To 02.01" (t/local-date 2014 1 1)) => (t/local-date 2014 1 2))
+            (core/parse-date (t/local-date 2014 1 1) "Ke 01.01") => (t/local-date 2014 1 1)
+            (core/parse-date (t/local-date 2014 1 1) "To 02.01") => (t/local-date 2014 1 2))
       (fact "sets the year to the one closest to today"
-            (core/parse-date "Ke 31.12" (t/local-date 2014 12 15)) => (t/local-date 2014 12 31)
-            (core/parse-date "Ke 31.12" (t/local-date 2015 1 15)) => (t/local-date 2014 12 31)
-            (core/parse-date "To 01.01" (t/local-date 2014 12 15)) => (t/local-date 2015 1 1)
-            (core/parse-date "To 01.01" (t/local-date 2015 1 15)) => (t/local-date 2015 1 1)))
+            (core/parse-date (t/local-date 2014 12 15) "Ke 31.12") => (t/local-date 2014 12 31)
+            (core/parse-date (t/local-date 2015 1 15) "Ke 31.12") => (t/local-date 2014 12 31)
+            (core/parse-date (t/local-date 2014 12 15) "To 01.01") => (t/local-date 2015 1 1)
+            (core/parse-date (t/local-date 2015 1 15) "To 01.01") => (t/local-date 2015 1 1)))
 
 (fact "Enriched restaurant data"
       ; XXX: Date and food constants must be updated when test data is updated.
