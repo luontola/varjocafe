@@ -115,10 +115,10 @@
               (core/enrich-exceptions today [{:from "24.12.2014-28.12.2014", :to nil, :closed true, :open "", :close nil}])
               => [{:from (t/local-date 2014 12 24), :to (t/local-date 2014 12 28), :closed true}])
 
-        (fact ":from contains freeform text"
-              (with-silent-logger
-                (core/enrich-exceptions today [{:from "Avaamme Ravintolan 7.1.2015", :to nil, :closed false, :open "08:00", :close nil}]))
-              => [])))
+        (with-silent-logger
+          (fact ":from contains freeform text"
+                (core/enrich-exceptions today [{:from "Avaamme Ravintolan 7.1.2015", :to nil, :closed false, :open "08:00", :close nil}])
+                => []))))
 
 (fact "Enriched restaurant data"
       ; XXX: Date and food constants must be updated when test data is updated.
