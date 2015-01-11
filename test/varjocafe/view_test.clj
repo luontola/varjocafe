@@ -4,9 +4,11 @@
             [varjocafe.testdata :as testdata]
             [net.cgrand.enlive-html :as html]))
 
+(defn render [page] (apply str page))
+
 (fact "Main page"
       ; XXX: Date and food constants must be updated when test data is updated.
-      (let [page (apply str (view/main-page testdata/data testdata/today testdata/settings))]
+      (let [page (render (view/main-page testdata/data testdata/today testdata/settings))]
         (fact "has area names"
               page => (contains "Kumpula"))
         (fact "has area IDs"
@@ -31,6 +33,16 @@
               page => (contains "Broileriwrap"))
         (fact "has food allergens on menu"
               page => (contains "(PÄ, SE, SO, V, soijaa, valkosipulia)"))))
+
+(fact "Google analytics"
+      (fact "Enabled"
+            (render (view/google-analytics
+                      (assoc-in testdata/settings [:google-analytics :tracking-id] "UA-1234567-8")))
+            => (contains "ga('create', 'UA-1234567-8', 'auto')"))
+      (fact "Disbled"
+            (render (view/google-analytics
+                      (assoc-in testdata/settings [:google-analytics :tracking-id] nil)))
+            => ""))
 
 (defn select [& args]
   (html/flatten-nodes-coll (apply html/select args)))

@@ -87,8 +87,15 @@
                  [:.restaurant-row] (html/clone-for [restaurant (:restaurants area)]
                                                     (html/substitute (restaurant-row restaurant dates))))
 
+(html/defsnippet google-analytics "templates/google-analytics.html" [:script]
+                 [{{tracking-id :tracking-id} :google-analytics}]
+                 [:script] (if tracking-id
+                             identity
+                             nil)
+                 [:script html/any-node] (html/replace-vars {:tracking-id tracking-id}))
+
 (html/deftemplate layout "templates/layout.html"
-                  [{:keys [dates today areadata]}]
+                  [{:keys [dates today areadata settings]}]
                   [(indent-of :.date-column)] nil
                   [:.date-column] (html/clone-for [date dates]
                                                   (html/substitute (date-cell date today)))
@@ -96,7 +103,8 @@
                   [(indent-of :.area-row)] nil
                   [:.area-row.collapsed] nil
                   [:.area-row] (html/clone-for [area areadata]
-                                               (html/substitute (area-restaurants area dates))))
+                                               (html/substitute (area-restaurants area dates)))
+                  [:body] (html/append (google-analytics settings) "\n\n"))
 
 (defn main-page [data today settings]
   (let [in-past? #(< (compare % today) 0)]
@@ -104,4 +112,5 @@
                             (drop-while in-past?)
                             (take 2))
              :today    today
-             :areadata (core/restaurants-by-area data (:areacode-names settings))})))
+             :areadata (core/restaurants-by-area data (:areacode-names settings))
+             :settings settings})))

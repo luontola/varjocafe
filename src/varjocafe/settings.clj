@@ -17,12 +17,14 @@
                       2 "Kumpula"
                       3 "Meilahti"
                       5 "Viikki"
-                      6 "Metropolia"}})
+                      6 "Metropolia"}
+   ; TODO: specify in external configuration
+   :google-analytics {:tracking-id "UA-5984051-8"}})
 
 (def dev-settings
   (assoc default-settings
-         :testdata-dir "testdata"
-         :development-mode true))
+    :testdata-dir "testdata"
+    :development-mode true))
 
 
 (defn read-properties-file [path]
