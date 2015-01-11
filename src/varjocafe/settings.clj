@@ -72,7 +72,10 @@
 
 (defn- string->TimeUnit [s]
   (if (string? s)
-    (TimeUnit/valueOf s)
+    (try
+      (TimeUnit/valueOf s)
+      (catch IllegalArgumentException e
+        (schema.utils/error (.getMessage e))))
     s))
 
 (defn- coercion-matcher [schema]

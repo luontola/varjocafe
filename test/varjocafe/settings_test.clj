@@ -42,7 +42,11 @@
       (fact "Coerces to TimeUnit"
             (-> {"updater.interval-unit" "SECONDS"}
                 (settings/merge-with-defaults settings/default-settings))
-            => (contains {:updater (contains {:interval-unit TimeUnit/SECONDS})}))
+            => (contains {:updater (contains {:interval-unit TimeUnit/SECONDS})})
+            (-> {"updater.interval-unit" "FOO"}
+                (settings/merge-with-defaults settings/default-settings))
+            => (throws IllegalArgumentException (str "Invalid settings: {:updater {:interval-unit "
+                                                     "\"No enum constant java.util.concurrent.TimeUnit.FOO\"}}")))
       (fact "Throws up if settings are not valid"
             (-> {"foo" "bar"}
                 (settings/merge-with-defaults settings/default-settings))
