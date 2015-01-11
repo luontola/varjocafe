@@ -5,25 +5,26 @@
   (:require [clojure.tools.logging :as log]
             [clojure.java.io :as io]
             [clojure.string :as string]
-            [schema.core :as s]
-            [schema.coerce :as sc]))
+            [schema.core :as schema]
+            [schema.coerce :as coerce]
+            [schema.utils]))
 
 ; Schema
 
 (def Settings
-  {:backend-url      s/Str
-   :server           {:port     s/Int
-                      :base-url s/Str}
-   :updater          {:interval      s/Int
-                      :interval-unit (apply s/enum (TimeUnit/values))}
-   :google-analytics {(s/optional-key
-                        :tracking-id) s/Str}
-   :areacode-names   {s/Int s/Str}
-   :development-mode s/Bool
-   (s/optional-key
-     :testdata-dir)  s/Str})
+  {:backend-url      schema/Str
+   :server           {:port     schema/Int
+                      :base-url schema/Str}
+   :updater          {:interval      schema/Int
+                      :interval-unit TimeUnit}
+   :google-analytics {(schema/optional-key
+                        :tracking-id) schema/Str}
+   :areacode-names   {schema/Int schema/Str}
+   :development-mode schema/Bool
+   (schema/optional-key
+     :testdata-dir)  schema/Str})
 
-(defn validate [settings] (s/validate Settings settings))
+(defn validate [settings] (schema/validate Settings settings))
 
 
 ; Defaults
@@ -69,8 +70,21 @@
             defaults
             m)))
 
+(defn- string->TimeUnit [s]
+  (if (string? s)
+    (TimeUnit/valueOf s)
+    s))
+
+(defn- coercion-matcher [schema]
+  (or (coerce/string-coercion-matcher schema)
+      ({TimeUnit string->TimeUnit} schema)))
+
 (defn- coerce-settings [settings]
-  ((sc/coercer Settings sc/string-coercion-matcher) settings))
+  (let [result ((coerce/coercer Settings coercion-matcher) settings)]
+    (when (schema.utils/error? result)
+      (throw (IllegalArgumentException.
+               (str "Invalid settings: " (schema.utils/error-val result)))))
+    result))
 
 (defn merge-with-defaults [settings defaults]
   (-> settings

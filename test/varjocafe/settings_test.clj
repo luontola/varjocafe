@@ -2,7 +2,8 @@
   (:use midje.sweet
         varjocafe.testutil)
   (:require [varjocafe.settings :as settings]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io])
+  (:import (java.util.concurrent TimeUnit)))
 
 (fact "#read-properties-file"
       (with-silent-logger
@@ -30,10 +31,22 @@
                   (settings/dotkeys->tree {"a.c" "added"} {:a {:b "default"}}) => {:a {:b "default", :c "added"}})))
 
 (fact "#merge-with-defaults"
-      (fact "coerces strings to types"
+      (fact "Coerces to int"
             (-> {"server.port" "8081"}
-                (settings/merge-with-defaults settings/default-settings)
-                (get-in [:server :port])) => 8081))
+                (settings/merge-with-defaults settings/default-settings))
+            => (contains {:server (contains {:port 8081})}))
+      (fact "Coerces to boolean"
+            (-> {"development-mode" "true"}
+                (settings/merge-with-defaults settings/default-settings))
+            => (contains {:development-mode true}))
+      (fact "Coerces to TimeUnit"
+            (-> {"updater.interval-unit" "SECONDS"}
+                (settings/merge-with-defaults settings/default-settings))
+            => (contains {:updater (contains {:interval-unit TimeUnit/SECONDS})}))
+      (fact "Throws up if settings are not valid"
+            (-> {"foo" "bar"}
+                (settings/merge-with-defaults settings/default-settings))
+            => (throws IllegalArgumentException "Invalid settings: {:foo disallowed-key}")))
 
 (fact "Validate schemas"
       (fact "default-settings"
