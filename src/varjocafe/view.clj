@@ -94,6 +94,11 @@
                              nil)
                  [:script html/any-node] (html/replace-vars {:tracking-id tracking-id}))
 
+(defn- pad-if [snippet padding]
+  (if (empty? snippet)
+    snippet
+    (html/html snippet padding)))
+
 (html/deftemplate layout "templates/layout.html"
                   [{:keys [dates today areadata settings]}]
                   [(indent-of :.date-column)] nil
@@ -104,7 +109,7 @@
                   [:.area-row.collapsed] nil
                   [:.area-row] (html/clone-for [area areadata]
                                                (html/substitute (area-restaurants area dates)))
-                  [:body] (html/append (google-analytics settings) "\n\n"))
+                  [:body] (html/append (pad-if (google-analytics settings) "\n\n")))
 
 (defn main-page [data today settings]
   (let [in-past? #(< (compare % today) 0)]
