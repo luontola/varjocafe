@@ -18,4 +18,25 @@
       (fact "hierarchial structures"
             (settings/dotkeys->tree {"parent.k" "v"}) => {:parent {:k "v"}}
             (settings/dotkeys->tree {:parent.k "v"}) => {:parent {:k "v"}}
-            (settings/dotkeys->tree {:parent.k1 "v1", :parent.k2 "v2"}) => {:parent {:k1 "v1", :k2 "v2"}}))
+            (settings/dotkeys->tree {:parent.k1 "v1", :parent.k2 "v2"}) => {:parent {:k1 "v1", :k2 "v2"}})
+      (fact "merges with defaults"
+            (fact "flat"
+                  (settings/dotkeys->tree {} {:a "default"}) => {:a "default"}
+                  (settings/dotkeys->tree {"a" "override"} {:a "default"}) => {:a "override"}
+                  (settings/dotkeys->tree {"b" "added"} {:a "default"}) => {:a "default", :b "added"})
+            (fact "hierarchial"
+                  (settings/dotkeys->tree {} {:a {:b "default"}}) => {:a {:b "default"}}
+                  (settings/dotkeys->tree {"a.b" "override"} {:a {:b "default"}}) => {:a {:b "override"}}
+                  (settings/dotkeys->tree {"a.c" "added"} {:a {:b "default"}}) => {:a {:b "default", :c "added"}})))
+
+(fact "#merge-with-defaults"
+      (fact "coerces strings to types"
+            (-> {"server.port" "8081"}
+                (settings/merge-with-defaults settings/default-settings)
+                (get-in [:server :port])) => 8081))
+
+(fact "Validate schemas"
+      (fact "default-settings"
+            (settings/validate settings/default-settings) => truthy)
+      (fact "dev-settings"
+            (settings/validate settings/dev-settings) => truthy))

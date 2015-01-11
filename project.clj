@@ -33,6 +33,7 @@
 
                  ; Misc
                  [com.stuartsierra/component "0.2.2"]
+                 [prismatic/schema "0.3.3"]
                  [org.clojure/algo.generic "0.1.2"]
                  [commons-io/commons-io "2.4"]]
 
