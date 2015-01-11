@@ -6,7 +6,8 @@
             [varjocafe.backend :as backend]
             [varjocafe.server :as server]
             [varjocafe.settings :as settings]
-            [varjocafe.updater :as updater]))
+            [varjocafe.updater :as updater]
+            [clojure.tools.logging :as log]))
 
 (defn init [settings]
   (let [clock (if (:development-mode settings)
@@ -33,6 +34,7 @@
   (component/stop system))
 
 (defn -main [& args]
+  (log/info "Starting up")
   (->
     (settings/read-configuration settings/default-settings)
     (init)
