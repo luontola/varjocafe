@@ -61,11 +61,11 @@
   (start [component]
     (let [port (get-in settings [:server :port])
           shutdown (hs/run-server (ring-stack database clock settings) {:port port})]
-      (log/info "Server listening on port" port)
+      (log/info "Listening on port" port)
       (assoc component :shutdown shutdown)))
 
   (stop [component]
-    (log/info "Server shutting down")
+    (log/info "Shutting down")
     ((:shutdown component))))
 
 (defn init []
