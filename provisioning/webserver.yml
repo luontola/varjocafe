@@ -1,0 +1,58 @@
+---
+
+- hosts: all
+  sudo: yes
+
+  tasks:
+    # selinux
+    - name: install libselinux-python
+      yum: name=libselinux-python
+
+    - name: install policycoreutils-python
+      yum: name=policycoreutils-python
+
+    - name: allow nginx to work as a proxy
+      seboolean: name=httpd_can_network_connect state=yes persistent=yes
+
+    # nginx
+    - name: help yum to find nginx
+      yum: name=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+
+    - name: install nginx
+      yum: name=nginx
+
+    - name: create nginx cache directory for varjocafe
+      file: path=/var/cache/nginx/varjocafe state=directory owner=nginx group=root mode=0700
+
+    - name: configure nginx
+      copy: src=nginx-default.conf dest=/etc/nginx/conf.d/default.conf owner=root group=root mode=0644
+      notify:
+        - restart nginx
+
+    - name: start nginx
+      service: name=nginx state=started
+
+    # varjocafe
+    - name: install java
+      yum: name=java-1.8.0-openjdk
+
+    - name: create varjocafe user
+      user: name=varjocafe system=yes
+
+    - name: copy varjocafe scripts
+      copy: src=../scripts/ dest=/home/varjocafe/ owner=root group=root mode=0755
+
+    - name: copy varjocafe settings
+      copy: src=varjocafe.properties dest=/home/varjocafe/ owner=root group=root mode=0644
+
+    - name: copy varjocafe binary
+      copy: src=../target/varjocafe-standalone.jar dest=/home/varjocafe/varjocafe-standalone.jar owner=root group=root mode=0644
+
+    - name: restart varjocafe
+      command: /home/varjocafe/start.sh chdir=/home/varjocafe
+      sudo: yes
+      sudo_user: varjocafe
+
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted

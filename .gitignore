@@ -3,6 +3,7 @@
 /.nrepl-port
 /.idea/
 /*.iml
+/.vagrant/
 .DS_Store
 *.tmp
 *.bak
