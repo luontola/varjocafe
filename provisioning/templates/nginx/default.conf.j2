@@ -1,8 +1,8 @@
-
-proxy_cache_path /var/cache/nginx/varjocafe keys_zone=varjocafe:1m max_size=10m;
+# from j2 template
+proxy_cache_path {{ nginx_varjocafe_cache }} keys_zone=varjocafe:1m max_size=10m;
 
 server {
-    server_name  varjocafe.net;
+    server_name  {{ primary_domain }};
     access_log  /var/log/nginx/varjocafe_access.log  main;
 
     proxy_cache varjocafe;
@@ -10,13 +10,13 @@ server {
     proxy_cache_valid any      5s;
 
     location / {
-        proxy_pass  http://127.0.0.1:8001;
+        proxy_pass  http://127.0.0.1:{{ varjocafe_port }};
         proxy_set_header  Host $host;
     }
 
     # no caching for the status page
     location /status {
-        proxy_pass  http://127.0.0.1:8001;
+        proxy_pass  http://127.0.0.1:{{ varjocafe_port }};
         proxy_set_header  Host $host;
         proxy_cache_bypass 1;
     }
@@ -30,6 +30,6 @@ server {
 
 # redirect visitors to the official site url
 server {
-    server_name www.varjocafe.net;
-    return 301 http://varjocafe.net$request_uri;
+    server_name {{ secondary_domain }};
+    return 301 http://{{ primary_domain }}$request_uri;
 }

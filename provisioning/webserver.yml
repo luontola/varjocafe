@@ -3,6 +3,13 @@
 - hosts: all
   sudo: yes
 
+  vars:
+    varjocafe_home: /opt/varjocafe
+    varjocafe_port: 8001
+    nginx_varjocafe_cache: /var/cache/nginx/varjocafe
+    primary_domain: varjocafe.net
+    secondary_domain: www.varjocafe.net
+
   tasks:
     # selinux
     - name: install libselinux-python
@@ -15,17 +22,27 @@
       seboolean: name=httpd_can_network_connect state=yes persistent=yes
 
     # nginx
-    - name: help yum to find nginx
+    - name: add nginx repository
       yum: name=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 
     - name: install nginx
       yum: name=nginx
 
     - name: create nginx cache directory for varjocafe
-      file: path=/var/cache/nginx/varjocafe state=directory owner=nginx group=root mode=0700
+      file:
+        path: "{{ nginx_varjocafe_cache }}"
+        state: directory
+        owner: nginx
+        group: root
+        mode: 0700
 
     - name: configure nginx
-      copy: src=nginx-default.conf dest=/etc/nginx/conf.d/default.conf owner=root group=root mode=0644
+      template:
+        src: templates/nginx/default.conf.j2
+        dest: /etc/nginx/conf.d/default.conf
+        owner: root
+        group: root
+        mode: 0644
       notify:
         - restart nginx
 
@@ -37,19 +54,63 @@
       yum: name=java-1.8.0-openjdk
 
     - name: create varjocafe user
-      user: name=varjocafe system=yes
+      user:
+        name: varjocafe
+        system: yes
+        shell: /sbin/nologin
+        home: "{{ varjocafe_home }}"
+        createhome: no
 
-    - name: copy varjocafe scripts
-      copy: src=../scripts/ dest=/home/varjocafe/ owner=root group=root mode=0755
+    - name: create varjocafe home directory
+      file:
+        path: "{{ varjocafe_home }}"
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: create varjocafe log directory
+      file:
+        path: "{{ varjocafe_home }}/log"
+        state: directory
+        owner: varjocafe
+        group: root
+        mode: 0750
+
+    - name: copy varjocafe startup script
+      template:
+        src: templates/varjocafe/start.sh.j2
+        dest: "{{ varjocafe_home }}/start.sh"
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: copy varjocafe shutdown script
+      template:
+        src: templates/varjocafe/stop.sh.j2
+        dest: "{{ varjocafe_home }}/stop.sh"
+        owner: root
+        group: root
+        mode: 0755
 
     - name: copy varjocafe settings
-      copy: src=varjocafe.properties dest=/home/varjocafe/ owner=root group=root mode=0644
+      template:
+        src: templates/varjocafe/varjocafe.properties.j2
+        dest: "{{ varjocafe_home }}/varjocafe.properties"
+        owner: root
+        group: root
+        mode: 0644
 
     - name: copy varjocafe binary
-      copy: src=../target/varjocafe-standalone.jar dest=/home/varjocafe/varjocafe-standalone.jar owner=root group=root mode=0644
+      copy:
+        src: ../target/varjocafe-standalone.jar
+        dest: "{{ varjocafe_home }}/varjocafe-standalone.jar"
+        owner: root
+        group: root
+        mode: 0644
 
     - name: restart varjocafe
-      command: /home/varjocafe/start.sh chdir=/home/varjocafe
+      command: "{{ varjocafe_home }}/start.sh chdir={{ varjocafe_home }}"
       sudo: yes
       sudo_user: varjocafe
 
