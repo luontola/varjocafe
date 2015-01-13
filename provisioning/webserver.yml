@@ -9,6 +9,8 @@
     nginx_varjocafe_cache: /var/cache/nginx/varjocafe
     primary_domain: varjocafe.net
     secondary_domain: www.varjocafe.net
+    open_tcp_ports:
+      - 80
 
   tasks:
     # selinux
@@ -20,6 +22,27 @@
 
     - name: allow nginx to work as a proxy
       seboolean: name=httpd_can_network_connect state=yes persistent=yes
+
+    # firewall
+    - name: install ferm
+      yum: name=http://dl.fedoraproject.org/pub/epel/6/i386/ferm-2.1.2-1.el6.noarch.rpm
+
+    - name: configure ferm
+      template:
+        src: templates/ferm.conf.j2
+        dest: /etc/ferm.conf
+        owner: root
+        group: root
+        mode: 0600
+
+    - name: configure iptables with ferm
+      command: /usr/sbin/ferm /etc/ferm.conf
+
+    - name: iptables is running and enabled
+      service: name=iptables state=started enabled=yes
+
+    - name: persist this iptables configuration across reboots
+      command: service iptables save
 
     # nginx
     - name: add nginx repository
