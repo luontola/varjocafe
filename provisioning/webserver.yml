@@ -23,9 +23,13 @@
     - name: allow nginx to work as a proxy
       seboolean: name=httpd_can_network_connect state=yes persistent=yes
 
+    # epel
+    - name: add EPEL repository
+      yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
     # firewall
     - name: install ferm
-      yum: name=http://dl.fedoraproject.org/pub/epel/6/i386/ferm-2.1.2-1.el6.noarch.rpm
+      yum: name=ferm
 
     - name: configure ferm
       template:
@@ -70,7 +74,22 @@
         - restart nginx
 
     - name: start nginx
-      service: name=nginx state=started
+      service: name=nginx state=started enabled=yes
+
+    # supervisord
+    - name: install supervisord
+      yum: name=supervisor
+
+    - name: configure supervisord
+      template:
+        src: templates/supervisord.conf.j2
+        dest: /etc/supervisord.conf
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: start supervisord
+      service: name=supervisord state=started enabled=yes
 
     # varjocafe
     - name: install java
