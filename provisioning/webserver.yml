@@ -13,7 +13,7 @@
       - 80
 
   tasks:
-    # selinux
+    # SELinux
     - name: Install libselinux-python
       yum: name=libselinux-python
 
@@ -23,11 +23,18 @@
     - name: Allow nginx to work as a proxy
       seboolean: name=httpd_can_network_connect state=yes persistent=yes
 
-    # epel
+    # NTP
+    - name: Install NTP
+      yum: name=ntp
+
+    - name: Start NTP
+      service: name=ntpd state=started enabled=yes
+
+    # EPEL
     - name: Add EPEL repository
       yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
-    # firewall
+    # Firewall
     - name: Install ferm
       yum: name=ferm
 
@@ -73,7 +80,7 @@
     - name: Start supervisord
       service: name=supervisord state=started enabled=yes
 
-    # varjocafe
+    # VarjoCafe
     - name: Install java
       yum: name=java-1.8.0-openjdk
 
