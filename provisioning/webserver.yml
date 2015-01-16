@@ -14,24 +14,24 @@
 
   tasks:
     # selinux
-    - name: install libselinux-python
+    - name: Install libselinux-python
       yum: name=libselinux-python
 
-    - name: install policycoreutils-python
+    - name: Install policycoreutils-python
       yum: name=policycoreutils-python
 
-    - name: allow nginx to work as a proxy
+    - name: Allow nginx to work as a proxy
       seboolean: name=httpd_can_network_connect state=yes persistent=yes
 
     # epel
-    - name: add EPEL repository
+    - name: Add EPEL repository
       yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
     # firewall
-    - name: install ferm
+    - name: Install ferm
       yum: name=ferm
 
-    - name: configure ferm
+    - name: Configure ferm
       template:
         src: templates/ferm.conf.j2
         dest: /etc/ferm.conf
@@ -39,55 +39,45 @@
         group: root
         mode: 0600
 
-    - name: configure iptables with ferm
+    - name: Configure iptables with ferm
       command: /usr/sbin/ferm /etc/ferm.conf
 
-    - name: iptables is running and enabled
+    - name: Start iptables
       service: name=iptables state=started enabled=yes
 
-    - name: persist this iptables configuration across reboots
+    - name: Save current iptables configuration
       command: service iptables save
 
     # nginx
-    - name: add nginx repository
+    - name: Add nginx repository
       yum: name=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 
-    - name: install nginx
+    - name: Install nginx
       yum: name=nginx
 
-    - name: create nginx cache directory for varjocafe
+    - name: Remove example configuration
       file:
-        path: "{{ nginx_varjocafe_cache }}"
-        state: directory
-        owner: nginx
-        group: root
-        mode: 0700
+        path: /etc/nginx/conf.d/{{ item }}
+        state: absent
+      with_items:
+        - default.conf
+        - example_ssl.conf
 
-    - name: configure nginx
-      template:
-        src: templates/nginx/default.conf.j2
-        dest: /etc/nginx/conf.d/default.conf
-        owner: root
-        group: root
-        mode: 0644
-      notify:
-        - restart nginx
-
-    - name: start nginx
+    - name: Start nginx
       service: name=nginx state=started enabled=yes
 
     # supervisord
-    - name: install supervisord
+    - name: Install supervisord
       yum: name=supervisor
 
-    - name: start supervisord
+    - name: Start supervisord
       service: name=supervisord state=started enabled=yes
 
     # varjocafe
-    - name: install java
+    - name: Install java
       yum: name=java-1.8.0-openjdk
 
-    - name: create varjocafe user
+    - name: Create varjocafe user
       user:
         name: varjocafe
         system: yes
@@ -95,7 +85,7 @@
         home: "{{ varjocafe_home }}"
         createhome: no
 
-    - name: create varjocafe home directory
+    - name: Create varjocafe home directory
       file:
         path: "{{ varjocafe_home }}"
         state: directory
@@ -103,23 +93,27 @@
         group: root
         mode: 0755
 
-    - name: copy varjocafe settings
+    - name: Copy varjocafe settings
       template:
-        src: templates/varjocafe/varjocafe.properties.j2
+        src: templates/varjocafe.properties.j2
         dest: "{{ varjocafe_home }}/varjocafe.properties"
         owner: root
         group: root
         mode: 0644
+      notify:
+        - restart supervisord
 
-    - name: copy varjocafe binary
+    - name: Copy varjocafe binary
       copy:
         src: ../target/varjocafe-standalone.jar
         dest: "{{ varjocafe_home }}/varjocafe-standalone.jar"
         owner: root
         group: root
         mode: 0644
+      notify:
+        - restart supervisord
 
-    - name: supervisord configuration
+    - name: Configure supervisord
       ini_file:
         dest: /etc/supervisord.conf
         section: program:varjocafe
@@ -135,6 +129,25 @@
         startsecs: 10
       notify:
         - restart supervisord
+
+    - name: Create nginx cache directory
+      file:
+        path: "{{ nginx_varjocafe_cache }}"
+        state: directory
+        owner: nginx
+        group: root
+        mode: 0700
+
+    - name: Configure nginx
+      template:
+        src: templates/nginx-varjocafe.conf.j2
+        dest: /etc/nginx/conf.d/varjocafe.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - restart nginx
+
 
   handlers:
     - name: restart nginx
