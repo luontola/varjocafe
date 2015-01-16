@@ -80,14 +80,6 @@
     - name: install supervisord
       yum: name=supervisor
 
-    - name: configure supervisord
-      template:
-        src: templates/supervisord.conf.j2
-        dest: /etc/supervisord.conf
-        owner: root
-        group: root
-        mode: 0644
-
     - name: start supervisord
       service: name=supervisord state=started enabled=yes
 
@@ -111,30 +103,6 @@
         group: root
         mode: 0755
 
-    - name: create varjocafe log directory
-      file:
-        path: "{{ varjocafe_home }}/log"
-        state: directory
-        owner: varjocafe
-        group: root
-        mode: 0750
-
-    - name: copy varjocafe startup script
-      template:
-        src: templates/varjocafe/start.sh.j2
-        dest: "{{ varjocafe_home }}/start.sh"
-        owner: root
-        group: root
-        mode: 0755
-
-    - name: copy varjocafe shutdown script
-      template:
-        src: templates/varjocafe/stop.sh.j2
-        dest: "{{ varjocafe_home }}/stop.sh"
-        owner: root
-        group: root
-        mode: 0755
-
     - name: copy varjocafe settings
       template:
         src: templates/varjocafe/varjocafe.properties.j2
@@ -151,11 +119,26 @@
         group: root
         mode: 0644
 
-    - name: restart varjocafe
-      command: "{{ varjocafe_home }}/start.sh chdir={{ varjocafe_home }}"
-      sudo: yes
-      sudo_user: varjocafe
+    - name: supervisord configuration
+      ini_file:
+        dest: /etc/supervisord.conf
+        section: program:varjocafe
+        option: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_dict:
+        command: sh -c "cd {{ varjocafe_home }} && TZ='Europe/Helsinki' exec java -jar varjocafe-standalone.jar"
+        user: varjocafe
+        logfile: /var/log/supervisor/varjocafe.log
+        log_stdout: "true"
+        log_stderr: "true"
+        autorestart: "true"
+        startsecs: 10
+      notify:
+        - restart supervisord
 
   handlers:
     - name: restart nginx
       service: name=nginx state=restarted
+
+    - name: restart supervisord
+      service: name=supervisord state=restarted
