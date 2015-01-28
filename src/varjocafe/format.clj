@@ -2,7 +2,8 @@
   (:import (java.util Locale)
            (org.joda.time.format DateTimeFormat DateTimeFormatter))
   (:require [net.cgrand.enlive-html :as html]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [varjocafe.core :as core]))
 
 (def ^:private date-formatter (-> (DateTimeFormat/forPattern "E d.M.")
                                   (.withLocale (Locale/forLanguageTag "fi"))))
@@ -79,13 +80,9 @@
          (map opening-time-html)
          (br-delimited))))
 
-(def ^:private opening-times-categories {:business "Auki"
-                                         :lounas   "Lounas"
-                                         :bistro   "Bistro"})
-
 (defn opening-times-title [restaurant category]
   (or (get-in restaurant [:information category :name])
-      (opening-times-categories category)
+      (core/opening-time-categories category)
       "???"))
 
 

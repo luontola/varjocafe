@@ -159,3 +159,57 @@
                       => [{:areacode    9
                            :name        "???"
                            :restaurants [{:areacode 9, :id 999, :name "New Restaurant"}]}])))))
+
+(fact "Finds exceptions by date"
+      (fact "No exceptions"
+            (let [r {:information
+                     {:business {:exception []}
+                      :lounas   {:exception []}
+                      :bistro   {:exception []}}}]
+              (core/exceptions-for-date r (t/local-date 2014 12 15)) => []))
+
+      (let [r {:information
+               {:business {:exception [{:from   (t/local-date 2014 12 24)
+                                        :to     (t/local-date 2014 12 28)
+                                        :closed true}]}
+                :lounas   {:exception []}
+                :bistro   {:exception []}}}]
+        (fact "Closed starting tomorrow"
+              (core/exceptions-for-date r (t/local-date 2014 12 23)) => [])
+        (fact "Closed starting today"
+              (core/exceptions-for-date r (t/local-date 2014 12 24)) => [{:category :business
+                                                                          :closed   true}])
+        (fact "Closed from before to after today"
+              (core/exceptions-for-date r (t/local-date 2014 12 25)) => [{:category :business
+                                                                          :closed   true}])
+        (fact "Closed until today"
+              (core/exceptions-for-date r (t/local-date 2014 12 28)) => [{:category :business
+                                                                          :closed   true}])
+        (fact "Closed until yesterday"
+              (core/exceptions-for-date r (t/local-date 2014 12 29)) => []))
+
+      (fact "Exceptional business and lunch hours"
+            (let [r {:information
+                     {:business {:exception [{:from  (t/local-date 2014 12 15)
+                                              :to    (t/local-date 2015 1 5)
+                                              :open  "08:00"
+                                              :close "14:00"}]}
+                      :lounas   {:exception [{:from  (t/local-date 2014 12 15)
+                                              :to    (t/local-date 2015 1 5)
+                                              :open  "10:30"
+                                              :close "14:00"}]}
+                      :bistro   {:exception []}}}]
+              (core/exceptions-for-date r (t/local-date 2014 12 15)) => [{:category :business
+                                                                          :open     "08:00"
+                                                                          :close    "14:00"}
+                                                                         {:category :lounas
+                                                                          :open     "10:30"
+                                                                          :close    "14:00"}]))
+      (fact "Removes unrelated keys from the information map"
+            (let [r {:information
+                     {:unrelated "foo"
+                      :business  {:exception [{:from   (t/local-date 2014 12 24)
+                                               :to     (t/local-date 2014 12 28)
+                                               :closed true}]}}}]
+              (core/exceptions-for-date r (t/local-date 2014 12 24)) => [{:category :business
+                                                                          :closed   true}])))

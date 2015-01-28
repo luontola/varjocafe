@@ -6,6 +6,13 @@
             [varjocafe.backend :as backend]
             [clojure.tools.logging :as log]))
 
+(def opening-time-categories (array-map :business "Auki"
+                                        :lounas "Lounas"
+                                        :bistro "Bistro"))
+
+(defn opening-time-category-index [category]
+  (.indexOf (keys opening-time-categories)
+            (:category category)))
 
 ; Date parsing
 
@@ -95,11 +102,15 @@
                (map #(parse-date today %)))
           data))
 
+(defn- enrich-restaurant-details [details today]
+  (reduce (fn [details category]
+            (update-in details [:information category :exception] #(enrich-exceptions today %)))
+          details
+          (keys opening-time-categories)))
+
 (defn- enrich-restaurant [restaurant backend today]
   (let [details @(backend/get-restaurant backend (:id restaurant))
-        details (update-in details [:information :business :exception] #(enrich-exceptions today %))
-        details (update-in details [:information :lounas :exception] #(enrich-exceptions today %))
-        details (update-in details [:information :bistro :exception] #(enrich-exceptions today %))]
+        details (enrich-restaurant-details details today)]
     (assoc restaurant
       :information (:information details)
       :menu (group-by-date (:data details) today))))
@@ -142,3 +153,22 @@
     {:areacode    areacode
      :name        (areacode-names areacode "???")
      :restaurants (restaurants-with-areacode data areacode)}))
+
+(defn- exception-in-effect? [exception date]
+  (and (<= 0 (compare date (:from exception)))
+       (>= 0 (compare date (:to exception)))))
+
+(defn- find-effective-exceptions [information date]
+  (mapcat (fn [[category opening-times]]
+            (as-> (:exception opening-times) $
+                  (filter #(exception-in-effect? % date) $)
+                  (first $)
+                  (dissoc $ :from :to)
+                  (when $ [(assoc $ :category category)])))
+          information))
+
+(defn exceptions-for-date [restaurant date]
+  (as-> (:information restaurant) $
+        (select-keys $ (keys opening-time-categories))
+        (find-effective-exceptions $ date)
+        (sort-by opening-time-category-index $)))

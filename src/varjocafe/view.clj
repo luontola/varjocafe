@@ -69,7 +69,7 @@
 (html/defsnippet opening-times "templates/layout.html" [:.opening-times]
                  [restaurant]
                  [:.opening-times #{(indented :dt) (indented :dd)}] nil ; keep only the whitespace before </dl>
-                 [:.opening-times] (html/prepend (->> [:business :lounas :bistro]
+                 [:.opening-times] (html/prepend (->> (keys core/opening-time-categories)
                                                       (map #(opening-times-for-category restaurant %)))))
 
 (html/defsnippet restaurant-row "templates/layout.html" [(indented :.restaurant-row)]
