@@ -88,6 +88,14 @@
       (opening-times-categories category)
       "???"))
 
+
+; Opening Time Exceptions
+
+(defn exceptions [restaurant date]
+  ; TODO
+  [])
+
+
 ; Food
 
 (defn allergens [food]

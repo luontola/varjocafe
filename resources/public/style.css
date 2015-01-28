@@ -89,6 +89,16 @@ table#restaurants td {
     float: left;
 }
 
+.exception {
+    display: block;
+    color: #ffffff;
+    background-color: #ff69b4;
+    text-align: center;
+    padding: 2px;
+    margin: 0 0.2em 0.2em;
+    border-radius: 3px;
+}
+
 .food {
     display: block;
     padding-bottom: 0.2em;
