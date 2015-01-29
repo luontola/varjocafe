@@ -120,6 +120,43 @@
                 (core/enrich-exceptions today [{:from "Avaamme Ravintolan 7.1.2015", :to nil, :closed false, :open "08:00", :close nil}])
                 => []))))
 
+(fact "#enrich-opening-time"
+      (let [today (t/local-date 2014 12 3)]
+        (fact "Normalizes 'previous' to false in :when"
+              (core/enrich-opening-time
+                today {:regular [{:when ["Ma" "Ti" "Ke" "To" false false false]
+                                  :open "08:00", :close "15:30"}
+                                 {:when ["previous" "previous" "previous" "previous" "Pe" false false]
+                                  :open "08:00", :close "15:00"}]})
+              => {:regular   [{:when ["Ma" "Ti" "Ke" "To" false false false]
+                               :open "08:00", :close "15:30"}
+                              {:when [false false false false "Pe" false false]
+                               :open "08:00", :close "15:00"}]
+                  :exception []})
+
+        (fact "Removes bistro which is never open"
+              (core/enrich-opening-time
+                today {:exception [{:close nil, :closed true, :from "16.12", :open nil, :to "11.1"}],
+                       :regular   [{:when [false false false false false false false]
+                                    :open "" :close ""}]})
+              => nil
+              (core/enrich-opening-time
+                today {:exception [{:close nil, :closed true, :from "16.12", :open nil, :to "11.1"}],
+                       :regular   [{:when ["Ma" "Ti" "Ke" "To" "Pe" false false]
+                                    :open "", :close ""}]})
+              => nil)
+
+        (fact "Removes empty exceptions"
+              (core/enrich-opening-time
+                today {:exception [{:close nil, :closed true, :from nil, :open nil, :to nil}],
+                       :regular   [{:close "15:00",
+                                    :open  "09:00",
+                                    :when  ["Ma" "Ti" "Ke" "To" "Pe" false false]}]})
+              => {:exception [],
+                  :regular   [{:close "15:00",
+                               :open  "09:00",
+                               :when  ["Ma" "Ti" "Ke" "To" "Pe" false false]}]})))
+
 (fact "Enriched restaurant data"
       ; XXX: Date and food constants must be updated when test data is updated.
       (let [data testdata/data]

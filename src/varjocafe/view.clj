@@ -32,8 +32,9 @@
                             identity))
 
 (html/defsnippet exception-line "templates/layout.html" [(indented :.exception)]
-                 [exception]
-                 [:.exception html/any-node] (html/replace-vars {:exception exception}))
+                 [restaurant exception]
+                 [:.exception html/any-node] (html/replace-vars
+                                               {:exception (format/exception restaurant exception)}))
 
 (html/defsnippet food-line "templates/layout.html" [(indented :.food)]
                  [food]
@@ -49,8 +50,8 @@
 (html/defsnippet menu-cell "templates/layout.html" [:.restaurant-row.expanded (indented :.menu)]
                  [restaurant date]
                  [(indent-of :.exception)] nil
-                 [:.exception] (html/clone-for [exception (format/exceptions restaurant date)]
-                                               (html/substitute (exception-line exception)))
+                 [:.exception] (html/clone-for [exception (core/exceptions-for-date restaurant date)]
+                                               (html/substitute (exception-line restaurant exception)))
                  [(indent-of :.food)] nil
                  [:.food] (html/clone-for [food (get-in restaurant [:menu date :data])]
                                           (html/substitute (food-line food))))

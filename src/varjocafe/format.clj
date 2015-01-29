@@ -17,13 +17,10 @@
        (:city (:information restaurant))))
 
 
-; Opening Times
+; Opening times
 
 (defn- day-set? [date]
-  (cond
-    (false? date) false
-    (= "previous" date) false
-    :else true))
+  date)
 
 (defn- comma-delimited [prefix suffix]
   (if (empty? suffix)
@@ -86,11 +83,17 @@
       "???"))
 
 
-; Opening Time Exceptions
+; Opening time exceptions
 
-(defn exceptions [restaurant date]
-  ; TODO
-  [])
+(defn exception [restaurant exception]
+  (let [category (:category exception)
+        title (opening-times-title restaurant category)]
+    (if (:closed exception)
+      (case category
+        :bistro (str title " suljettu")
+        :lounas "Ei lounasta"
+        "Ravintola suljettu")
+      (str title " " (:open exception) "-" (:close exception)))))
 
 
 ; Food

@@ -62,7 +62,7 @@
       (fact "Opening and closing times may vary by day of week"
             (format/opening-times [{:when ["Ma" "Ti" "Ke" "To" false false false]
                                     :open "10:30", :close "16:00"}
-                                   {:when ["previous" "previous" "previous" "previous" "Pe" false false]
+                                   {:when [false false false false "Pe" false false]
                                     :open "10:30", :close "15:00"}])
             => ["Ma-To" "10:30-16:00"
                 "Pe" "10:30-15:00"])
@@ -96,3 +96,23 @@
                                         :bistro) => "Pizza")
       (fact "Unknown category"
             (format/opening-times-title {} :foo) => "???"))
+
+(fact "Exception format"
+      (fact "Closed"
+            (format/exception {} {:category :business
+                                               :closed   true}) => "Ravintola suljettu")
+      (fact "No lunch"
+            (format/exception {} {:category :lounas
+                                               :closed   true}) => "Ei lounasta")
+      (fact "Bistro closed"
+            (format/exception {} {:category :bistro
+                                               :closed   true}) => "Bistro suljettu")
+
+      (fact "Custom opening hours"
+            (format/exception {} {:category :business
+                                               :open     "08:00"
+                                               :close    "14:00"}) => "Auki 08:00-14:00")
+      (fact "Custom lunch hours"
+            (format/exception {} {:category :lounas
+                                               :open     "10:00"
+                                               :close    "14:00"}) => "Lounas 10:00-14:00"))

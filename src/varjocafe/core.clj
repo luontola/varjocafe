@@ -58,7 +58,7 @@
              original)))))
 
 
-; Opening time exception parsing
+; Enrich opening times
 
 (defn- pre-process-exception [exception]
   (let [{:keys [from]} exception]
@@ -94,6 +94,27 @@
        (map #(enrich-exception today %))
        (remove nil?)))
 
+(defn- normalize-when [when]
+  (if (= "previous" when)
+    false
+    when))
+
+(defn- enrich-regular [regular]
+  (as-> regular $
+        (update-in $ [:when] #(map normalize-when %))
+        (if (and (empty? (:open $))
+                 (empty? (:close $)))
+          nil
+          [$])))
+
+(defn enrich-opening-time [today schedule]
+  (as-> schedule $
+        (update-in $ [:regular] #(mapcat enrich-regular %))
+        (update-in $ [:exception] #(enrich-exceptions today %))
+        (if (empty? (:regular $))
+          nil
+          $)))
+
 
 ; Enrich restaurant data
 
@@ -104,7 +125,7 @@
 
 (defn- enrich-restaurant-details [details today]
   (reduce (fn [details category]
-            (update-in details [:information category :exception] #(enrich-exceptions today %)))
+            (update-in details [:information category] #(enrich-opening-time today %)))
           details
           (keys opening-time-categories)))
 
