@@ -1,0 +1,118 @@
+{:data
+ [{:data [],
+   :date "Ma 29.12",
+   :date_en "Mon 29.12",
+   :date_sv "Mån 29.12",
+   :message nil}
+  {:data [],
+   :date "Ti 30.12",
+   :date_en "Tue 30.12",
+   :date_sv "Tis 30.12",
+   :message nil}
+  {:data [],
+   :date "Ke 31.12",
+   :date_en "Wed 31.12",
+   :date_sv "Ons 31.12",
+   :message nil}
+  {:data [],
+   :date "To 01.01",
+   :date_en "Thu 01.01",
+   :date_sv "Tors 01.01",
+   :message nil}
+  {:data [],
+   :date "Pe 02.01",
+   :date_en "Fri 02.01",
+   :date_sv "Fre 02.01",
+   :message nil}
+  {:data [],
+   :date "La 03.01",
+   :date_en "Sat 03.01",
+   :date_sv "Lör 03.01",
+   :message nil}
+  {:data [],
+   :date "Su 04.01",
+   :date_en "Sun 04.01",
+   :date_sv "Sön 04.01",
+   :message nil}
+  {:data [],
+   :date "Ma 05.01",
+   :date_en "Mon 05.01",
+   :date_sv "Mån 05.01",
+   :message nil}
+  {:data [],
+   :date "Ti 06.01",
+   :date_en "Tue 06.01",
+   :date_sv "Tis 06.01",
+   :message nil}
+  {:data [],
+   :date "Ke 07.01",
+   :date_en "Wed 07.01",
+   :date_sv "Ons 07.01",
+   :message nil}
+  {:data [],
+   :date "To 08.01",
+   :date_en "Thu 08.01",
+   :date_sv "Tors 08.01",
+   :message nil}
+  {:data [],
+   :date "Pe 09.01",
+   :date_en "Fri 09.01",
+   :date_sv "Fre 09.01",
+   :message nil}
+  {:data [],
+   :date "La 10.01",
+   :date_en "Sat 10.01",
+   :date_sv "Lör 10.01",
+   :message nil}
+  {:data [],
+   :date "Su 11.01",
+   :date_en "Sun 11.01",
+   :date_sv "Sön 11.01",
+   :message nil}],
+ :information
+ {:address "Agnes Sjöbergin katu 2",
+  :bistro
+  {:exception
+   [{:close nil, :closed false, :from "", :open nil, :to ""}
+    {:close nil, :closed false, :from nil, :open nil, :to nil}
+    {:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :name "Pizza",
+   :regular
+   [{:close "14:00",
+     :open "10:30",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}]},
+  :business
+  {:exception
+   [{:close "13:00",
+     :closed false,
+     :from "19.12",
+     :open "08:00",
+     :to "19.12"}
+    {:close nil, :closed true, :from "22.12", :open nil, :to "6.1"}
+    {:close nil,
+     :closed false,
+     :from "Avaamme Ravintolan 7.1.2015",
+     :open "08:00",
+     :to nil}],
+   :regular
+   [{:close "15:00",
+     :open "08:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}]},
+  :city "Helsinki",
+  :description
+  "Esteettömyys<br />- sisäänkäynti : Pihan reunustalla kiinteä liuska.<br />- inva-wc ravintolaan mentäessä oikealla naulakoiden luona.",
+  :description_en
+  "Disabled access<br />- Entry: fixed ramp by the side of the courtyard.<br />- Disabled toilet: to the right by the coat racks on entering the restaurant.",
+  :description_sv
+  "Tillgänglighet för funktionshindrade<br />- ingång: fast ramp på gårdssidan<br />- inva-wc vid ingången till restaurangen, till höger vid klädhängarna",
+  :ilta nil,
+  :lounas
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :regular
+   [{:close "14:30",
+     :open "10:30",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}]},
+  :restaurant "Viikuna",
+  :zip "00710"},
+ :status "OK"}

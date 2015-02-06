@@ -1,0 +1,214 @@
+{:data
+ [{:data [],
+   :date "Ma 29.12",
+   :date_en "Mon 29.12",
+   :date_sv "Mån 29.12",
+   :message nil}
+  {:data [],
+   :date "Ti 30.12",
+   :date_en "Tue 30.12",
+   :date_sv "Tis 30.12",
+   :message nil}
+  {:data [],
+   :date "Ke 31.12",
+   :date_en "Wed 31.12",
+   :date_sv "Ons 31.12",
+   :message nil}
+  {:data [],
+   :date "To 01.01",
+   :date_en "Thu 01.01",
+   :date_sv "Tors 01.01",
+   :message nil}
+  {:data [],
+   :date "Pe 02.01",
+   :date_en "Fri 02.01",
+   :date_sv "Fre 02.01",
+   :message nil}
+  {:data [],
+   :date "La 03.01",
+   :date_en "Sat 03.01",
+   :date_sv "Lör 03.01",
+   :message nil}
+  {:data [],
+   :date "Su 04.01",
+   :date_en "Sun 04.01",
+   :date_sv "Sön 04.01",
+   :message nil}
+  {:data [],
+   :date "Ma 05.01",
+   :date_en "Mon 05.01",
+   :date_sv "Mån 05.01",
+   :message nil}
+  {:data [],
+   :date "Ti 06.01",
+   :date_en "Tue 06.01",
+   :date_sv "Tis 06.01",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Broilerin- ja porsaanlihaa (suomi), muskottipähkinää, sipulia, mustapippuria, korianteria, valkosipulia, kasviproteiinia (herne), perunajauhoja, glukoosia, kaurakuitua, korppujauhoja (vehnä), happamuudensäätöaineita (E262, kaliumlaktaatti), suolaa, sokeria, sitruuna-aromia, margariinia, lihaliemijauhetta [glukoosisiirappi, suola, sokeri, lihauute [6,3 %], hiivauute, maltodekstriini, happo (sitruunahappo), palmurasva, väriaine (E 150c), mustapippuriaromi], viherpippuria, maustepippuria, sokerikulööriä.",
+     :meta {:0 ["L" "PÄ" "[S]"], :1 ["pähkinää"], :2 []},
+     :name "Jauhelihapihvit, pippurikastiketta",
+     :name_en "Minced meat burgers, pepper sauce",
+     :name_sv "Köttfärsbiffar, pepparsås",
+     :nutrition
+     "energiaa 139kcal (582kJ), hiilihydraattia 11g, rasvaa 8g, proteiinia 6g.",
+     :price
+     {:name "Metropolia Edullisesti",
+      :value
+      {:contract "5.40",
+       :graduate "4.54",
+       :graduate_hyy "0.00",
+       :normal "7.50",
+       :student "2.60",
+       :student_hyy "0.00"}}}
+    {:ingredients
+     "Quorn-rouhetta (sieniproteiinia, kananmunaa, ohramallasuutetta), porkkanaa, kesäkurpitsaa, lanttua, purjosipulia, sipulia, tomaattia, rypsiöljyä, valkosipulia, kasvisliemijauhetta, sokeria, oreganoa, mustapippuria, timjamia, suolaa, persiljaa.",
+     :meta {:0 ["K" "L" "M" "[S]" "SO"], :1 [], :2 []},
+     :name "Quornbolognesekastike",
+     :name_en "Quorn Bolognese",
+     :name_sv "Quornfärssås Bolognese",
+     :nutrition
+     "energiaa 77kcal (324kJ), hiilihydraattia 3g, rasvaa 4g, proteiinia 2g.",
+     :price
+     {:name "Metropolia Kasvis",
+      :value
+      {:contract "5.00",
+       :graduate "4.54",
+       :graduate_hyy "0.00",
+       :normal "6.10",
+       :student "2.60",
+       :student_hyy "0.00"}}}],
+   :date "Ke 07.01",
+   :date_en "Wed 07.01",
+   :date_sv "Ons 07.01",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Perunaa, sipulia, purjoa, kinkkua [sianlihaa (suomi), vettä, lihaproteiinia, suolaa, muunneltua maissitärkkelystä, happamuudensäätöaineita (kalimlaktaatti, E262, E315) stabilointiaineita (E450, karrageeni), glukoosia, luontaista aromia, säilöntäainetta (E250)], lihaliemijauhetta [glukoosisiirappi, suola, sokeri, lihauute [6,3 %], hiivauute, maltodekstriini, happo (sitruunahappo), palmurasva, väriaine (E 150c), mustapippuriaromi], mustapippuria, kasvirasvavalmistetta [sis. vettä, maitoa, rypsiöljyä, kovetettua kasvirasvaa, muunneltua tärkkelystä, emulgointiainetta (E472e kasvirasvapohjainen), stabilointiainetta (guarkumia), maltodekstriinia, sokeria, happamuudensäätöainetta (natriumsitraatit), laktaasientsyymiä, aromia, väriä (betakaroteenia)].",
+     :meta {:0 ["G" "L" "[S]"], :1 [], :2 []},
+     :name "Kinkkukiusausta",
+     :name_en "Ham and potato casserole",
+     :name_sv "Skinkfrestelse",
+     :nutrition
+     "energiaa 217kcal (908kJ), hiilihydraattia 10g, rasvaa 5g, proteiinia 4g.",
+     :price
+     {:name "Metropolia Edullisesti",
+      :value
+      {:contract "5.40",
+       :graduate "4.54",
+       :graduate_hyy "0.00",
+       :normal "7.50",
+       :student "2.60",
+       :student_hyy "0.00"}}}
+    {:ingredients
+     "Nuudelia [sis. vehnäjauhoa, suolaa, happamuudensäätöainetta (E500, E501 ja E330), väriaineita (E160a ja E160c)], valkokaalia, vesikastanjaa, bambunversoa, papua, porkkanaa, vettä, omenaviinietikkaa, soijakastiketta, inkivääritahnaa, chilijauhetta, kasvisliemijauhetta, siirappia, paneroituja soijasuikaleita [sis. soijaproteiinia, korppujauhoa, vehnäjauhoa, perunatärkkelystä, kovettamatonta kasviöljyä, suolaa, valkosipulia, sinapinsiemeniä, glukoosia].",
+     :meta
+     {:0 ["K" "L" "M" "[S]" "SO" "V" "VE"],
+      :1 ["soijaa" "valkosipulia"],
+      :2 ["Ilmastovalinta"]},
+     :name "Vihanneswokkia",
+     :name_en "Vegetable wok",
+     :name_sv "Grönsakswok",
+     :nutrition
+     "energiaa 93kcal (390kJ), hiilihydraattia 14g, rasvaa 2g, proteiinia 5g.",
+     :price
+     {:name "Metropolia Kasvis",
+      :value
+      {:contract "5.00",
+       :graduate "4.54",
+       :graduate_hyy "0.00",
+       :normal "6.10",
+       :student "2.60",
+       :student_hyy "0.00"}}}],
+   :date "To 08.01",
+   :date_en "Thu 08.01",
+   :date_sv "Tors 08.01",
+   :message nil}
+  {:data
+   [{:ingredients
+     "Broilerin- ja kalkkunanlihaa (suomi), vettä, sipulia, korppujauhoa (sis.vehnää), rypsiöljyä, soijaproteiinia, perunajauhoa, herneproteiinia, mausteita [currya, mustapippuria, inkivääriä, valkopippuria, paprikaa, suolaa, glukoosia, happamuudensäätöaineita E326, E331 ja E262, aromeja (mm. sitruunaa)].\nVettä, kasvirasvavalmistetta [sis. vettä, maitoa, rypsiöljyä, kovetettua kasvirasvaa, muunneltua tärkkelystä, emulgointiainetta (E472e kasvirasvapohjainen), stabilointiainetta (guarkumia), maltodekstriinia, sokeria, happamuudensäätöainetta (natriumsitraatit), laktaasientsyymiä, aromia, väriä (betakaroteenia)], öljyä,   currya, kasvisliemijauhetta, valkosipulia, soijaa, kurkumaa.",
+     :meta {:0 ["L" "SO" "V"], :1 ["soijaa" "valkosipulia"], :2 []},
+     :name "Broileripyörykät, currykastiketta",
+     :name_en "Chicken balls with curry sauce",
+     :name_sv "Broilerbuller med currysås",
+     :nutrition
+     "energiaa 176kcal (737kJ), hiilihydraattia 9g, rasvaa 12g, proteiinia 8g.",
+     :price
+     {:name "Metropolia Edullisesti",
+      :value
+      {:contract "5.40",
+       :graduate "4.54",
+       :graduate_hyy "0.00",
+       :normal "7.50",
+       :student "2.60",
+       :student_hyy "0.00"}}}
+    {:ingredients
+     "Hernettä, herneproteiinivalmiste, kasviöljyä, perunahiutaletta, rypälesokeria, korppujauhoja (vehnä), hiivaa, nostatusainetta, vehnätärkkelystä, suolaa, sipulia valkosipulia, mustapippuria, timjamia, rosmariinia, basilikaa, paprikaa, sekamehua, tomaattipyrettä, chiliä, omenaviinietikkaa, valkosipulia, sokeria, paprikaa, maissitärkkelystä. rypäle- ja omenatäysmehutiivistettä, mustaherukka-täysmehutiivistettä, happamuudensäätöainetta (E330), säilöntäaineita (E211, E202).",
+     :meta
+     {:0 ["L" "[S]" "V" "VE"],
+      :1 ["valkosipulia"],
+      :2 ["Ilmastovalinta"]},
+     :name "Hernenugetit, makeaa chilikastiketta",
+     :name_en "Vegan nuggets, sweet chilisås",
+     :name_sv "Ärtnugget, söt chilisås",
+     :nutrition
+     "energiaa 145kcal (607kJ), hiilihydraattia 11g, rasvaa 8g, proteiinia 8g.",
+     :price
+     {:name "Metropolia Kasvis",
+      :value
+      {:contract "5.00",
+       :graduate "4.54",
+       :graduate_hyy "0.00",
+       :normal "6.10",
+       :student "2.60",
+       :student_hyy "0.00"}}}],
+   :date "Pe 09.01",
+   :date_en "Fri 09.01",
+   :date_sv "Fre 09.01",
+   :message nil}
+  {:data [],
+   :date "La 10.01",
+   :date_en "Sat 10.01",
+   :date_sv "Lör 10.01",
+   :message nil}
+  {:data [],
+   :date "Su 11.01",
+   :date_en "Sun 11.01",
+   :date_sv "Sön 11.01",
+   :message nil}],
+ :information
+ {:address "Hämeentie 161",
+  :bistro
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :name "",
+   :regular
+   [{:close "",
+     :open "",
+     :when [false false false false false false false]}]},
+  :business
+  {:exception
+   [{:close nil, :closed true, :from "22.12", :open nil, :to "7.1"}],
+   :regular
+   [{:close "15:00",
+     :open "08:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}]},
+  :city "Helsinki",
+  :description
+  "Esteettömyys<br />- sisäänkäynti : kulku pääovesta (ovissa ei ole automatiikkaa).<br />- inva-wc : aulassa ennen ravintolatiloja.",
+  :description_en
+  "Disabled access<br />-entry: through main door (doors do not have automation).<br />-toilet for disabled is situated in the lobby close to the restaurant.",
+  :description_sv
+  "Tillgänglighet för funktionshindrade<br />-entré via huvudingången (dörrarna öppnas inte automatiskt).<br />-invalidtoalett i lobbyn invid restaurangen.",
+  :ilta nil,
+  :lounas
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :regular
+   [{:close "14:30",
+     :open "10:30",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}]},
+  :restaurant "Hämeentie",
+  :zip "00560"},
+ :status "OK"}

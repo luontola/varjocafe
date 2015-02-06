@@ -1,0 +1,37 @@
+{:data
+ [{:areacode 6, :id 21, :name "Albertinkatu"}
+  {:areacode 5, :id 16, :name "Biokeskus"}
+  {:areacode 6, :id 20, :name "Bulevardi"}
+  {:areacode 1, :id 5, :name "Cafe Portaali"}
+  {:areacode 999, :id 35, :name "Cafespa"}
+  {:areacode 2, :id 10, :name "Chemicum"}
+  {:areacode 2, :id 11, :name "Exactum"}
+  {:areacode 1, :id 31, :name "Gaudeamus Kirja & Kahvi"}
+  {:areacode 6, :id 25, :name "Hämeentie"}
+  {:areacode 5, :id 17, :name "Korona"}
+  {:areacode 6, :id 28, :name "Leiritie"}
+  {:areacode 3, :id 13, :name "Meilahti"}
+  {:areacode 1, :id 1, :name "Metsätalo"}
+  {:areacode 1, :id 2, :name "Olivia"}
+  {:areacode 6, :id 22, :name "Onnentie"}
+  {:areacode 1, :id 4, :name "Päärakennus"}
+  {:areacode 1, :id 32, :name "Päärakennus Opettajien ravintola"}
+  {:areacode 999, :id 36, :name "Paviljonki"}
+  {:areacode 2, :id 12, :name "Physicum"}
+  {:areacode 1, :id 3, :name "Porthania"}
+  {:areacode 1, :id 34, :name "Porthania Opettajien ravintola"}
+  {:areacode 1, :id 30, :name "Ravintola Domus"}
+  {:areacode 1, :id 33, :name "Ravintola Serpens"}
+  {:areacode 6, :id 19, :name "Ricola"}
+  {:areacode 3, :id 14, :name "Ruskeasuo"}
+  {:areacode 1, :id 15, :name "Soc&Kom"}
+  {:areacode 6, :id 26, :name "Sofianlehto"}
+  {:areacode 1, :id 7, :name "Topelias"}
+  {:areacode 6, :id 23, :name "Tukholmankatu"}
+  {:areacode 1, :id 8, :name "Valtiotiede"}
+  {:areacode 6, :id 27, :name "Vanha Maantie"}
+  {:areacode 6, :id 24, :name "Vanha Viertotie"}
+  {:areacode 5, :id 18, :name "Viikuna"}
+  {:areacode 999, :id 29, :name "Viola"}
+  {:areacode 1, :id 9, :name "Ylioppilasaukio"}],
+ :status "OK"}

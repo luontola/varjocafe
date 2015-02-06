@@ -1,0 +1,446 @@
+{:data
+ [{:data
+   [{:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Ravintola on suljettu!",
+     :name_en "Restaurant is closed!",
+     :name_sv "Restaurant stängd!",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "Ma 29.12",
+   :date_en "Mon 29.12",
+   :date_sv "Mån 29.12",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Ravintola on suljettu!",
+     :name_en "Restaurant is closed!",
+     :name_sv "Restaurant stängd!",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "Ti 30.12",
+   :date_en "Tue 30.12",
+   :date_sv "Tis 30.12",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Ravintola on suljettu!",
+     :name_en "Restaurant is closed!",
+     :name_sv "Restaurant stängd!",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "Ke 31.12",
+   :date_en "Wed 31.12",
+   :date_sv "Ons 31.12",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Ravintola on suljettu!",
+     :name_en "Restaurant is closed!",
+     :name_sv "Restaurant stängd!",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "To 01.01",
+   :date_en "Thu 01.01",
+   :date_sv "Tors 01.01",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Ravintola on suljettu!",
+     :name_en "Restaurant is closed!",
+     :name_sv "Restaurant stängd!",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "Pe 02.01",
+   :date_en "Fri 02.01",
+   :date_sv "Fre 02.01",
+   :message nil}
+  {:data [],
+   :date "La 03.01",
+   :date_en "Sat 03.01",
+   :date_sv "Lör 03.01",
+   :message nil}
+  {:data [],
+   :date "Su 04.01",
+   :date_en "Sun 04.01",
+   :date_sv "Sön 04.01",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Ravintola on suljettu!",
+     :name_en "Restaurant is closed!",
+     :name_sv "Restaurant stängd!",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "Ma 05.01",
+   :date_en "Mon 05.01",
+   :date_sv "Mån 05.01",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Ravintola on suljettu!",
+     :name_en "Restaurant is closed!",
+     :name_sv "Restaurant stängd!",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "Ti 06.01",
+   :date_en "Tue 06.01",
+   :date_sv "Tis 06.01",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 ["G" "VL"], :1 [], :2 []},
+     :name "Paahdettua lohta, Beurre Blanc",
+     :name_en "Roasted salmon, Beurre Blanc",
+     :name_sv "Rostad lax, Beurre Blanc",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["G" "L"], :1 [], :2 []},
+     :name "Pekoni-sienimunakasta, marinoitua rucolaa",
+     :name_en "Bacon-mushroom omelette, marinated rocket",
+     :name_sv "Bacon-svamp omelet, marinerad rucola",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["G" "L"], :1 [], :2 []},
+     :name "Paprika-savujuustokeittoa, yrttiöljyä",
+     :name_en "Sweet pepper-cheese soup, herb oil",
+     :name_sv "Paprika-rökostsoppa, örtolja",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["G" "VL"], :1 [], :2 []},
+     :name "Tilli-voi perunaa",
+     :name_en "Dill-butter potatoes",
+     :name_sv "Dill-smörpotatis",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["VL"], :1 [], :2 []},
+     :name "Porkkanapiirakka",
+     :name_en "Carrot pie",
+     :name_sv "Morotspaj",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "Ke 07.01",
+   :date_en "Wed 07.01",
+   :date_sv "Ons 07.01",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 ["G" "M"], :1 [], :2 []},
+     :name "Karamellisoitua possua",
+     :name_en "Caramelized pork",
+     :name_sv "Karamelliserad gris",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["G" "M"], :1 [], :2 []},
+     :name "Kasviswok, paahdettua cashewpähkinää",
+     :name_en "Vegetable wok, roasted cashew nuts",
+     :name_sv "Grönsakswok, rostade cashewnötter",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["M"], :1 [], :2 []},
+     :name "Ramenkeittoa",
+     :name_en "Ramen soup",
+     :name_sv "Ramensoppa",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["G" "M"], :1 [], :2 []},
+     :name "Jasminriisiä",
+     :name_en "Jasmin rice",
+     :name_sv "Jasminris",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 [], :1 [], :2 []},
+     :name "Appelsiini-suklaakakkua, kookosvaahtoa",
+     :name_en "Orange chokolate cake, coconut foam",
+     :name_sv "Appelsin-chokladkaka, kokosskum",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "To 08.01",
+   :date_en "Thu 08.01",
+   :date_sv "Tors 08.01",
+   :message nil}
+  {:data
+   [{:ingredients "t",
+     :meta {:0 ["L"], :1 [], :2 []},
+     :name "PIZZA: savulohi-mozzarella",
+     :name_en "PIZZA: Smoked salmon-mozzarella",
+     :name_sv "PIZZA: Rökt lax-mozzarella",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["L"], :1 [], :2 []},
+     :name "Herkkusieni-artisokkapastaa",
+     :name_en "Champignon-artichoke pasta",
+     :name_sv "Champinjon-ätrskockapasta",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["G" "L"], :1 [], :2 []},
+     :name "Valkosipuli-tomaattikeittoa",
+     :name_en "Garlic-tomato soup",
+     :name_sv "Vitlök-tomatsoppa",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["G" "L"], :1 [], :2 []},
+     :name "Kanacaesar salaattia",
+     :name_en "Chicken caesar salad",
+     :name_sv "Kyckling caesarsalad",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}
+    {:ingredients "t",
+     :meta {:0 ["L"], :1 [], :2 []},
+     :name "Tiramisuvaahto",
+     :name_en "Tiramisu foam",
+     :name_sv "Tiramisuskum",
+     :nutrition nil,
+     :price
+     {:name "Domus buffet",
+      :value
+      {:contract "0.00",
+       :graduate "0.00",
+       :graduate_hyy "0.00",
+       :normal "10.00",
+       :student "0.00",
+       :student_hyy "0.00"}}}],
+   :date "Pe 09.01",
+   :date_en "Fri 09.01",
+   :date_sv "Fre 09.01",
+   :message nil}
+  {:data [],
+   :date "La 10.01",
+   :date_en "Sat 10.01",
+   :date_sv "Lör 10.01",
+   :message nil}
+  {:data [],
+   :date "Su 11.01",
+   :date_en "Sun 11.01",
+   :date_sv "Sön 11.01",
+   :message nil}],
+ :information
+ {:address "Hietaniemenkatu 14",
+  :bistro
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :name "",
+   :regular
+   [{:close "",
+     :open "",
+     :when [false false false false false false false]}]},
+  :business
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :regular
+   [{:close "13:30",
+     :open "11:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}
+    {:close "",
+     :open "",
+     :when
+     ["previous"
+      "previous"
+      "previous"
+      "previous"
+      "previous"
+      false
+      false]}]},
+  :city "Helsinki",
+  :description
+  "Esteettömyys<br />- sisäänkäynti : Hietaniemenkatu 14 , ravintolan viereisestä ovesta (hostellin sisäänkäynti)<br />pääsee hissillä ravintolakerrokseen.",
+  :description_en
+  "Disabled access<br />-entrance : Hietaniemenkatu 14, the door next to restaurant entry door (Hostel entrance)<br />has access to elevator to restaurant level",
+  :description_sv
+  "Tillgänglighet för funktionshindrade<br />- ingång: Sanduddsvägen 14, dörren till vänster om restaurangdörren (ingång till hostelet), hiss till restaurangen från aulan",
+  :ilta nil,
+  :lounas
+  {:exception
+   [{:close nil, :closed false, :from nil, :open nil, :to nil}],
+   :regular
+   [{:close "13:30",
+     :open "11:00",
+     :when ["Ma" "Ti" "Ke" "To" "Pe" false false]}]},
+  :restaurant "Ravintola Domus",
+  :zip "00100"},
+ :status "OK"}
