@@ -68,7 +68,7 @@
       (fact "nil"
             (core/parse-date (t/local-date 2014 1 1) nil) => nil))
 
-(fact "Enriches opening time exceptions"
+(fact "#enrich-exceptions"
       (let [today (t/local-date 2014 12 3)]
         (fact "No exceptions"
               (core/enrich-exceptions today [{:from nil, :to nil, :closed false, :open nil, :close nil}]) => []
@@ -240,6 +240,23 @@
                                                                           :open     "08:00"
                                                                           :close    "14:00"}
                                                                          {:category :lounas
+                                                                          :open     "10:30"
+                                                                          :close    "14:00"}]))
+      (fact "If restaurant is closed then it's not necessary to say that there is no lunch"
+            (let [r {:information
+                     {:business {:exception [{:from   (t/local-date 2014 12 15)
+                                              :to     (t/local-date 2015 1 5)
+                                              :closed true}]}
+                      :lounas   {:exception [{:from   (t/local-date 2014 12 15)
+                                              :to     (t/local-date 2015 1 5)
+                                              :closed true}]}
+                      :bistro   {:exception [{:from  (t/local-date 2014 12 15)
+                                              :to    (t/local-date 2015 1 5)
+                                              :open  "10:30"
+                                              :close "14:00"}]}}}]
+              (core/exceptions-for-date r (t/local-date 2014 12 15)) => [{:category :business
+                                                                          :closed   true}
+                                                                         {:category :bistro
                                                                           :open     "10:30"
                                                                           :close    "14:00"}]))
       (fact "Removes unrelated keys from the information map"

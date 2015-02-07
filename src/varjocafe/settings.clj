@@ -46,7 +46,9 @@
 (def dev-settings
   (assoc default-settings
     :development-mode true
-    :testdata-dir "testdata"))
+    :testdata-dir "testdata"
+    ;:testdata-dir "testdata-exceptions"
+    ))
 
 
 ; External Configuration

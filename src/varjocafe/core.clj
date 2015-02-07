@@ -188,8 +188,18 @@
                   (when $ [(assoc $ :category category)])))
           information))
 
+(defn- remove-duplicate-closed [information]
+  (if (some #(and (= :business (:category %))
+                  (:closed %))
+            information)
+    (remove #(and (not= :business (:category %))
+                  (:closed %))
+            information)
+    information))
+
 (defn exceptions-for-date [restaurant date]
   (as-> (:information restaurant) $
         (select-keys $ (keys opening-time-categories))
         (find-effective-exceptions $ date)
+        (remove-duplicate-closed $)
         (sort-by opening-time-category-index $)))
