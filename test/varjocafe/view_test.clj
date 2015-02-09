@@ -38,7 +38,7 @@
       (fact "Enabled"
             (render (view/google-analytics
                       (assoc-in testdata/settings [:google-analytics :tracking-id] "UA-1234567-8")))
-            => (contains "ga('create', 'UA-1234567-8', 'auto')"))
+            => (contains "ga('create', 'UA-1234567-8'"))
       (fact "Disbled"
             (render (view/google-analytics
                       (assoc-in testdata/settings [:google-analytics :tracking-id] nil)))
