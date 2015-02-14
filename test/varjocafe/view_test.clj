@@ -2,13 +2,14 @@
   (:use midje.sweet)
   (:require [varjocafe.view :as view]
             [varjocafe.testdata :as testdata]
-            [net.cgrand.enlive-html :as html]))
+            [net.cgrand.enlive-html :as html]
+            [clj-time.core :as t]))
 
 (defn render [page] (apply str page))
 
 (fact "Main page"
       ; XXX: Date and food constants must be updated when test data is updated.
-      (let [page (render (view/main-page testdata/data testdata/today testdata/settings))]
+      (let [page (render (view/main-page testdata/data (view/today-and-tomorrow testdata/today) testdata/today testdata/settings))]
         (fact "has area names"
               page => (contains "Kumpula"))
         (fact "has area IDs"
@@ -72,3 +73,36 @@
       (fact "Ignores missing text nodes"
             (let [page (html/html [:div "\n" [:h1 "T1"] [:h2 "T2"] "\n\n\nx"])]
               (select page [(view/indent-of :h2)]) => (html/html))))
+
+(fact "#today-and-tomorrow"
+      (view/today-and-tomorrow (t/local-date 2015 2 10)) => [(t/local-date 2015 2 10) (t/local-date 2015 2 11)])
+
+(fact "#this-week"
+      (let [expected [(t/local-date 2015 2 9)
+                      (t/local-date 2015 2 10)
+                      (t/local-date 2015 2 11)
+                      (t/local-date 2015 2 12)
+                      (t/local-date 2015 2 13)
+                      (t/local-date 2015 2 14)
+                      (t/local-date 2015 2 15)]]
+        (fact "today is monday"
+              (view/this-week (t/local-date 2015 2 9)) => expected)
+        (fact "today is wednesday"
+              (view/this-week (t/local-date 2015 2 11)) => expected)
+        (fact "today is sunday"
+              (view/this-week (t/local-date 2015 2 15)) => expected)))
+
+(fact "#next-week"
+      (let [expected [(t/local-date 2015 2 16)
+                      (t/local-date 2015 2 17)
+                      (t/local-date 2015 2 18)
+                      (t/local-date 2015 2 19)
+                      (t/local-date 2015 2 20)
+                      (t/local-date 2015 2 21)
+                      (t/local-date 2015 2 22)]]
+        (fact "today is monday"
+              (view/next-week (t/local-date 2015 2 9)) => expected)
+        (fact "today is wednesday"
+              (view/next-week (t/local-date 2015 2 11)) => expected)
+        (fact "today is sunday"
+              (view/next-week (t/local-date 2015 2 15)) => expected)))

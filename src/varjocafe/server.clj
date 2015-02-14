@@ -22,10 +22,20 @@
       (rsp/content-type "text/html")
       (rsp/charset "UTF-8")))
 
+(defn- main-page [date-selector database clock settings]
+  (let [today (.toLocalDate (clock))]
+    (using-template view/main-page
+                    @database
+                    (date-selector today)
+                    today
+                    settings)))
+
 (defn- routes [database clock settings]
   (c/routes
+    (c/GET "/" [] (main-page view/today-and-tomorrow database clock settings))
+    (c/GET "/week" [] (main-page view/this-week database clock settings))
+    (c/GET "/next-week" [] (main-page view/next-week database clock settings))
     (c/GET "/status" [] "OK")
-    (c/GET "/" [] (using-template view/main-page @database (.toLocalDate (clock)) settings))
     (r/not-found "Not found")))
 
 (defn- wrap-if-dev [next settings handler & args]

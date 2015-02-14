@@ -1,7 +1,8 @@
 (ns varjocafe.view
   (:require [net.cgrand.enlive-html :as html]
             [varjocafe.core :as core]
-            [varjocafe.format :as format]))
+            [varjocafe.format :as format])
+  (:import (org.joda.time LocalDate DateTimeConstants)))
 
 (def compile-step #'net.cgrand.enlive-html/compile-step)
 
@@ -120,11 +121,27 @@
                                                (html/substitute (area-restaurants area dates)))
                   [:body] (html/append (pad-if (google-analytics settings) "\n\n")))
 
-(defn main-page [data today settings]
-  (let [in-past? #(< (compare % today) 0)]
-    (layout {:dates    (->> (core/dates data)
-                            (drop-while in-past?)
-                            (take 2))
-             :today    today
-             :areadata (core/restaurants-by-area data (:areacode-names settings))
-             :settings settings})))
+(defn main-page [data dates today settings]
+  (layout {:dates    dates
+           :today    today
+           :areadata (core/restaurants-by-area data (:areacode-names settings))
+           :settings settings}))
+
+(defn- first-day-of-week [^LocalDate date]
+  (if (= DateTimeConstants/MONDAY (.getDayOfWeek date))
+    date
+    (recur (.minusDays date 1))))
+
+(defn- week-of [^LocalDate date]
+  (let [start (first-day-of-week date)]
+    (for [offset (range 7)]
+      (.plusDays start offset))))
+
+(defn next-week [^LocalDate today]
+  (week-of (.plusDays today 7)))
+
+(defn this-week [^LocalDate today]
+  (week-of today))
+
+(defn today-and-tomorrow [^LocalDate today]
+  [today (.plusDays today 1)])

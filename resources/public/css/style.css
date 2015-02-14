@@ -1,3 +1,15 @@
+ul#navigation {
+    float: right;
+    list-style-type: none;
+    margin: 0 0 0.5em;
+    padding: 0;
+}
+
+ul#navigation li {
+    display: inline;
+    padding: 0.3em;
+}
+
 table#restaurants {
     border-spacing: 0;
     width: 100%;
@@ -9,6 +21,7 @@ table#restaurants td {
 
 .date {
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .today {
