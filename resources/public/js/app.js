@@ -73,31 +73,34 @@ $(function () {
         });
 
         $('.date').css('visibility', menusVisible ? '' : 'hidden');
-        saveState();
     }
 
     function expandArea(areaId) {
         console.log("Expand area", areaId);
         areas[areaId].expanded = true;
         updateRestaurantVisibilities();
+        saveState();
     }
 
     function collapseArea(areaId) {
         console.log("Collapse area", areaId);
         areas[areaId].expanded = false;
         updateRestaurantVisibilities();
+        saveState();
     }
 
     function expandRestaurant(restaurantId) {
         console.log("Expand restaurant", restaurantId);
         restaurants[restaurantId].expanded = true;
         updateRestaurantVisibilities();
+        saveState();
     }
 
     function collapseRestaurant(restaurantId) {
         console.log("Collapse restaurant", restaurantId);
         restaurants[restaurantId].expanded = false;
         updateRestaurantVisibilities();
+        saveState();
     }
 
     $('.area-row.collapsed').each(function (index, row) {
