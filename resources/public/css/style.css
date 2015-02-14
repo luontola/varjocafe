@@ -161,3 +161,26 @@ table#restaurants td {
     padding-left: 1em;
     padding-bottom: 1em;
 }
+
+@media print {
+    .area-row.collapsed,
+    .restaurant-row.collapsed,
+    .area-name .fa,
+    .restaurant-name .fa,
+    #navigation,
+    #external-links,
+    #sponsors,
+    #copyright {
+        display: none;
+    }
+
+    td,
+    .food,
+    .opening-times {
+        page-break-inside: avoid;
+    }
+
+    .area-row td {
+        page-break-after: avoid;
+    }
+}
