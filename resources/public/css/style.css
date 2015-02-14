@@ -104,6 +104,13 @@ table#restaurants td {
     padding-bottom: 0.2em;
 }
 
+.price {
+    display: inline;
+    padding-left: 1ex;
+    font-size: 80%;
+    color: #ccc;
+}
+
 .allergens {
     display: block;
     font-size: 80%;

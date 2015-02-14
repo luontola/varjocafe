@@ -42,7 +42,8 @@
                                  (if (empty? allergens)
                                    nil
                                    (refine [html/any-node] (html/replace-vars {:allergens allergens}))))
-                 [:.food html/any-node] (html/replace-vars {:food (:name food)}))
+                 [:.food html/any-node] (html/replace-vars {:food  (:name food)
+                                                            :price (:name (:price food))}))
 
 (html/defsnippet collapsed-menu-cell "templates/layout.html" [:.restaurant-row.collapsed (indented :.menu)]
                  [])

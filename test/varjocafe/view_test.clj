@@ -32,7 +32,9 @@
         (fact "has foods on menu"
               page => (contains "Broileriwrap"))
         (fact "has food allergens on menu"
-              page => (contains "(PÄ, SE, SO, V, soijaa, valkosipulia)"))))
+              page => (contains "(PÄ, SE, SO, V, soijaa, valkosipulia)"))
+        (fact "has food prices on menu"
+              page => (contains "Edullisesti"))))
 
 (fact "Google analytics"
       (fact "Enabled"
