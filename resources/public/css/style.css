@@ -3,6 +3,16 @@ h1 {
     padding-left: 1ex;
 }
 
+.tagline {
+    font-size: 40%;
+}
+
+@media screen and (max-width: 830px) {
+    .tagline {
+        display: none;
+    }
+}
+
 #sponsors {
     float: right;
     padding: 10px;
@@ -141,6 +151,12 @@ table#restaurants td {
     color: #aaa;
 }
 
+#external-links {
+    padding-left: 1em;
+}
+
 #copyright {
     font-style: italic;
+    padding-left: 1em;
+    padding-bottom: 1em;
 }
