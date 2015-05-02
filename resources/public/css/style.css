@@ -163,16 +163,57 @@ table#restaurants td {
 }
 
 @media only screen and (max-width: 500px) {
+
+    /* vertical layout instead of a table */
     table#restaurants td {
         display: block;
     }
 
-    /* XXX: make the date dynamically selectable */
-    .date-row td:not(:nth-of-type(2)) {
-        display: none !important;
+    /* date selector */
+    .date-row {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #eee;
+        padding: 5px 8px 2px;
+        z-index: 10;
     }
 
-    .restaurant-row.expanded .menu:not(:nth-of-type(2)) {
+    .date-row td {
+        border: 0 !important;
+    }
+
+    .date-row .date-column {
+        display: inline !important;
+        line-height: 20px;
+    }
+
+    body {
+        margin-top: 40px !important;
+    }
+
+    /* dates */
+    .date-column:hover {
+        cursor: pointer;
+        color: #00f;
+    }
+
+    .date-column.selected {
+        color: #00f;
+    }
+
+    .date-column:not(.selected) {
+        font-size: 80%;
+    }
+
+    /* menus */
+    .menu {
+        padding-left: 1.5em;
+    }
+
+    .menu:not(.selected) {
         display: none !important;
     }
 
@@ -180,6 +221,7 @@ table#restaurants td {
         display: none !important;
     }
 
+    /* restaurant address and opening times: hide */
     /* TODO: make the address and opening times visible with a click of button */
     .restaurant-address {
         display: none;
@@ -187,10 +229,6 @@ table#restaurants td {
 
     .opening-times {
         display: none;
-    }
-
-    .menu {
-        padding-left: 1.5em;
     }
 }
 

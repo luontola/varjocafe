@@ -75,6 +75,41 @@ $(function () {
         $('.date').css('visibility', menusVisible ? '' : 'hidden');
     }
 
+    function registerResponsivenessAdjustments() {
+        var $dateColumns = $('.date-column');
+        var $menus = $('.menu');
+        var selectedDate =
+            $dateColumns.filter(':has(.today)').first().attr('data-date') ||
+            $dateColumns.first().attr('data-date');
+
+        $dateColumns.each(function () {
+            var date = $(this).attr('data-date');
+            $(this).click(function () {
+                console.log("Select " + date);
+                selectedDate = date;
+                updateSelectedDate();
+            });
+        });
+        updateSelectedDate();
+
+        function updateSelectedDate() {
+            $dateColumns.each(function () {
+                if ($(this).attr('data-date') === selectedDate) {
+                    $(this).addClass('selected');
+                } else {
+                    $(this).removeClass('selected');
+                }
+            });
+            $menus.each(function () {
+                if ($(this).attr('data-date') === selectedDate) {
+                    $(this).addClass('selected');
+                } else {
+                    $(this).removeClass('selected');
+                }
+            });
+        }
+    }
+
     function expandArea(areaId) {
         console.log("Expand area", areaId);
         areas[areaId].expanded = true;
@@ -145,4 +180,5 @@ $(function () {
 
     loadState();
     updateRestaurantVisibilities();
+    registerResponsivenessAdjustments()
 });

@@ -30,7 +30,8 @@
                  [:.date html/any-node] (html/replace-vars {:date (format/date date)})
                  [:.date] (if (= date today)
                             (html/add-class "today")
-                            identity))
+                            identity)
+                 [:.date-column] (html/set-attr :data-date (str date)))
 
 (html/defsnippet exception-line "templates/layout.html" [(indented :.exception)]
                  [restaurant exception]
@@ -56,7 +57,8 @@
                                                (html/substitute (exception-line restaurant exception)))
                  [(indent-of :.food)] nil
                  [:.food] (html/clone-for [food (get-in restaurant [:menu date :data])]
-                                          (html/substitute (food-line food))))
+                                          (html/substitute (food-line food)))
+                 [:.menu] (html/set-attr :data-date (str date)))
 
 (html/defsnippet opening-times-entry "templates/layout.html" [:.opening-times #{(indented :dt) (indented :dd)}]
                  [title times]
