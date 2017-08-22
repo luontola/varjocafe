@@ -230,6 +230,11 @@ table#restaurants td {
     .opening-times {
         display: none;
     }
+
+    /* sponsors: smaller logos */
+    #sponsors img {
+        max-width: 100px;
+    }
 }
 
 @media print {
