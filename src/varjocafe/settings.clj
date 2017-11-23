@@ -30,7 +30,7 @@
 ; Defaults
 
 (def default-settings
-  {:backend-url      "http://messi.hyyravintolat.fi/publicapi"
+  {:backend-url      "https://messi.hyyravintolat.fi/publicapi"
    :server           {:port     8080
                       :base-url ""}
    :updater          {:interval      30

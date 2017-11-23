@@ -11,7 +11,7 @@
                  [ring/ring-core "1.3.2"]
                  [ring/ring-devel "1.3.2"]
                  [ring/ring-json "0.3.1"]
-                 [http-kit "2.1.16"]
+                 [http-kit "2.3.0-alpha3"]
                  [ring-middleware-force-reload "0.1.0-SNAPSHOT"]
 
                  ; HTTP Routing
