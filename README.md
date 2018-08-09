@@ -5,7 +5,7 @@ VarjoCafe
 Mashup of [UniCafe](http://www.unicafe.fi/)'s daily lunch menus.
 
 - Web Site: <http://www.varjocafe.net>
-- Source Code: <http://github.com/orfjackal/varjocafe>
+- Source Code: <https://github.com/luontola/varjocafe>
 - License: Apache License 2.0
 
 
